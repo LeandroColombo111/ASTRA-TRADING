@@ -1,0 +1,60 @@
+{
+  "status": "V3_PRECHECK_PASSED",
+  "threshold": 0.3,
+  "best_lookback_days": 60,
+  "best_net_sharpe_maker": 0.5898412453180797,
+  "best_net_sharpe_taker": 0.5538761306350394,
+  "best_gross_sharpe": 0.6018296168790931,
+  "optimization_attempts_used": 0,
+  "table": [
+    {
+      "lookback_days": 5,
+      "gross_sharpe": -0.23855783612037007,
+      "flips_per_year": 80.97390043499274,
+      "net_sharpe_maker": -0.295251817552783,
+      "net_sharpe_taker": -0.46533376185002195,
+      "time_in_market": 1.0
+    },
+    {
+      "lookback_days": 10,
+      "gross_sharpe": 0.1780752871432616,
+      "flips_per_year": 57.8637022716288,
+      "net_sharpe_maker": 0.13745676495584588,
+      "net_sharpe_taker": 0.01560119839359872,
+      "time_in_market": 1.0
+    },
+    {
+      "lookback_days": 20,
+      "gross_sharpe": 0.3772386351928488,
+      "flips_per_year": 41.28081198646689,
+      "net_sharpe_maker": 0.34802644795943394,
+      "net_sharpe_taker": 0.26038988625918946,
+      "time_in_market": 1.0
+    },
+    {
+      "lookback_days": 30,
+      "gross_sharpe": 0.5706999185079714,
+      "flips_per_year": 33.165780570323825,
+      "net_sharpe_maker": 0.5471469752539011,
+      "net_sharpe_taker": 0.4764881454916902,
+      "time_in_market": 1.0
+    },
+    {
+      "lookback_days": 60,
+      "gross_sharpe": 0.6018296168790931,
+      "flips_per_year": 16.582890285161913,
+      "net_sharpe_maker": 0.5898412453180797,
+      "net_sharpe_taker": 0.5538761306350394,
+      "time_in_market": 1.0
+    },
+    {
+      "lookback_days": 90,
+      "gross_sharpe": 0.20846110620004205,
+      "flips_per_year": 13.05461575640406,
+      "net_sharpe_maker": 0.19900494666495733,
+      "net_sharpe_taker": 0.1706364680597032,
+      "time_in_market": 1.0
+    }
+  ],
+  "note": "Parameter-free screen of the trend family at daily granularity. The lookback sweep is itself a six-way selection and is disclosed as such; it is a family screen, not a performance claim."
+}

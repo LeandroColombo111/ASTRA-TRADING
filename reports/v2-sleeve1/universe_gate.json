@@ -1,0 +1,42 @@
+{
+  "status": "UNIVERSE_GATE_FAILED",
+  "minimum_universe_count": 18,
+  "maximum_universe_count": 33,
+  "failing_months": [
+    {
+      "month": "2026-02-01",
+      "count": 23
+    },
+    {
+      "month": "2026-03-01",
+      "count": 21
+    },
+    {
+      "month": "2026-04-01",
+      "count": 21
+    },
+    {
+      "month": "2026-05-01",
+      "count": 19
+    },
+    {
+      "month": "2026-06-01",
+      "count": 19
+    },
+    {
+      "month": "2026-07-01",
+      "count": 18
+    },
+    {
+      "month": "2026-08-01",
+      "count": 18
+    },
+    {
+      "month": "2026-09-01",
+      "count": 19
+    }
+  ],
+  "optimization_attempts": 0,
+  "precheck_signal_status": "NOT_RUN_UNIVERSE_GATE",
+  "approved_for_live": false
+}

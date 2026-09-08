@@ -1,0 +1,65 @@
+{
+  "status": "UNIVERSE_GATE_FAILED",
+  "minimum_universe_count": 18,
+  "maximum_universe_count": 33,
+  "failing_months": [
+    {
+      "month": "2026-02-01",
+      "count": 23
+    },
+    {
+      "month": "2026-03-01",
+      "count": 21
+    },
+    {
+      "month": "2026-04-01",
+      "count": 21
+    },
+    {
+      "month": "2026-05-01",
+      "count": 19
+    },
+    {
+      "month": "2026-06-01",
+      "count": 19
+    },
+    {
+      "month": "2026-07-01",
+      "count": 18
+    },
+    {
+      "month": "2026-08-01",
+      "count": 18
+    },
+    {
+      "month": "2026-09-01",
+      "count": 19
+    }
+  ],
+  "optimization_attempts": 0,
+  "precheck_signal_status": "NOT_RUN_UNIVERSE_GATE",
+  "approved_for_live": false,
+  "brief_version": 2,
+  "archived": true,
+  "budget_limit": 60,
+  "parameter_count": 5,
+  "latest_month": "2026-09-01",
+  "latest_eligible_symbols": 19,
+  "minimum_required_symbols": 25,
+  "signal_profitability": "NOT_MEASURED",
+  "portfolio_engine": "NOT_IMPLEMENTED_GATE_FAILED",
+  "portfolio_service": "NOT_IMPLEMENTED_GATE_FAILED",
+  "sleeve2": "NOT_STARTED_SLEEVE1_NOT_MEASURED_AND_VALIDATED",
+  "prospective_demo": "NOT_STARTED",
+  "independent_historical_holdout": false,
+  "orders_sent_this_run": 0,
+  "historical_spread_costs_verified": false,
+  "full_pnl_funding_coverage_verified": false,
+  "benchmarks": {
+    "btc_buy_hold": "NOT_RUN_UNIVERSE_GATE",
+    "equal_weight": "NOT_RUN_UNIVERSE_GATE",
+    "random_entries_1000": "NOT_RUN_UNIVERSE_GATE"
+  },
+  "final_acceptance_metrics": null,
+  "reason": "Fewer than 25 admissible symbols in eight monthly snapshots; abort required before signal precheck."
+}

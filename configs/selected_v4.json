@@ -1,0 +1,36 @@
+{
+  "strategy": "v4_hourly",
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 2.0,
+    "slippage_bps": 0.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "source_run": "reports/v4-hourly-01",
+  "measured": {
+    "sharpe": 0.8749847831238833,
+    "annualised_return": 0.13904571054253867,
+    "max_drawdown": 0.20952300490132447,
+    "trades": 120,
+    "deflated_sharpe": 0.7174140641527482
+  },
+  "point_8_preserved": true,
+  "approved_for_live": false,
+  "note": "Research configuration for OBSERVE/DEMO only. No independent holdout exists; forward paper trading is the validation."
+}

@@ -1,0 +1,118 @@
+{
+  "brief": "docs/BRIEF-v2.md",
+  "brief_sha256": "bc3ae92cd2ea1e3fcd19bd24a5725ba526a50d58b3acef1bdf504002f52ce904",
+  "hypothesis": "OKX USDT perpetual cross-sectional volatility-adjusted rank momentum, dollar-neutral and BTC-beta-neutral",
+  "phase": "universe_and_raw_signal_precheck",
+  "search_budget": 60,
+  "attempts_used": 0,
+  "parameter_count": 5,
+  "parameters": {
+    "momentum_ensemble_days": {
+      "value": [
+        7,
+        14,
+        30
+      ],
+      "optimize": false,
+      "count": 1
+    },
+    "portfolio_vol_target": {
+      "value": 0.15,
+      "optimize": false
+    },
+    "no_trade_relative_band": {
+      "value": 0.2,
+      "optimize": false
+    },
+    "effective_stop_vol_multiplier": {
+      "value": 3.0,
+      "optimize": true,
+      "allowed": [
+        2.0,
+        3.0,
+        4.0
+      ]
+    },
+    "rank_weighting": {
+      "value": "centered continuous ranks, inverse volatility; normalize each sign leg then constrain beta",
+      "optimize": false
+    }
+  },
+  "fixed_operational_constraints": {
+    "position_max_days": 30,
+    "purge_embargo_days": 60,
+    "walk_forward_folds_min": 6,
+    "min_trades_per_fold": 100,
+    "min_universe": 25,
+    "max_universe": 50,
+    "history_months": 24,
+    "median_quote_volume_90d_min": 5000000,
+    "portfolio_vol_cap": 0.2,
+    "position_risk_cap": 0.02,
+    "beta_residual_abs_cap": 0.1,
+    "turnover_target_daily": 0.15
+  },
+  "precheck": {
+    "primary_rebalance_days": 1,
+    "diagnostic_rebalance_days": [
+      1,
+      2,
+      7,
+      14,
+      30,
+      60
+    ],
+    "signal_net_sharpe_must_exceed": 0.3,
+    "no_stops_targets_or_additional_filters": true,
+    "attempts_before_pass": 0,
+    "implementation": {
+      "weight_time": "prior closed daily candle; next daily open execution",
+      "weighting": "continuous centered percentile ranks / trailing30day volatility, dollar and BTC beta constraints",
+      "covariance_days": 60,
+      "annualization_days": 365,
+      "diagnostic_horizons_not_selectable": true,
+      "rebalance_band": "excluded from raw signal precheck; no filters/stops/targets",
+      "ic_forward_returns": "next open to open after horizon",
+      "ic_t_stat": "Newey-West HAC with lag at least horizon-1",
+      "cost_policy": "Current authenticated demo account taker fee as fixed historical scenario, explicitly not historical tier reconstruction; actual funding; historical observed per-symbol spread required for final net gate. No constant spread proxy.",
+      "missing_cost_policy": "Report IC/gross and available components but leave final net gate NOT_EVALUABLE; never treat missing costs as zero.",
+      "spread_sampling_policy": "If full BBO unavailable, estimate per-symbol month cost from prior-month official L2 sample: first 60 seconds of first daily archive, median positive relative spread /2; retain sample source/times/count. Never use current spreads to backfill. Coverage and sensitivity reported."
+    }
+  },
+  "data": {
+    "venue": "OKX_only",
+    "history_start": "2023-03-01",
+    "known_audit_start": "2025-03-01",
+    "known_audit_end_exclusive": "2026-09-01",
+    "monthly_admissions_through": "2026-09-01",
+    "membership_source": "causal prior-day historical OKX funding inventory including delisted instruments",
+    "funding": "actual OKX",
+    "fees": "authenticated account taker metadata; not inferred from generic schedule",
+    "slippage": "historical per-symbol observed spread, required before net precheck; no global substitute"
+  },
+  "kill_rules": [
+    "Abort if any monthly admission universe has fewer than 25 symbols.",
+    "Reject family before any optimization if primary raw net Sharpe <=0.3.",
+    "Gate total costs/gross <=0.30; nonpositive gross fails.",
+    "No more than 60 configurations; no rerun on same data."
+  ],
+  "holdout": {
+    "historical_data_independent": false,
+    "future_demo_minimum_months": 3,
+    "approved_for_live": false
+  },
+  "status": "PROTOCOL_FROZEN_BEFORE_NEW_RESULTS",
+  "patch": "docs/PATCH-v2.1.md",
+  "patch_sha256": "0b24cb0960386de5ff59d495f4214fb4db23c398f1c37d4f42fa492920b85516",
+  "frozen_at": "2026-09-07T23:41:49.232516+00:00",
+  "liquidity_derivation": {
+    "capital_usdt": 10000,
+    "illustrative_max_position_notional": 900,
+    "daily_volume_participation_max": 0.005,
+    "arithmetic_volume_required": 180000,
+    "fixed_volume_threshold": 5000000,
+    "threshold_locked": true,
+    "note": "900 USDT is a sizing estimate, not a measured maximum; realized portfolio notionals must be checked separately."
+  },
+  "authorized_rerun": "User patch explicitly authorizes v2.1; original v2 remains archived; no further liquidity threshold adjustment."
+}

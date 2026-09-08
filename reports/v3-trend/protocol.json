@@ -1,0 +1,28 @@
+{
+  "brief": "v1 eleven points preserved; point 8 released from 1h/4h to 1D/4D at the same 1:4 ratio",
+  "asset": "BTC perpetual (Binance USD-M series as OKX proxy)",
+  "directions": "long and short",
+  "instrument": "linear perpetual futures, not spot",
+  "risk_fraction": 0.02,
+  "risk_measured_at": "effective stop, including the trailing rule",
+  "execution": "post-only maker 2bps per side, no spread crossed; taker 5bps+3bps reported as stress",
+  "attempt_budget": 60,
+  "brief_limit": 200,
+  "free_parameters": 10,
+  "seed": 3141,
+  "folds": 4,
+  "fold_bounds": [
+    "2022-02-05 00:00:00+00:00",
+    "2023-03-29 00:00:00+00:00",
+    "2024-05-19 00:00:00+00:00",
+    "2025-07-10 00:00:00+00:00",
+    "2026-09-01 00:00:00+00:00"
+  ],
+  "minimum_trades_per_fold": 4,
+  "data_sha256": "0ce40608bd4b92fe64d83c3f02f3c076750f2862ca12e9b5ce68e973410fb832",
+  "selection": "median fold Sharpe minus 0.25 SD; every fold must clear the trade floor without halting, and both sides must trade",
+  "independent_holdout": false,
+  "holdout_disclosure": "None exists. This price series was searched in run-001 and run-002, and the horizon sweep motivating this configuration was measured on it. Walk-forward folds reduce but do not remove that contamination. Only forward paper trading can still be independent.",
+  "sample_size_disclosure": "A single asset at this horizon yields tens of trades over 5.7 years. The standard error of an annualised Sharpe over this sample is roughly 0.42, so a measured 0.6 is under two standard errors from zero. This bounds what any result here can establish.",
+  "approved_for_live": false
+}

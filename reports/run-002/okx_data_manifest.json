@@ -1,0 +1,238 @@
+{
+  "venue": "OKX",
+  "instrument": "BTC-USDT-SWAP",
+  "start": "2025-01-01 00:00:00+00:00",
+  "end_exclusive": "2026-09-01 00:00:00+00:00",
+  "rows": 14592,
+  "funding_events": 1824,
+  "csv_sha256": "03ef77a1a1d9df645dec54aba64d938bc07167151c0ed1a00f1ad645e4affe00",
+  "archives": [
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202501/BTC-USDT-SWAP-fundingrates-2025-01.zip?v=999",
+      "sha256": "ba80672aaaa85623de417839a4e4da74c1f4ad7575cb9c29b127e5d0a7e540ff",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202502/BTC-USDT-SWAP-fundingrates-2025-02.zip?v=999",
+      "sha256": "b0b383c70c59e787fe49878de71a6337b8fbea80aff1cec3c5df2f3b39d6811e",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202503/BTC-USDT-SWAP-fundingrates-2025-03.zip?v=999",
+      "sha256": "af5777e0c8a2e1a3b42b30bf7660ae95cb8cab657a721ad73dd8a36ade55e6c2",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202504/BTC-USDT-SWAP-fundingrates-2025-04.zip?v=999",
+      "sha256": "20d53688abb825a4d337adf676011ab6574a78b358ae42c64f73c9c707b31a58",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202505/BTC-USDT-SWAP-fundingrates-2025-05.zip?v=999",
+      "sha256": "8e14d8e10fa030e9971bd1339f2f49ff1d47cc1c94591e835f5b1ba39a3e50f7",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202506/BTC-USDT-SWAP-fundingrates-2025-06.zip?v=999",
+      "sha256": "7d9c0081d864be097539ee6021ace42709fdadce148cd5cabde12ee3603b9a2a",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202507/BTC-USDT-SWAP-fundingrates-2025-07.zip?v=999",
+      "sha256": "2a3e346fdf88d6f864187af77bdbebe6d344b0c4eb29c950170c4d1447996cd7",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202508/BTC-USDT-SWAP-fundingrates-2025-08.zip?v=999",
+      "sha256": "61b5a9ba5cb039a8ca4210d7da1242c9d54178b2d1715b002a60b8474deee84f",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202509/BTC-USDT-SWAP-fundingrates-2025-09.zip?v=999",
+      "sha256": "dfa52059846715ce2dad12f7d7e19b1e1e9b892918bfdc1649d3b769289f86db",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202510/BTC-USDT-SWAP-fundingrates-2025-10.zip?v=999",
+      "sha256": "0f8b4b0320ec74a42d93ea456913464abcfd52933ed316c11a44a1e48b6508ff",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202511/BTC-USDT-SWAP-fundingrates-2025-11.zip?v=999",
+      "sha256": "63841ef6c22cc4f9f0ceb5806097f396dd4e9688c73daf96aa0c81079eb6af34",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202512/BTC-USDT-SWAP-fundingrates-2025-12.zip?v=999",
+      "sha256": "cc2da7d9a5309f30d1ad51c6e3768d842aa26edbd6e815180d65358579c6baea",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202601/BTC-USDT-SWAP-fundingrates-2026-01.zip?v=999",
+      "sha256": "950c317f3bcc039d9619e7ce8bcd3ecd9ab98e9225f6d2399834863b8d33acd3",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202602/BTC-USDT-SWAP-fundingrates-2026-02.zip?v=999",
+      "sha256": "1d38823ac86f7ffcba41d68809ee4eb401d6b08cb0620285e86ad98e151e319e",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202603/BTC-USDT-SWAP-fundingrates-2026-03.zip?v=999",
+      "sha256": "56c6d567c67f8ffb2ab3302679829a2ee54e001eb30b6ebc0e90ecd4092b0441",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202604/BTC-USDT-SWAP-fundingrates-2026-04.zip?v=999",
+      "sha256": "af12d2b6b53a19f1fa04fce3a1b2f0d69f6f21cf3f190d58de8b7824a2ea6d92",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202605/BTC-USDT-SWAP-fundingrates-2026-05.zip?v=999",
+      "sha256": "40215f2064a024caaeda10eb9b851b6cec120246d37269ef3df8c51803ae17fd",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202606/BTC-USDT-SWAP-fundingrates-2026-06.zip?v=999",
+      "sha256": "99b10cf9290831055a6cd46a33ced6b8784041949219aad5654448d3425710e4",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202607/BTC-USDT-SWAP-fundingrates-2026-07.zip?v=999",
+      "sha256": "ff589201cc39e79558645766b914426607418ea68fa8ad8649b5c614d16c31dd",
+      "type": "funding_archive"
+    },
+    {
+      "url": "https://static.okx.com/cdn/okex/traderecords/swaprates/monthly/202608/BTC-USDT-SWAP-fundingrates-2026-08.zip?v=999",
+      "sha256": "d3efe1c8f7cc04f7de45f4e3372bef5756dda310edc46403a84150534c75518e",
+      "type": "funding_archive"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/public/funding-rate-history",
+      "role": "UTC boundary supplement; monthly archives use UTC+8",
+      "sha256": "192da480b25306194ada171a66eceb3cc581ca4616c0ccfe98cd2e65475decb3"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-01",
+      "sha256": "c111f0f5d17ac5f5ff98c43b565c9f5d972292563e62f9b25f87143ad7564d73",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-02",
+      "sha256": "eba2f14f70bb93c76ff04bb5cf9b4984e555e7c426fd2c06bf39c1fac6eaf127",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-03",
+      "sha256": "6923d38e50ce1ae11a2951ccc8bbe70de7a84e2a6148d69f4cc1d50f00634c12",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-04",
+      "sha256": "9c4ab92677577eca0eb8dfe631494603604acf07ce9081236e3750697c188928",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-05",
+      "sha256": "c9faf9c1e0c8dfd37b3cf555584b48694c32c160e9c8b8c91aedd0223a2e948b",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-06",
+      "sha256": "df7188f011bbe96a745685f6ad433e48f68b22ff609fdff5f79796af5eb561ab",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-07",
+      "sha256": "ba26aa1c0b768e5846ee35d534ac23ce3340a3c819eaeb279b22180660777008",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-08",
+      "sha256": "512f98bd5bc2dca32a3318e6e95f860a67e6893b05d8e15ec0dd4ebbb05d4f52",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-09",
+      "sha256": "705594b68db71c68e0498811f5bb94c900c3a709787a57f017c0ebe1ab7c38df",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-10",
+      "sha256": "03177bca1aa2ac11d3d1f41a2e14cbb211f61177bd7ea03d1036815a04a3dd5a",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-11",
+      "sha256": "44712a7bbbd8a012b809a0bea9cc5ea912b85b9f8c6295ce1dc8318b53436f15",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2025-12",
+      "sha256": "6297090a858794742c9d8926dd6415cf778c4c521edf73a2d30f612002f6f387",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-01",
+      "sha256": "a9531ea62eed578dd3523626a6631946646d96cf61e1a7f4f0928328c35cafea",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-02",
+      "sha256": "fe38c306c7a60aa0332a98f2f9ab687ec269a0a93c3053e78f812840e4e534e7",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-03",
+      "sha256": "5d6a82ee338c92f1d19ff6bbc3c628d5c01b6642867d5724a7f345a99a88058c",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-04",
+      "sha256": "f0dc51e3e978037c102b5a0af5dc1c4900f0752c9c26ef7f7597aaad105565b2",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-05",
+      "sha256": "7037d05fa124c397dde4d5f165634cee90cd28a02f3ce914dea4b1a5ba5db484",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-06",
+      "sha256": "94e974191b11e8f90dfcc97ff122dd92e9cc14b89e84b0cdc04f32730c7dce98",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-07",
+      "sha256": "b2dd781f34ded492adab78cc7c62f8137869e80d30138c067fd5f57fefc6d4be",
+      "type": "hourly_candles"
+    },
+    {
+      "endpoint": "https://openapi.okx.com/api/v5/market/history-candles",
+      "month": "2026-08",
+      "sha256": "13fd175b4a84bee82cb2927e290c259e57d9f7fe641baeed26e444e751faf73a",
+      "type": "hourly_candles"
+    }
+  ],
+  "checksum_note": "Locally computed hashes for reproducibility; OKX did not supply independent archive checksums.",
+  "validation_role": "Cross-venue comparison on known BTC dates, not independent temporal validation"
+}

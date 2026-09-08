@@ -1,0 +1,81 @@
+{
+  "status": "CRITERIA_NOT_MET",
+  "attempts": 200,
+  "selected_attempt": 171,
+  "holdout_start": "2025-03-01 00:00:00+00:00",
+  "holdout_end_exclusive": "2026-09-01 00:00:00+00:00",
+  "params": {
+    "fast": 8,
+    "slow": 60,
+    "breakout": 168,
+    "atr_period": 14,
+    "stop_atr": 4.0,
+    "trail_atr": 2.0,
+    "reward": 2.0,
+    "min_trend": 0.0,
+    "max_hours": 240
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 6.0,
+    "slippage_bps": 3.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "holdout": {
+    "sharpe": -0.10182190048235543,
+    "return": -0.03171473786993906,
+    "max_drawdown": 0.15635942178968887,
+    "trades": 124,
+    "long_trades": 70,
+    "short_trades": 54,
+    "win_rate": 0.31451612903225806,
+    "days": 549
+  },
+  "monte_carlo": {
+    "simulations": 2000,
+    "block_days": 7,
+    "seed": 43,
+    "sharpe_p05": -1.5710002807881887,
+    "sharpe_p50": -0.1509736174353818,
+    "sharpe_p95": 1.1348663515932889,
+    "drawdown_p95": 0.2958469041872961,
+    "probability_loss": 0.596,
+    "probability_drawdown_over_25pct": 0.1265,
+    "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+  },
+  "deflated_sharpe_probability_approx": 0.032300628860968135,
+  "double_cost_stress": {
+    "sharpe": -1.3669758280235418,
+    "return": -0.22177888095500053,
+    "max_drawdown": 0.2500044169522905,
+    "trades": 117,
+    "long_trades": 64,
+    "short_trades": 53,
+    "win_rate": 0.26495726495726496,
+    "days": 549
+  },
+  "gates": {
+    "development_eligible": true,
+    "sharpe_at_least_1_5": false,
+    "at_least_18_months": true,
+    "at_least_50_trades": true,
+    "both_sides": true,
+    "drawdown_under_25pct": true,
+    "not_halted": true,
+    "bootstrap_lower_bound_positive": false,
+    "dsr_at_least_95pct": false,
+    "double_costs_positive_sharpe": false
+  },
+  "approved_for_live": false,
+  "limitations": [
+    "Historical venue is Binance, not OKX. OKX validation remains required.",
+    "Fees/slippage are explicit assumptions, not your account fee tier.",
+    "Risk is a target at the stop, not a guaranteed maximum loss; gaps and funding can exceed it.",
+    "OHLC simulation cannot model exchange outages, queue position, mark-price liquidation or all intrabar paths.",
+    "Monte Carlo and approximate DSR cannot guarantee future Sharpe or absence of overfitting."
+  ]
+}

@@ -1,0 +1,11 @@
+*
+!Dockerfile
+!docker-entrypoint.sh
+!pyproject.toml
+!requirements.lock
+!src/
+!src/**
+!configs/
+!configs/**
+src/**/__pycache__/
+src/**/*.pyc

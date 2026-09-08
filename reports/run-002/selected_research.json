@@ -1,0 +1,41 @@
+{
+  "attempt": 104,
+  "spec": {
+    "params": {
+      "fast": 8,
+      "slow": 60,
+      "breakout": 168,
+      "atr_period": 14,
+      "stop_atr": 4.0,
+      "trail_atr": 2.0,
+      "reward": 1.5,
+      "min_trend": 0.0,
+      "max_hours": 240
+    },
+    "trail_enabled": true,
+    "trail_start_r": 0.0,
+    "target_enabled": true,
+    "adx_min": 0.0,
+    "entry_mode": "breakout",
+    "cooldown_hours": 0,
+    "direction": 0,
+    "funding_enabled": true
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 6.0,
+    "slippage_bps": 3.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "changes": [
+    "params.reward"
+  ],
+  "selected_on": "development only; informed by previous research",
+  "approved_for_live": false,
+  "approved_for_independent_target": false,
+  "research_only": true
+}

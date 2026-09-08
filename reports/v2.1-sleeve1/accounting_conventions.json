@@ -1,0 +1,11 @@
+{
+  "fixed_at": "2026-09-07T23:47:51.231072+00:00",
+  "before_pnl_evaluation": true,
+  "monthly_membership": "rebalance at membership changes for every horizon; horizon schedule anchored at study start",
+  "funding_mark": "actual daily rates on opening notional; intraday mark approximation, must be replaced with event-time mark for final portfolio validation",
+  "cost_attribution": "same gross-sized positions for all cost components; net NAV accumulated separately",
+  "terminal": "liquidate at exact Sep 1 OKX daily open",
+  "random_control": "primary daily raw allocation cohorts each last one day; permute their entry timestamps within month, preserving symbols, daily cohort durations, side mix, counts and weight distribution; 1000 fixed-seed controls. This is not a match to final engine position spells, which do not yet exist.",
+  "benchmarks": "BTC perpetual passive long and monthly equal-weight admitted perpetual basket, same fee/spread/funding scenarios; no leverage matching to force comparability",
+  "concentration_note": "record changes in admitted counts; do not assert strictly monotonic contraction when monthly data show rebounds"
+}

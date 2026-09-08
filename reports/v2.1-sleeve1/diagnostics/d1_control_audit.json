@@ -1,0 +1,37 @@
+{
+  "strategy": {
+    "net_sharpe": 0.3675266116028065,
+    "gross_sharpe": 0.960789646595748,
+    "mean_daily_turnover_equity": 0.4956167483690884
+  },
+  "legacy_control_as_shipped": {
+    "repetitions": 400,
+    "median_net_sharpe": 4.151600818896046,
+    "median_gross_sharpe": 5.853511120240034,
+    "median_mean_daily_turnover": 1.1783253029922394,
+    "turnover_ratio_vs_strategy": 2.3774929052936975,
+    "median_total_costs_fraction_of_nav": 0.390155201839278,
+    "median_daily_gross_vol": 0.008569936275830692
+  },
+  "matched_control": {
+    "repetitions": 400,
+    "method": "Cross-sectional permutation of weights within the admitted set, evaluated through the strategy simulator.",
+    "median_net_sharpe": -2.46216074221525,
+    "p05_net_sharpe": -3.9255695831659376,
+    "p95_net_sharpe": -0.9556478009012888,
+    "median_mean_daily_turnover_equity": 1.696559777411844,
+    "strategy_percentile": 99.5,
+    "caveat": "Daily reassignment destroys portfolio persistence, so this control churns far more than the strategy and pays costs the strategy never pays. Its percentile is biased in the strategy favour and is reported for completeness only."
+  },
+  "relabel_control_primary": {
+    "repetitions": 400,
+    "method": "One fixed symbol relabeling per membership month, applied to every day in that month. Preserves the exposure path and therefore the turnover; severs symbol-to-signal association.",
+    "median_net_sharpe": -0.8382730247618002,
+    "p05_net_sharpe": -2.2339499132681917,
+    "p95_net_sharpe": 0.5160549269746827,
+    "median_mean_daily_turnover_equity": 0.5309920198945115,
+    "turnover_ratio_vs_strategy": 1.071376263295846,
+    "strategy_percentile": 92.75
+  },
+  "verdict": "Legacy control is NOT turnover-matched (ratio 2.38); its percentile is void. Against the persistence-preserving control (turnover ratio 1.07) the strategy sits at percentile 92.8 with a control median of -0.838."
+}

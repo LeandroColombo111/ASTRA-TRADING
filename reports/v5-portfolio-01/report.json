@@ -1,0 +1,197 @@
+{
+  "status": "TARGET_NOT_MET",
+  "construction": "Equal-weighted ensemble of the top 5 eligible configurations per sleeve; sleeves combined by 90-day rolling inverse volatility lagged one day.",
+  "point_8_preserved_in_fast_sleeve": true,
+  "cumulative_attempts_this_round": 120,
+  "brief_limit": 200,
+  "sleeves": {
+    "daily_1D_4D": {
+      "sharpe": 0.8817134133919678,
+      "total_return": 0.20270949435317553,
+      "annualised_return": 0.041216805188326155,
+      "max_drawdown": 0.048381630678601684,
+      "annual_volatility": 0.047065567750910094,
+      "calmar": 0.8519102107601264,
+      "days": 1668
+    },
+    "hourly_1h_4h": {
+      "sharpe": 0.8472609108017825,
+      "total_return": 0.7195688861582155,
+      "annualised_return": 0.12586108703276588,
+      "max_drawdown": 0.18153600756274846,
+      "annual_volatility": 0.1535812167258664,
+      "calmar": 0.6933119700192901,
+      "days": 1669
+    }
+  },
+  "combined": {
+    "sharpe": 1.1267833103816314,
+    "total_return": 0.27600071634628587,
+    "annualised_return": 0.05799567967150687,
+    "max_drawdown": 0.06136095058167046,
+    "annual_volatility": 0.051194164143930625,
+    "calmar": 0.9451561477085583,
+    "days": 1578
+  },
+  "sleeve_correlation": 0.0447996559558104,
+  "mean_weights": {
+    "daily_1D_4D": 0.7757716016872089,
+    "hourly_1h_4h": 0.2242283983127911
+  },
+  "sleeve_detail": {
+    "daily_1D_4D": [
+      {
+        "attempt": 56,
+        "development_score": 0.9033236285944105,
+        "sharpe": 1.045504991641025,
+        "return": 0.21657189025572432,
+        "max_drawdown": 0.051554483642229365,
+        "trades": 21
+      },
+      {
+        "attempt": 6,
+        "development_score": 0.6462113359882555,
+        "sharpe": 0.9315741668343986,
+        "return": 0.256380836741098,
+        "max_drawdown": 0.06795483452054785,
+        "trades": 26
+      },
+      {
+        "attempt": 50,
+        "development_score": 0.592206360799657,
+        "sharpe": 0.48856766091164966,
+        "return": 0.10720801766078547,
+        "max_drawdown": 0.06049507833194889,
+        "trades": 17
+      },
+      {
+        "attempt": 7,
+        "development_score": 0.5830197156162868,
+        "sharpe": 0.7390785157194355,
+        "return": 0.21747961979748376,
+        "max_drawdown": 0.08757813096298328,
+        "trades": 16
+      },
+      {
+        "attempt": 60,
+        "development_score": 0.5755079411148577,
+        "sharpe": 0.7808844129139828,
+        "return": 0.21339729163500643,
+        "max_drawdown": 0.0555658761729656,
+        "trades": 24
+      }
+    ],
+    "hourly_1h_4h": [
+      {
+        "attempt": 6,
+        "development_score": 0.7470747069725931,
+        "sharpe": 0.8749847831238833,
+        "return": 0.8135946697337746,
+        "max_drawdown": 0.20952300490132447,
+        "trades": 120
+      },
+      {
+        "attempt": 28,
+        "development_score": 0.724131381359652,
+        "sharpe": 0.6990928119650524,
+        "return": 0.5648914079773677,
+        "max_drawdown": 0.22525097798236926,
+        "trades": 91
+      },
+      {
+        "attempt": 25,
+        "development_score": 0.6922359292719387,
+        "sharpe": 0.6435132108830536,
+        "return": 0.6017279099971646,
+        "max_drawdown": 0.23221395516497767,
+        "trades": 127
+      },
+      {
+        "attempt": 21,
+        "development_score": 0.6534721515610005,
+        "sharpe": 0.7061235567354541,
+        "return": 0.6000595253855288,
+        "max_drawdown": 0.23469278509031288,
+        "trades": 69
+      },
+      {
+        "attempt": 30,
+        "development_score": 0.6433944375987422,
+        "sharpe": 0.854849452160572,
+        "return": 0.9387674413979918,
+        "max_drawdown": 0.23340665045458275,
+        "trades": 104
+      }
+    ]
+  },
+  "monte_carlo": {
+    "3": {
+      "simulations": 2000,
+      "block_days": 3,
+      "seed": 2721,
+      "sharpe_p05": 0.2303926549838866,
+      "sharpe_p50": 1.128608941688205,
+      "sharpe_p95": 1.941923771380631,
+      "drawdown_p95": 0.11766164566981537,
+      "probability_loss": 0.022,
+      "probability_drawdown_over_25pct": 0.0,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "7": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 2725,
+      "sharpe_p05": 0.19341796975222666,
+      "sharpe_p50": 1.1288895793397802,
+      "sharpe_p95": 2.039889713385024,
+      "drawdown_p95": 0.12486354947390542,
+      "probability_loss": 0.032,
+      "probability_drawdown_over_25pct": 0.0,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "14": {
+      "simulations": 2000,
+      "block_days": 14,
+      "seed": 2732,
+      "sharpe_p05": 0.08306268351513413,
+      "sharpe_p50": 1.142906707409747,
+      "sharpe_p95": 2.039914999896556,
+      "drawdown_p95": 0.1301499139713124,
+      "probability_loss": 0.044,
+      "probability_drawdown_over_25pct": 0.0,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    }
+  },
+  "deflated_sharpe_probability": 0.8655997008852685,
+  "taker_stress": {
+    "sharpe": 0.9771743531929001,
+    "total_return": 0.21658939952368628,
+    "annualised_return": 0.046391679636992755,
+    "max_drawdown": 0.06362298556720958,
+    "annual_volatility": 0.04756249708052696,
+    "calmar": 0.7291653986904757,
+    "days": 1578
+  },
+  "gates": {
+    "sharpe_at_least_1_5": false,
+    "drawdown_under_25pct": true,
+    "calmar_at_least_0_5": true,
+    "bootstrap_lower_bound_positive": true,
+    "dsr_at_least_95pct": false,
+    "taker_stress_positive": true
+  },
+  "approved_for_live": false,
+  "pending_sleeve": {
+    "name": "funding_carry",
+    "status": "NOT_BUILT",
+    "reason": "Requires spot or index prices to mark the basis. This repository holds perpetual candles and funding rates only. Booking funding as riskless income would overstate the Sharpe by an order of magnitude.",
+    "measured_correlation_with_trend": "between 0.07 and 0.12 on daily returns"
+  },
+  "limitations": [
+    "No independent holdout exists for this price series; it was searched in run-001, run-002, v3 and v4.",
+    "The ensemble reduces selection risk but does not create out-of-sample evidence.",
+    "Binance USD-M series stands in for OKX; funding and basis differ between venues.",
+    "Sleeve returns are combined as sub-accounts, so risk per trade is 2% of each slice, not of the total.",
+    "Monte Carlo resamples realised returns and cannot prove the absence of overfitting; the DSR is the relevant statistic."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "strategy": "v4_hourly",
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 5.0,
+    "slippage_bps": 3.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "point_8_preserved": true,
+  "signal_bar": "1h",
+  "anchor_bar": "4h",
+  "source_run": "reports/v4-hourly-01",
+  "measured_research": {
+    "sharpe_maker": 0.8749847831238833,
+    "sharpe_taker": 0.7385202598236399,
+    "annualised_return": 0.13904571054253867,
+    "max_drawdown": 0.20952300490132447,
+    "calmar": 0.6636298033622737,
+    "trades": 120,
+    "deflated_sharpe": 0.7174140641527482,
+    "monte_carlo_p05_7d": 0.026392505079278317
+  },
+  "approved_for_live": false,
+  "intended_modes": [
+    "observe",
+    "demo"
+  ],
+  "disclosures": [
+    "No independent holdout exists for this price series; it was searched in run-001, run-002, v3 and v4.",
+    "The DSR is 0.717, below the 0.95 gate. Forward paper trading is the validation, not this backtest.",
+    "Research used Binance USD-M as an OKX proxy; funding and basis differ between venues.",
+    "This is the single best runnable sleeve. The v5 two-sleeve portfolio measures Sharpe 1.127 but needs multi-configuration support the service does not have.",
+    "Deposit-aware drawdown halt and time-weighted return reporting are still pending; both are required before real capital."
+  ]
+}

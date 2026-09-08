@@ -1,0 +1,30 @@
+{
+  "brief": "All eleven points preserved, point 8 included: 1h signal bar, 4h anchor bar",
+  "change_from_v1": "Only the parameter ranges move. The v1 capped the breakout at 200 bars (8.3 days) and the holding period at 480 hours, so the slow end of the family was unreachable at hourly resolution. Point 8 fixes the bar size, not the lookback or the holding period.",
+  "asset": "BTC perpetual (Binance USD-M series as OKX proxy)",
+  "directions": "long and short",
+  "instrument": "linear perpetual futures, not spot",
+  "risk_fraction": 0.02,
+  "risk_measured_at": "effective stop including the trailing rule",
+  "execution": "post-only maker 2bps per side; taker 5bps+3bps reported as stress",
+  "attempt_budget_this_run": 60,
+  "attempts_earlier_this_round": 60,
+  "cumulative_attempts": 120,
+  "brief_limit": 200,
+  "seed": 3141,
+  "folds": 4,
+  "fold_bounds": [
+    "2022-02-05 00:00:00+00:00",
+    "2023-03-29 06:00:00+00:00",
+    "2024-05-19 12:00:00+00:00",
+    "2025-07-10 18:00:00+00:00",
+    "2026-09-01 00:00:00+00:00"
+  ],
+  "minimum_trades_per_fold": 8,
+  "data_sha256": "ddf82daf6eb4a0f15b2206d0067c555e5c303a6f32a34cb54465bece9e2c20c2",
+  "selection": "median fold Sharpe minus 0.25 SD; every fold clears the trade floor without halting, both sides trade",
+  "independent_holdout": false,
+  "holdout_disclosure": "None exists. This series was searched in run-001, run-002 and the v3 daily search, and the horizon sweep that motivated the open ranges was measured on it. Only forward paper trading can still be independent.",
+  "dsr_disclosure": "The DSR penalty counts all 120 configurations spent this round.",
+  "approved_for_live": false
+}

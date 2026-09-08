@@ -1,0 +1,15 @@
+{
+  "source": "GET /api/v5/account/trade-fee",
+  "environment": "OKX demo",
+  "values": {
+    "delivery": "",
+    "exercise": "",
+    "instType": "SWAP",
+    "level": "Lv1",
+    "makerU": "-0.0002",
+    "taker": "",
+    "takerU": "-0.0005",
+    "ts": "1788824649678"
+  },
+  "historical_tier_reconstructed": false
+}

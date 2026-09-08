@@ -1,0 +1,12 @@
+{
+  "asset": "BTC",
+  "execution_instrument": "BTC-USDT-SWAP",
+  "execution_venue": "OKX",
+  "research_source": "Binance USD-M futures proxy",
+  "signal_timeframe": "1h",
+  "anchor_timeframe": "4h",
+  "target_sharpe": 1.5,
+  "holdout_months": 18,
+  "maximum_attempts": 200,
+  "note": "Descriptive protocol. Run-specific executable settings are in reports/run-001/protocol.json and selected.json."
+}

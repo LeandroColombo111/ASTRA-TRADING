@@ -1,0 +1,28 @@
+{
+  "params": {
+    "fast": 8,
+    "slow": 60,
+    "breakout": 168,
+    "atr_period": 14,
+    "stop_atr": 4.0,
+    "trail_atr": 2.0,
+    "reward": 2.0,
+    "min_trend": 0.0,
+    "max_hours": 240
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 6.0,
+    "slippage_bps": 3.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "attempt": 171,
+  "development_eligible": true,
+  "execution_venue": "OKX",
+  "data_venue": "Binance proxy",
+  "approved_for_live": false
+}

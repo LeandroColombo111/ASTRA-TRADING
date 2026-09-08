@@ -1,0 +1,49 @@
+{
+  "started_at_utc": "2026-09-08T16:15:54.572240917Z",
+  "container": {
+    "name": "astra-demo",
+    "id": "2162bc1b6e7c3c86cee4cf09ee682523ffb831ff1a170516346d38c3f1f2eff5",
+    "volume": "astra-trading_astra-state",
+    "volume_mount": "/app/state"
+  },
+  "runtime_env": {
+    "ASTRA_MODE": "demo",
+    "ASTRA_STATE": "/app/state/demo.db"
+  },
+  "account_equity_usdt_at_start": 74944.44869563001,
+  "config_sha256": {
+    "file": "configs/selected.json",
+    "sha256": "930b0e7d8d7191977adedff94bf47c9e7664cadf41c399588a1f8041aa196fa4"
+  },
+  "state_at_start": {
+    "last_closed": "2026-09-08 16:00:00+00:00",
+    "events_count": 0,
+    "open_position": null,
+    "pending_intent": null,
+    "halted": false,
+    "peak": 74944.44869563001
+  },
+  "doctor_output": {
+    "demo_authentication": "ok",
+    "instrument": "BTC-USDT-SWAP",
+    "contract_value_btc": "0.01",
+    "lot_contracts": "0.01",
+    "position_mode": "net_mode",
+    "account_level": "2",
+    "open_swap_positions": 0,
+    "ready_account_mode": true,
+    "orders_sent": 0,
+    "live_enabled": false
+  },
+  "check_command": "docker exec astra-demo astra health --state \"$(docker exec astra-demo sh -c 'echo $ASTRA_STATE')\"",
+  "warning": "El servicio esta disenado para detenerse antes que operar a ciegas: el loop aborta tras 3 ciclos fallidos consecutivos y compose reintenta 3 veces. Puede quedar detenido sin aviso. Por eso hace falta el chequeo periodico con el comando de arriba (o 'docker ps --filter name=astra-demo' para ver el estado 'healthy'/'unhealthy'/ausente).",
+  "previous_runs": [
+    {
+      "started_at_utc": "2026-09-08T15:20:14.933747Z",
+      "container_id": "693e21e693b9c367d50d23f8d43f733c859eb608f393fccbc3229ce962f4e479",
+      "stopped_at_utc": "2026-09-08T15:51:49.561911634Z",
+      "exit_code": 1,
+      "reason": "3 ciclos consecutivos fallidos: ExchangeError OKX HTTP 401 en /api/v5/account/positions. Autenticacion intermitente del lado de OKX; no fue drift de reloj (VM Docker sincronizada con el host) ni credencial invalida (astra doctor autentico normalmente antes y despues). Sin posiciones, pending orders ni algo orders remanentes en OKX al momento de la caida. No se modifico codigo ni configuracion; se relanzo el contenedor tras confirmar con astra doctor que la cuenta volvia a autenticar."
+    }
+  ]
+}

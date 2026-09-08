@@ -1,0 +1,57 @@
+{
+  "trades": 124,
+  "totals_usdt": {
+    "net_pnl": -317.147378699393,
+    "gross_before_execution_costs": 1308.107401349561,
+    "slippage_cost": 538.6473064641875,
+    "entry_fee": 538.998987745002,
+    "exit_fee": 538.2953897241521,
+    "funding_cost": 9.313096115613
+  },
+  "percentage_points_of_initial_capital": {
+    "net_pnl": -3.1714737869939302,
+    "gross_before_execution_costs": 13.081074013495611,
+    "slippage_cost": 5.3864730646418755,
+    "entry_fee": 5.389989877450019,
+    "exit_fee": 5.382953897241521,
+    "funding_cost": 0.09313096115613001
+  },
+  "groups": {
+    "side": {
+      "-1": {
+        "trades": 54,
+        "net_pnl": 584.2468880553906,
+        "win_rate": 0.4074074074074074,
+        "mean_hours": 16.333333333333332
+      },
+      "1": {
+        "trades": 70,
+        "net_pnl": -901.394266754784,
+        "win_rate": 0.24285714285714285,
+        "mean_hours": 13.685714285714285
+      }
+    },
+    "exit_detail": {
+      "target": {
+        "trades": 11,
+        "net_pnl": 3827.1454550722224,
+        "win_rate": 1.0,
+        "mean_hours": 18.272727272727273
+      },
+      "trailing_stop": {
+        "trades": 113,
+        "net_pnl": -4144.292833771614,
+        "win_rate": 0.24778761061946902,
+        "mean_hours": 14.504424778761061
+      }
+    }
+  },
+  "trades_with_trailing_updates": 123,
+  "first_trail_at_loss_count": 68,
+  "median_first_trail_r": -0.026432144931738597,
+  "average_nominal_risk_fraction": 0.018278968764620204,
+  "median_nominal_risk_fraction": 0.018749975876599566,
+  "profit_factor": 0.9470309708935711,
+  "average_win": 145.3913899929351,
+  "average_loss": -70.44013633439837
+}

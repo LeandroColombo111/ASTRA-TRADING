@@ -1,0 +1,430 @@
+{
+  "status": "SECOND_RESEARCH_COMPLETE_NOT_INDEPENDENTLY_VALIDATED",
+  "attempts_this_round": 200,
+  "cumulative_attempts": 400,
+  "selected_attempt": 104,
+  "selected_changes": [
+    "params.reward"
+  ],
+  "baseline_known_audit": {
+    "sharpe": -0.10182190048235543,
+    "return": -0.03171473786993906,
+    "max_drawdown": 0.15635942178968887,
+    "trades": 124,
+    "long_trades": 70,
+    "short_trades": 54,
+    "win_rate": 0.31451612903225806,
+    "days": 549,
+    "halted": false
+  },
+  "selected_known_audit": {
+    "sharpe": 0.11666825367570702,
+    "return": 0.010419869055001474,
+    "max_drawdown": 0.11382860502587178,
+    "trades": 129,
+    "long_trades": 71,
+    "short_trades": 58,
+    "win_rate": 0.3333333333333333,
+    "days": 549
+  },
+  "apparent_sharpe_target_met": false,
+  "independent_18month_target_met": false,
+  "development_score": 1.0003057467252336,
+  "development_folds": [
+    {
+      "sharpe": 1.1518084057239597,
+      "return": 0.15116757220367028,
+      "max_drawdown": 0.10692460813658444,
+      "trades": 79,
+      "long_trades": 33,
+      "short_trades": 46,
+      "win_rate": 0.46835443037974683,
+      "days": 385,
+      "halted": false
+    },
+    {
+      "sharpe": 1.3069196155378444,
+      "return": 0.16819696096149173,
+      "max_drawdown": 0.06886113865752452,
+      "trades": 70,
+      "long_trades": 45,
+      "short_trades": 25,
+      "win_rate": 0.38571428571428573,
+      "days": 385,
+      "halted": false
+    },
+    {
+      "sharpe": -0.04914112962776008,
+      "return": -0.01589013711095577,
+      "max_drawdown": 0.11478923193072654,
+      "trades": 97,
+      "long_trades": 60,
+      "short_trades": 37,
+      "win_rate": 0.36082474226804123,
+      "days": 385,
+      "halted": false
+    }
+  ],
+  "development_eligible": true,
+  "selected_attribution": {
+    "trades": 129,
+    "totals_usdt": {
+      "net_pnl": 104.19869054999526,
+      "gross_before_execution_costs": 1802.2675617614873,
+      "slippage_cost": 561.5234500639397,
+      "entry_fee": 562.07047289067,
+      "exit_fee": 560.9761028291578,
+      "funding_cost": 13.498845427725001
+    },
+    "percentage_points_of_initial_capital": {
+      "net_pnl": 1.0419869054999527,
+      "gross_before_execution_costs": 18.022675617614873,
+      "slippage_cost": 5.615234500639397,
+      "entry_fee": 5.620704728906699,
+      "exit_fee": 5.609761028291578,
+      "funding_cost": 0.13498845427725
+    },
+    "groups": {
+      "side": {
+        "-1": {
+          "trades": 58,
+          "net_pnl": 1118.2163266498326,
+          "win_rate": 0.43103448275862066,
+          "mean_hours": 15.551724137931034
+        },
+        "1": {
+          "trades": 71,
+          "net_pnl": -1014.0176360998379,
+          "win_rate": 0.2535211267605634,
+          "mean_hours": 13.830985915492958
+        }
+      },
+      "exit_detail": {
+        "target": {
+          "trades": 20,
+          "net_pnl": 5260.531224788749,
+          "win_rate": 1.0,
+          "mean_hours": 15.35
+        },
+        "trailing_stop": {
+          "trades": 109,
+          "net_pnl": -5156.332534238754,
+          "win_rate": 0.21100917431192662,
+          "mean_hours": 14.46788990825688
+        }
+      }
+    },
+    "trades_with_trailing_updates": 128,
+    "first_trail_at_loss_count": 71,
+    "median_first_trail_r": -0.029515723969271206,
+    "average_nominal_risk_fraction": 0.01830333395443338,
+    "median_nominal_risk_fraction": 0.018739755830676576,
+    "profit_factor": 1.0169623672928763,
+    "average_win": 145.28213884862987,
+    "average_loss": -71.42945674350104
+  },
+  "monte_carlo_by_block_days": {
+    "3": {
+      "simulations": 2000,
+      "block_days": 3,
+      "seed": 20260910,
+      "sharpe_p05": -1.4792894197828659,
+      "sharpe_p50": 0.050913285617628895,
+      "sharpe_p95": 1.3875174029456543,
+      "drawdown_p95": 0.26888917562192305,
+      "probability_loss": 0.5035,
+      "probability_drawdown_over_25pct": 0.083,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "7": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 20260914,
+      "sharpe_p05": -1.5585233423055431,
+      "sharpe_p50": 0.11075542616568268,
+      "sharpe_p95": 1.4574502521829065,
+      "drawdown_p95": 0.27410988586542845,
+      "probability_loss": 0.467,
+      "probability_drawdown_over_25pct": 0.084,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "14": {
+      "simulations": 2000,
+      "block_days": 14,
+      "seed": 20260921,
+      "sharpe_p05": -1.4991932875950653,
+      "sharpe_p50": 0.10296725757015208,
+      "sharpe_p95": 1.4854185585060258,
+      "drawdown_p95": 0.2687648339697634,
+      "probability_loss": 0.48,
+      "probability_drawdown_over_25pct": 0.079,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    }
+  },
+  "deflated_sharpe_approx_cumulative": 0.02703257273410213,
+  "double_cost_stress": {
+    "sharpe": -0.7925744787430342,
+    "return": -0.138966665285566,
+    "max_drawdown": 0.20346354254279309,
+    "trades": 129,
+    "long_trades": 71,
+    "short_trades": 58,
+    "win_rate": 0.29457364341085274,
+    "days": 549
+  },
+  "six_month_stability": [
+    {
+      "start": "2025-03-01 00:00:00+00:00",
+      "end_exclusive": "2025-09-01 00:00:00+00:00",
+      "baseline": {
+        "sharpe": -0.1312404460186214,
+        "return": -0.012307402777426812,
+        "max_drawdown": 0.084103047277434,
+        "trades": 43,
+        "long_trades": 28,
+        "short_trades": 15,
+        "win_rate": 0.3488372093023256,
+        "days": 184
+      },
+      "selected": {
+        "sharpe": -0.3439455559014155,
+        "return": -0.022400679917412347,
+        "max_drawdown": 0.07656049625920924,
+        "trades": 44,
+        "long_trades": 29,
+        "short_trades": 15,
+        "win_rate": 0.38636363636363635,
+        "days": 184
+      }
+    },
+    {
+      "start": "2025-09-01 00:00:00+00:00",
+      "end_exclusive": "2026-03-01 00:00:00+00:00",
+      "baseline": {
+        "sharpe": 0.3093210878567287,
+        "return": 0.017175393189803323,
+        "max_drawdown": 0.07055562642254953,
+        "trades": 38,
+        "long_trades": 17,
+        "short_trades": 21,
+        "win_rate": 0.3684210526315789,
+        "days": 181
+      },
+      "selected": {
+        "sharpe": 1.0073031767597889,
+        "return": 0.06763284934172753,
+        "max_drawdown": 0.06683828517844148,
+        "trades": 42,
+        "long_trades": 17,
+        "short_trades": 25,
+        "win_rate": 0.38095238095238093,
+        "days": 181
+      }
+    },
+    {
+      "start": "2026-03-01 00:00:00+00:00",
+      "end_exclusive": "2026-09-01 00:00:00+00:00",
+      "baseline": {
+        "sharpe": -0.5504241507056842,
+        "return": -0.03525798518206824,
+        "max_drawdown": 0.12258145161972234,
+        "trades": 43,
+        "long_trades": 25,
+        "short_trades": 18,
+        "win_rate": 0.23255813953488372,
+        "days": 184
+      },
+      "selected": {
+        "sharpe": -0.504221169470765,
+        "return": -0.030776760527993274,
+        "max_drawdown": 0.11362236111673274,
+        "trades": 43,
+        "long_trades": 25,
+        "short_trades": 18,
+        "win_rate": 0.23255813953488372,
+        "days": 184
+      }
+    }
+  ],
+  "approved_for_live": false,
+  "known_audit_period": {
+    "start": "2025-03-01 00:00:00+00:00",
+    "end_exclusive": "2026-09-01 00:00:00+00:00",
+    "months": 18,
+    "independent": false
+  },
+  "limitations": [
+    "Diagnostic ablations are conditional simulated counterfactuals; they do not identify universal market causes.",
+    "Both rounds and diagnosis informed this research. Reused audit data and another venue for BTC are not independent time samples.",
+    "Monte Carlo paths are conditional resampled returns, not proof of no overfitting.",
+    "Current 1x exposure cap can lower nominal risk below 2%; risk budget and exposure cap are different.",
+    "OKX venue comparison, if available, is transportability evidence only, not independent validation."
+  ],
+  "okx_comparison": {
+    "baseline": {
+      "sharpe": -0.000884577024782389,
+      "return": -0.012844497512232156,
+      "max_drawdown": 0.13931969481630757,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.3064516129032258,
+      "days": 549,
+      "attribution": {
+        "trades": 124,
+        "totals_usdt": {
+          "net_pnl": -128.44497512231095,
+          "gross_before_execution_costs": 1524.8420386513762,
+          "slippage_cost": 545.606903538294,
+          "entry_fee": 545.9887962906661,
+          "exit_fee": 545.2247363144783,
+          "funding_cost": 16.466577630248885
+        },
+        "percentage_points_of_initial_capital": {
+          "net_pnl": -1.2844497512231094,
+          "gross_before_execution_costs": 15.24842038651376,
+          "slippage_cost": 5.4560690353829395,
+          "entry_fee": 5.45988796290666,
+          "exit_fee": 5.4522473631447825,
+          "funding_cost": 0.16466577630248885
+        },
+        "groups": {
+          "side": {
+            "-1": {
+              "trades": 54,
+              "net_pnl": 737.1917082431406,
+              "win_rate": 0.4074074074074074,
+              "mean_hours": 16.48148148148148
+            },
+            "1": {
+              "trades": 70,
+              "net_pnl": -865.6366833654513,
+              "win_rate": 0.22857142857142856,
+              "mean_hours": 13.5
+            }
+          },
+          "exit_detail": {
+            "target": {
+              "trades": 11,
+              "net_pnl": 3859.960174279394,
+              "win_rate": 1.0,
+              "mean_hours": 17.90909090909091
+            },
+            "trailing_stop": {
+              "trades": 113,
+              "net_pnl": -3988.405149401705,
+              "win_rate": 0.23893805309734514,
+              "mean_hours": 14.495575221238939
+            }
+          }
+        },
+        "trades_with_trailing_updates": 123,
+        "first_trail_at_loss_count": 68,
+        "median_first_trail_r": -0.02947890024594038,
+        "average_nominal_risk_fraction": 0.018243293331922067,
+        "median_nominal_risk_fraction": 0.018712440628116448,
+        "profit_factor": 0.9787876005094984,
+        "average_win": 155.96680791614085,
+        "average_loss": -70.40911251087981
+      }
+    },
+    "selected": {
+      "sharpe": 0.22909278403605834,
+      "return": 0.03135306273118377,
+      "max_drawdown": 0.10753810002023223,
+      "trades": 130,
+      "long_trades": 72,
+      "short_trades": 58,
+      "win_rate": 0.3153846153846154,
+      "days": 549,
+      "attribution": {
+        "trades": 130,
+        "totals_usdt": {
+          "net_pnl": 313.5306273118321,
+          "gross_before_execution_costs": 2061.5284541161022,
+          "slippage_cost": 575.5916615424865,
+          "entry_fee": 576.1647480645839,
+          "exit_fee": 575.0182039454022,
+          "funding_cost": 21.22321325179744
+        },
+        "percentage_points_of_initial_capital": {
+          "net_pnl": 3.135306273118321,
+          "gross_before_execution_costs": 20.61528454116102,
+          "slippage_cost": 5.755916615424864,
+          "entry_fee": 5.7616474806458395,
+          "exit_fee": 5.750182039454022,
+          "funding_cost": 0.21223213251797438
+        },
+        "groups": {
+          "side": {
+            "-1": {
+              "trades": 58,
+              "net_pnl": 1277.3479765166273,
+              "win_rate": 0.41379310344827586,
+              "mean_hours": 15.39655172413793
+            },
+            "1": {
+              "trades": 72,
+              "net_pnl": -963.8173492047952,
+              "win_rate": 0.2361111111111111,
+              "mean_hours": 13.5
+            }
+          },
+          "exit_detail": {
+            "target": {
+              "trades": 22,
+              "net_pnl": 5841.103139274211,
+              "win_rate": 1.0,
+              "mean_hours": 15.590909090909092
+            },
+            "trailing_stop": {
+              "trades": 108,
+              "net_pnl": -5527.5725119623785,
+              "win_rate": 0.17592592592592593,
+              "mean_hours": 14.092592592592593
+            }
+          }
+        },
+        "trades_with_trailing_updates": 129,
+        "first_trail_at_loss_count": 73,
+        "median_first_trail_r": -0.031630528539602715,
+        "average_nominal_risk_fraction": 0.0182684257860651,
+        "median_nominal_risk_fraction": 0.01874881459374078,
+        "profit_factor": 1.0486476498054802,
+        "average_win": 164.8404678346173,
+        "average_loss": -72.41492757199414
+      }
+    },
+    "role": "Fixed-candidate venue comparison; same known BTC dates, not independent temporal evidence.",
+    "costs": {
+      "fee_bps_per_side": 6.0,
+      "slippage_bps_per_side": 3.0,
+      "funding": "Actual official OKX historical rates",
+      "quantity_step_btc": 0.001,
+      "precision_note": "Same conservative sizing step as original comparison; not a replay of historical account contract filters."
+    },
+    "current_demo_fee_snapshot": [
+      {
+        "instType": "SWAP",
+        "makerU": "-0.0002",
+        "takerU": "-0.0005",
+        "maker": "",
+        "taker": "",
+        "ts": "1788821011514"
+      }
+    ],
+    "fee_snapshot_note": "Current DEMO taker metadata, not a historical fee series or live-account quote; no additional parameter search."
+  },
+  "paired_bootstrap_improvement": {
+    "paths": 2000,
+    "block_days": 7,
+    "seed": 20260907,
+    "delta_sharpe_p05": -0.3272889378182698,
+    "delta_sharpe_p50": 0.21708379405567396,
+    "delta_sharpe_p95": 0.7323043566846784,
+    "fraction_delta_positive": 0.7455,
+    "meaning": "Conditional paired resampling of known daily returns; not probability of future strategy superiority."
+  },
+  "fixed_trade_path_break_even_fee_bps_per_side": 4.233645035197592,
+  "fee_break_even_note": "Accounting on the original trade path, not a new backtest: different fees can alter sizing, fills and subsequent trades."
+}

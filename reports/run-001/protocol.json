@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "attempt_budget": 200,
+  "holdout_start": "2025-03-01 00:00:00+00:00",
+  "end_exclusive": "2026-09-01 00:00:00+00:00",
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 6.0,
+    "slippage_bps": 3.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "data_hash": "de992d41ef3d9f223574142fb93632e8c33f3754d9e9cc2e3f0c5cb698758f88",
+  "selection": "Maximum median development-fold Sharpe minus 0.25*fold SD; all folds >=20 trades and no halt preferred; no holdout-based retuning",
+  "criteria": {
+    "holdout_sharpe": 1.5,
+    "holdout_months": 18,
+    "minimum_trades": 50,
+    "minimum_each_side": 10,
+    "max_drawdown": 0.25,
+    "bootstrap_sharpe_p05": 0,
+    "deflated_sharpe_probability": 0.95
+  },
+  "research_venue": "Binance USD-M proxy",
+  "execution_venue": "OKX BTC-USDT-SWAP"
+}

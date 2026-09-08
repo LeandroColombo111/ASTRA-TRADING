@@ -1,0 +1,33 @@
+{
+  "round": 2,
+  "budget_including_diagnostics": 200,
+  "previous_round_attempts": 200,
+  "seed": 20260907,
+  "data_sha256": "6afb81f89efad9f2bcec04b3aa6cb3f527af6a0c1cb46f8b9d1713a36514021b",
+  "fixed_constraints": {
+    "venue": "OKX SWAP target; Binance for controlled comparison",
+    "asset": "BTC",
+    "signal": "1h",
+    "anchor": "4h",
+    "directions": "long and short",
+    "risk_fraction": 0.02,
+    "maximum_risk_fraction": 0.03,
+    "target_sharpe": 1.5,
+    "minimum_evaluation_months": 18
+  },
+  "development_bounds": [
+    "2022-01-01 00:00:00+00:00",
+    "2023-01-21 00:00:00+00:00",
+    "2024-02-10 00:00:00+00:00",
+    "2025-03-01 00:00:00+00:00"
+  ],
+  "known_audit_start": "2025-03-01 00:00:00+00:00",
+  "known_audit_end_exclusive": "2026-09-01 00:00:00+00:00",
+  "known_audit_is_independent": false,
+  "selection": "Development median fold Sharpe minus 0.25*SD; require >=20 trades and both sides/no halt in every fold. Diagnostic-only cost/side/risk changes are not selectable. Select before evaluating non-panel candidates on known audit.",
+  "panel_count": 30,
+  "search": "170 additional unique configurations; at most two component groups changed relative to baseline. Original anchor EMA8/60, timeframe, asset, costs and risk retained.",
+  "holdout_rule": "No new independent 18-month validation is claimed. Previous observed prices and diagnosis contaminate reuse even when computational features are causal.",
+  "stopping_rule": "Stop at 200 total round-two configurations; apparent improvement does not establish the independent target.",
+  "new_experiment_costs": "Base 6bps fees and 3bps slippage per side; funding historical. Zero-cost cases are diagnostic only."
+}

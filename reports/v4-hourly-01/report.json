@@ -1,0 +1,124 @@
+{
+  "status": "TARGET_NOT_MET",
+  "point_8_preserved": true,
+  "signal_bar": "1h",
+  "anchor_bar": "4h",
+  "attempts_this_run": 60,
+  "cumulative_attempts_this_round": 120,
+  "selected_attempt": 6,
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 2.0,
+    "slippage_bps": 0.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "full_period": {
+    "sharpe": 0.8749847831238833,
+    "return": 0.8135946697337746,
+    "max_drawdown": 0.20952300490132447,
+    "trades": 120,
+    "long_trades": 73,
+    "short_trades": 47,
+    "win_rate": 0.38333333333333336,
+    "days": 1669
+  },
+  "annualised_return": 0.13904571054253867,
+  "calmar": 0.6636298033622737,
+  "monte_carlo": {
+    "3": {
+      "simulations": 2000,
+      "block_days": 3,
+      "seed": 3144,
+      "sharpe_p05": 0.0568693740186421,
+      "sharpe_p50": 0.8490989866985249,
+      "sharpe_p95": 1.5816059675938252,
+      "drawdown_p95": 0.34146678505681927,
+      "probability_loss": 0.0535,
+      "probability_drawdown_over_25pct": 0.2205,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "7": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 3148,
+      "sharpe_p05": 0.026392505079278317,
+      "sharpe_p50": 0.8853228380639373,
+      "sharpe_p95": 1.6463997864206648,
+      "drawdown_p95": 0.35592170152042424,
+      "probability_loss": 0.06,
+      "probability_drawdown_over_25pct": 0.254,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "14": {
+      "simulations": 2000,
+      "block_days": 14,
+      "seed": 3155,
+      "sharpe_p05": -0.012840973712132782,
+      "sharpe_p50": 0.8819871963507635,
+      "sharpe_p95": 1.6815200702228807,
+      "drawdown_p95": 0.3700602209450823,
+      "probability_loss": 0.07,
+      "probability_drawdown_over_25pct": 0.3225,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    }
+  },
+  "deflated_sharpe_probability": 0.7174140641527482,
+  "taker_stress": {
+    "sharpe": 0.7385202598236399,
+    "return": 0.6160506778102277,
+    "max_drawdown": 0.2196510097472517,
+    "trades": 121,
+    "long_trades": 73,
+    "short_trades": 48,
+    "win_rate": 0.38016528925619836,
+    "days": 1669
+  },
+  "attribution": {
+    "trades": 120,
+    "net_pnl_usdt": 8135.946697337782,
+    "estimated_costs_usdt": 493.9792922800001,
+    "gross_before_costs_usdt": 8629.925989617783,
+    "cost_ratio": 0.05724026983247377,
+    "mean_effective_risk_fraction": 0.019125428427819533,
+    "max_effective_risk_fraction": 0.01999964491744043,
+    "long_trades": 73,
+    "short_trades": 47,
+    "win_rate": 0.38333333333333336,
+    "mean_days_held": 2.1875,
+    "max_days_held": 20.0
+  },
+  "gates": {
+    "development_eligible": true,
+    "sharpe_at_least_1_5": false,
+    "drawdown_under_25pct": true,
+    "not_halted": true,
+    "both_sides": true,
+    "bootstrap_lower_bound_positive": true,
+    "dsr_at_least_95pct": false,
+    "taker_stress_positive": true,
+    "calmar_at_least_0_5": true
+  },
+  "approved_for_live": false,
+  "limitations": [
+    "No independent holdout exists for this price series; forward paper trading is the only remaining independent test.",
+    "Binance USD-M series stands in for OKX; funding and basis differ between venues.",
+    "Post-only execution assumes fills that bar data cannot verify; the taker case is the reported bound.",
+    "Monte Carlo resamples realised returns and cannot prove the absence of overfitting; the DSR is the relevant statistic."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "verified_at_utc": "2026-09-07T22:30:48.545129+00:00",
+  "pytest": {
+    "passed": 22,
+    "failed": 0
+  },
+  "attempt_records": 200,
+  "monte_carlo_paths": 2000,
+  "holdout_replay_exact_match": true,
+  "okx_demo_read_only_auth": "passed",
+  "okx_observe_startup": "passed",
+  "okx_cached_hourly_candles": 1299,
+  "orders_sent": 0,
+  "account_settings_changed": false,
+  "demo_account_level": "1 (spot; futures mode required for demo orders)",
+  "demo_order_lifecycle_integration_test": "not run: account is spot",
+  "live_execution_enabled": false,
+  "secret_scan_publishable_files": "passed, no copied OKX credential values found",
+  "docker_build": "not run: Docker unavailable locally",
+  "remote_github_repository": "not created"
+}

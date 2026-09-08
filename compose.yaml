@@ -1,0 +1,24 @@
+services:
+  astra:
+    build: .
+    init: true
+    restart: "on-failure:3"
+    env_file: .env
+    volumes:
+      - astra-state:/app/state
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stop_grace_period: 30s
+    # Observe uses public data and sends no orders. Override both variables
+    # together to run another mode; the healthcheck reads ASTRA_STATE too.
+    #   docker compose run -d -e ASTRA_MODE=demo -e ASTRA_STATE=/app/state/demo.db astra
+    environment:
+      ASTRA_MODE: observe
+      ASTRA_STATE: /app/state/observe.db
+volumes:
+  astra-state:

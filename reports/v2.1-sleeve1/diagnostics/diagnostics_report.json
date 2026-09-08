@@ -1,0 +1,382 @@
+{
+  "status": "DIAGNOSTICS_COMPLETE",
+  "optimization_attempts_used": 0,
+  "approved_for_live": false,
+  "changes_to_gates": "none",
+  "simulator_equivalence": {
+    "max_abs_row_difference": 0.0,
+    "equivalent": true
+  },
+  "baseline_strategy": {
+    "gross_sharpe": 0.960789646595748,
+    "net_sharpe": 0.3675266116028065,
+    "total_costs_usdt": 1762.96755231433,
+    "cost_gate": {
+      "passed": false,
+      "ratio": 0.6879655376720298,
+      "reason": "costs_exceed_30pct_gross"
+    },
+    "cost_coverage_complete": true,
+    "spread_coverage_complete": true,
+    "funding_coverage_complete": true,
+    "missing_spread_pairs": 0,
+    "missing_funding_days_symbols": 0,
+    "mean_daily_turnover_equity": 0.4956167483690884,
+    "max_position_notional_usdt": 3155.6898523860978,
+    "gross_pnl_usdt": 2562.5811988779883,
+    "fees_usdt": 1412.240390414632,
+    "sampled_spread_usdt": 294.29870890991816,
+    "funding_usdt": 56.42845298978003,
+    "net_return": 0.07996136465636638
+  },
+  "d1_control_audit": {
+    "strategy": {
+      "net_sharpe": 0.3675266116028065,
+      "gross_sharpe": 0.960789646595748,
+      "mean_daily_turnover_equity": 0.4956167483690884
+    },
+    "legacy_control_as_shipped": {
+      "repetitions": 400,
+      "median_net_sharpe": 4.151600818896046,
+      "median_gross_sharpe": 5.853511120240034,
+      "median_mean_daily_turnover": 1.1783253029922394,
+      "turnover_ratio_vs_strategy": 2.3774929052936975,
+      "median_total_costs_fraction_of_nav": 0.390155201839278,
+      "median_daily_gross_vol": 0.008569936275830692
+    },
+    "matched_control": {
+      "repetitions": 400,
+      "method": "Cross-sectional permutation of weights within the admitted set, evaluated through the strategy simulator.",
+      "median_net_sharpe": -2.46216074221525,
+      "p05_net_sharpe": -3.9255695831659376,
+      "p95_net_sharpe": -0.9556478009012888,
+      "median_mean_daily_turnover_equity": 1.696559777411844,
+      "strategy_percentile": 99.5,
+      "caveat": "Daily reassignment destroys portfolio persistence, so this control churns far more than the strategy and pays costs the strategy never pays. Its percentile is biased in the strategy favour and is reported for completeness only."
+    },
+    "relabel_control_primary": {
+      "repetitions": 400,
+      "method": "One fixed symbol relabeling per membership month, applied to every day in that month. Preserves the exposure path and therefore the turnover; severs symbol-to-signal association.",
+      "median_net_sharpe": -0.8382730247618002,
+      "p05_net_sharpe": -2.2339499132681917,
+      "p95_net_sharpe": 0.5160549269746827,
+      "median_mean_daily_turnover_equity": 0.5309920198945115,
+      "turnover_ratio_vs_strategy": 1.071376263295846,
+      "strategy_percentile": 92.75
+    },
+    "verdict": "Legacy control is NOT turnover-matched (ratio 2.38); its percentile is void. Against the persistence-preserving control (turnover ratio 1.07) the strategy sits at percentile 92.8 with a control median of -0.838."
+  },
+  "d2_weighting_decomposition": {
+    "question": "Does the P&L come from the ranking or from the inverse-volatility overlay?",
+    "strategy_full": {
+      "gross_pnl_usdt": 2562.5811988779883,
+      "gross_sharpe": 0.960789646595748,
+      "net_sharpe": 0.3675266116028065
+    },
+    "rank_equal_weight_no_overlay": {
+      "gross_pnl_usdt": 1387.540351395488,
+      "gross_sharpe": 0.6986149766911424,
+      "net_sharpe": -0.00017580870100024956,
+      "mean_daily_turnover_equity": 0.4590809831581624
+    },
+    "overlay_contribution_usdt": 1175.0408474825003,
+    "overlay_share_of_gross": 0.45853799598505807,
+    "ic_h1_mean": -0.018496608324576565,
+    "causality_audit": {
+      "checked_dates": 15,
+      "max_abs_vol_difference": 0.0,
+      "strictly_causal": true,
+      "note": "Rolling volatility truncated at t-1 reproduces the value used to build the weights for t.",
+      "samples": [
+        {
+          "date": "2025-03-01",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-04-07",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-05-14",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-06-20",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-07-27",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-09-02",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-10-09",
+          "max_abs_vol_difference": 0.0
+        },
+        {
+          "date": "2025-11-15",
+          "max_abs_vol_difference": 0.0
+        }
+      ]
+    },
+    "verdict": "The ranking carries the gross P&L (54% from the signal). The IC and the P&L can be reconciled by the weighting, not contradicted by it."
+  },
+  "d3_maker_execution": {
+    "maker_fee_bps": 2.0,
+    "taker_fee_bps": 5.0,
+    "no_trade_band": 0.2,
+    "scenarios": [
+      {
+        "gross_sharpe": 0.960789646595748,
+        "net_sharpe": 0.3675266116028065,
+        "total_costs_usdt": 1762.96755231433,
+        "cost_gate": {
+          "passed": false,
+          "ratio": 0.6879655376720298,
+          "reason": "costs_exceed_30pct_gross"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.4956167483690884,
+        "max_position_notional_usdt": 3155.6898523860978,
+        "gross_pnl_usdt": 2562.5811988779883,
+        "fees_usdt": 1412.240390414632,
+        "sampled_spread_usdt": 294.29870890991816,
+        "funding_usdt": 56.42845298978003,
+        "net_return": 0.07996136465636638,
+        "unfilled_notional_usdt": 0.0,
+        "intended_rebalance_notional_usdt": 0.0,
+        "label": "taker_as_measured",
+        "fee_bps": 5.0,
+        "crosses_spread": true,
+        "band": 0.0,
+        "fill_rate": 1.0,
+        "fill_mode": "random",
+        "outcome": "COMPLETED"
+      },
+      {
+        "gross_sharpe": 0.9728348759799886,
+        "net_sharpe": 0.42274078660246506,
+        "total_costs_usdt": 1614.748710028872,
+        "cost_gate": {
+          "passed": false,
+          "ratio": 0.6289896888989409,
+          "reason": "costs_exceed_30pct_gross"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.45090412923594986,
+        "max_position_notional_usdt": 3140.562147081771,
+        "gross_pnl_usdt": 2567.2101443435777,
+        "fees_usdt": 1294.5235618420893,
+        "sampled_spread_usdt": 270.69464993813,
+        "funding_usdt": 49.53049824865268,
+        "net_return": 0.09524614343147153,
+        "unfilled_notional_usdt": 0.0,
+        "intended_rebalance_notional_usdt": 0.0,
+        "label": "taker_with_band",
+        "fee_bps": 5.0,
+        "crosses_spread": true,
+        "band": 0.2,
+        "fill_rate": 1.0,
+        "fill_mode": "random",
+        "outcome": "COMPLETED"
+      },
+      {
+        "gross_sharpe": 0.960789646595748,
+        "net_sharpe": 0.7547675835395135,
+        "total_costs_usdt": 621.3246091556332,
+        "cost_gate": {
+          "passed": true,
+          "ratio": 0.2424604572248,
+          "reason": "pass"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.4956167483690884,
+        "max_position_notional_usdt": 3155.6898523860978,
+        "gross_pnl_usdt": 2562.5811988779883,
+        "fees_usdt": 564.8961561658532,
+        "sampled_spread_usdt": 0.0,
+        "funding_usdt": 56.42845298978003,
+        "net_return": 0.19412565897223688,
+        "unfilled_notional_usdt": 0.0,
+        "intended_rebalance_notional_usdt": 0.0,
+        "label": "maker_no_band_full_fill",
+        "fee_bps": 2.0,
+        "crosses_spread": false,
+        "band": 0.0,
+        "fill_rate": 1.0,
+        "fill_mode": "random",
+        "outcome": "COMPLETED"
+      },
+      {
+        "gross_sharpe": 0.9728348759799886,
+        "net_sharpe": 0.7827019824125228,
+        "total_costs_usdt": 567.3399229854889,
+        "cost_gate": {
+          "passed": true,
+          "ratio": 0.22099473400552286,
+          "reason": "pass"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.45090412923594986,
+        "max_position_notional_usdt": 3140.562147081771,
+        "gross_pnl_usdt": 2567.2101443435777,
+        "fees_usdt": 517.8094247368363,
+        "sampled_spread_usdt": 0.0,
+        "funding_usdt": 49.53049824865268,
+        "net_return": 0.19998702213581065,
+        "unfilled_notional_usdt": 0.0,
+        "intended_rebalance_notional_usdt": 0.0,
+        "label": "maker_band_full_fill",
+        "fee_bps": 2.0,
+        "crosses_spread": false,
+        "band": 0.2,
+        "fill_rate": 1.0,
+        "fill_mode": "random",
+        "outcome": "COMPLETED"
+      },
+      {
+        "gross_sharpe": 0.8651980459794449,
+        "net_sharpe": 0.6952849807291628,
+        "total_costs_usdt": 528.1287048119306,
+        "cost_gate": {
+          "passed": true,
+          "ratio": 0.2257328059713272,
+          "reason": "pass"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.39780105226695756,
+        "max_position_notional_usdt": 3259.3772212215595,
+        "gross_pnl_usdt": 2339.618747657857,
+        "fees_usdt": 466.87686816105054,
+        "sampled_spread_usdt": 0.0,
+        "funding_usdt": 61.25183665088004,
+        "net_return": 0.18114900428459335,
+        "unfilled_notional_usdt": 579746.0461537265,
+        "intended_rebalance_notional_usdt": 2898915.334916184,
+        "label": "maker_band_fill80_random",
+        "fee_bps": 2.0,
+        "crosses_spread": false,
+        "band": 0.2,
+        "fill_rate": 0.8,
+        "fill_mode": "random",
+        "outcome": "COMPLETED"
+      },
+      {
+        "gross_sharpe": -11.313907736254173,
+        "net_sharpe": -10.378882639008747,
+        "total_costs_usdt": 96.11715592771392,
+        "cost_gate": {
+          "passed": false,
+          "ratio": null,
+          "reason": "nonpositive_gross"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.42222207765827235,
+        "max_position_notional_usdt": 885.3662342541244,
+        "gross_pnl_usdt": -9788.873245841976,
+        "fees_usdt": 102.74285708660129,
+        "sampled_spread_usdt": 0.0,
+        "funding_usdt": -6.625701158887372,
+        "net_return": -0.9884990401769703,
+        "unfilled_notional_usdt": 208478.83993419757,
+        "intended_rebalance_notional_usdt": 721926.2654384314,
+        "label": "maker_band_fill80_adverse",
+        "fee_bps": 2.0,
+        "crosses_spread": false,
+        "band": 0.2,
+        "fill_rate": 0.8,
+        "fill_mode": "adverse",
+        "outcome": "COMPLETED"
+      },
+      {
+        "gross_sharpe": 0.7570307968344044,
+        "net_sharpe": 0.5962967571876786,
+        "total_costs_usdt": 503.27755101278944,
+        "cost_gate": {
+          "passed": true,
+          "ratio": 0.24729665255860436,
+          "reason": "pass"
+        },
+        "cost_coverage_complete": true,
+        "spread_coverage_complete": true,
+        "funding_coverage_complete": true,
+        "missing_spread_pairs": 0,
+        "missing_funding_days_symbols": 0,
+        "mean_daily_turnover_equity": 0.33470120444543394,
+        "max_position_notional_usdt": 3235.6579560261002,
+        "gross_pnl_usdt": 2035.11671430135,
+        "fees_usdt": 398.59742897533516,
+        "sampled_spread_usdt": 0.0,
+        "funding_usdt": 104.68012203745427,
+        "net_return": 0.1531839163288553,
+        "unfilled_notional_usdt": 1328925.1601031306,
+        "intended_rebalance_notional_usdt": 3306712.284890673,
+        "label": "maker_band_fill60_random",
+        "fee_bps": 2.0,
+        "crosses_spread": false,
+        "band": 0.2,
+        "fill_rate": 0.6,
+        "fill_mode": "random",
+        "outcome": "COMPLETED"
+      },
+      {
+        "label": "maker_band_fill60_adverse",
+        "fee_bps": 2.0,
+        "crosses_spread": false,
+        "band": 0.2,
+        "fill_rate": 0.6,
+        "fill_mode": "adverse",
+        "outcome": "RUINED",
+        "reason": "Raw portfolio insolvent",
+        "net_sharpe": null,
+        "cost_gate": {
+          "passed": false,
+          "ratio": null,
+          "reason": "portfolio_ruined"
+        }
+      }
+    ],
+    "scenarios_passing_cost_gate": [
+      "maker_no_band_full_fill",
+      "maker_band_full_fill",
+      "maker_band_fill80_random",
+      "maker_band_fill60_random"
+    ],
+    "net_sharpe_range_conservative": [
+      -10.378882639008747,
+      0.6952849807291628
+    ],
+    "ruined_scenarios": [
+      "maker_band_fill60_adverse"
+    ],
+    "note": "Post-only is modelled as not paying the half-spread; it is never booked as a credit. Unfilled orders retain the prior position. The adverse mode drops, every single day, the trades that would have been most profitable next bar. That is a maximal bound, not a forecast, and compounding it daily can destroy the portfolio; where it does, the scenario is reported as RUINED rather than as a measurement.",
+    "fill_rate_caveat": "Daily bars cannot determine passive fill rates, which depend on queue position within the bar. The fill rate is therefore a stated assumption and results are reported across a range, not a measured quantity."
+  }
+}

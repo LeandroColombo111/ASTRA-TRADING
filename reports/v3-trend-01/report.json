@@ -1,0 +1,118 @@
+{
+  "status": "TARGET_NOT_MET",
+  "attempts": 60,
+  "selected_attempt": 56,
+  "params": {
+    "fast": 6,
+    "slow": 32,
+    "breakout": 40,
+    "atr_period": 14,
+    "stop_atr": 4.0,
+    "trail_atr": 5.0,
+    "reward": 6.0,
+    "min_trend": 0.0,
+    "max_hours": 30,
+    "trail_start_r": 1.0
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 2.0,
+    "slippage_bps": 0.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "full_period": {
+    "sharpe": 1.045504991641025,
+    "return": 0.21657189025572432,
+    "max_drawdown": 0.051554483642229365,
+    "trades": 21,
+    "long_trades": 14,
+    "short_trades": 7,
+    "win_rate": 0.6666666666666666,
+    "days": 1669
+  },
+  "monte_carlo": {
+    "3": {
+      "simulations": 2000,
+      "block_days": 3,
+      "seed": 3144,
+      "sharpe_p05": 0.30160358647877744,
+      "sharpe_p50": 1.040008549208097,
+      "sharpe_p95": 1.7995755542200083,
+      "drawdown_p95": 0.08764683955057445,
+      "probability_loss": 0.012,
+      "probability_drawdown_over_25pct": 0.0,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "7": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 3148,
+      "sharpe_p05": 0.31420544240440157,
+      "sharpe_p50": 1.0719924702638126,
+      "sharpe_p95": 1.762169634676006,
+      "drawdown_p95": 0.08241184418098155,
+      "probability_loss": 0.01,
+      "probability_drawdown_over_25pct": 0.0,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "14": {
+      "simulations": 2000,
+      "block_days": 14,
+      "seed": 3155,
+      "sharpe_p05": 0.2575575161836575,
+      "sharpe_p50": 1.0563936229136042,
+      "sharpe_p95": 1.8003555685907993,
+      "drawdown_p95": 0.08583394736609433,
+      "probability_loss": 0.017,
+      "probability_drawdown_over_25pct": 0.0,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    }
+  },
+  "deflated_sharpe_probability": 0.8582370695469315,
+  "taker_stress": {
+    "sharpe": 1.0257981881712817,
+    "return": 0.20967156370911333,
+    "max_drawdown": 0.05145474859120325,
+    "trades": 21,
+    "long_trades": 14,
+    "short_trades": 7,
+    "win_rate": 0.6666666666666666,
+    "days": 1669
+  },
+  "attribution": {
+    "trades": 21,
+    "net_pnl_usdt": 2165.718902557247,
+    "estimated_costs_usdt": 13.170781680000003,
+    "gross_before_costs_usdt": 2178.889684237247,
+    "cost_ratio": 0.006044721665021161,
+    "mean_effective_risk_fraction": 0.01961193900654811,
+    "max_effective_risk_fraction": 0.01994893798120153,
+    "long_trades": 14,
+    "short_trades": 7,
+    "win_rate": 0.6666666666666666,
+    "mean_days_held": 27.0,
+    "max_days_held": 30.0
+  },
+  "gates": {
+    "development_eligible": true,
+    "sharpe_at_least_1_5": false,
+    "drawdown_under_25pct": true,
+    "not_halted": true,
+    "both_sides": true,
+    "bootstrap_lower_bound_positive": true,
+    "dsr_at_least_95pct": false,
+    "taker_stress_positive": true
+  },
+  "approved_for_live": false,
+  "limitations": [
+    "No independent holdout exists for this price series; forward paper trading is the only remaining independent test.",
+    "Binance USD-M series stands in for OKX; funding and basis differ between venues.",
+    "Tens of trades over 5.7 years cannot separate a Sharpe of 0.6 from zero at conventional confidence.",
+    "Post-only execution assumes fills that daily bars cannot verify; the taker case is reported as the bound.",
+    "Monte Carlo resamples realised returns and cannot prove the absence of overfitting; the DSR is the relevant statistic."
+  ]
+}

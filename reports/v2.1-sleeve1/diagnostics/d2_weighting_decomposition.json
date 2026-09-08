@@ -1,0 +1,58 @@
+{
+  "question": "Does the P&L come from the ranking or from the inverse-volatility overlay?",
+  "strategy_full": {
+    "gross_pnl_usdt": 2562.5811988779883,
+    "gross_sharpe": 0.960789646595748,
+    "net_sharpe": 0.3675266116028065
+  },
+  "rank_equal_weight_no_overlay": {
+    "gross_pnl_usdt": 1387.540351395488,
+    "gross_sharpe": 0.6986149766911424,
+    "net_sharpe": -0.00017580870100024956,
+    "mean_daily_turnover_equity": 0.4590809831581624
+  },
+  "overlay_contribution_usdt": 1175.0408474825003,
+  "overlay_share_of_gross": 0.45853799598505807,
+  "ic_h1_mean": -0.018496608324576565,
+  "causality_audit": {
+    "checked_dates": 15,
+    "max_abs_vol_difference": 0.0,
+    "strictly_causal": true,
+    "note": "Rolling volatility truncated at t-1 reproduces the value used to build the weights for t.",
+    "samples": [
+      {
+        "date": "2025-03-01",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-04-07",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-05-14",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-06-20",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-07-27",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-09-02",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-10-09",
+        "max_abs_vol_difference": 0.0
+      },
+      {
+        "date": "2025-11-15",
+        "max_abs_vol_difference": 0.0
+      }
+    ]
+  },
+  "verdict": "The ranking carries the gross P&L (54% from the signal). The IC and the P&L can be reconciled by the weighting, not contradicted by it."
+}

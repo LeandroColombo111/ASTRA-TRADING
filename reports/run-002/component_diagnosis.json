@@ -1,0 +1,4463 @@
+[
+  {
+    "attempt": 1,
+    "phase": "one_component_diagnosis",
+    "label": "baseline",
+    "changes": [],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.6876450680244969,
+    "development_mean_sharpe": 0.6958025767153501,
+    "folds": [
+      {
+        "sharpe": 0.8886054160718171,
+        "return": 0.11447850696506112,
+        "max_drawdown": 0.10404495964059002,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.49333333333333335,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.5696391559565905,
+        "return": 0.23298362087114755,
+        "max_drawdown": 0.06886113865752452,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.3968253968253968,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.3708368418823575,
+        "return": -0.05872426649183271,
+        "max_drawdown": 0.1489334262410944,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.358695652173913,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.10182190048235543,
+      "return": -0.03171473786993906,
+      "max_drawdown": 0.15635942178968887,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.31451612903225806,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 124,
+      "totals_usdt": {
+        "net_pnl": -317.147378699393,
+        "gross_before_execution_costs": 1308.107401349561,
+        "slippage_cost": 538.6473064641875,
+        "entry_fee": 538.998987745002,
+        "exit_fee": 538.2953897241521,
+        "funding_cost": 9.313096115613
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -3.1714737869939302,
+        "gross_before_execution_costs": 13.081074013495611,
+        "slippage_cost": 5.3864730646418755,
+        "entry_fee": 5.389989877450019,
+        "exit_fee": 5.382953897241521,
+        "funding_cost": 0.09313096115613001
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 584.2468880553906,
+            "win_rate": 0.4074074074074074,
+            "mean_hours": 16.333333333333332
+          },
+          "1": {
+            "trades": 70,
+            "net_pnl": -901.394266754784,
+            "win_rate": 0.24285714285714285,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 3827.1454550722224,
+            "win_rate": 1.0,
+            "mean_hours": 18.272727272727273
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -4144.292833771614,
+            "win_rate": 0.24778761061946902,
+            "mean_hours": 14.504424778761061
+          }
+        }
+      },
+      "trades_with_trailing_updates": 123,
+      "first_trail_at_loss_count": 68,
+      "median_first_trail_r": -0.026432144931738597,
+      "average_nominal_risk_fraction": 0.018278968764620204,
+      "median_nominal_risk_fraction": 0.018749975876599566,
+      "profit_factor": 0.9470309708935711,
+      "average_win": 145.3913899929351,
+      "average_loss": -70.44013633439837
+    }
+  },
+  {
+    "attempt": 2,
+    "phase": "one_component_diagnosis",
+    "label": "zero_fees_diagnostic",
+    "changes": [],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 1.0550463834305883,
+    "development_mean_sharpe": 1.0826338683183339,
+    "folds": [
+      {
+        "sharpe": 1.2439444439360612,
+        "return": 0.17205316320518405,
+        "max_drawdown": 0.09050341692600494,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.5066666666666667,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.9167810881311487,
+        "return": 0.3097217839178401,
+        "max_drawdown": 0.06861874067510054,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.4126984126984127,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.08717607288779108,
+        "return": 0.0028813034443115892,
+        "max_drawdown": 0.10561726181539988,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.40217391304347827,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.4765096428806448,
+      "return": 0.08641335795989158,
+      "max_drawdown": 0.11241085679452412,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.3629032258064516,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 124,
+      "totals_usdt": {
+        "net_pnl": 864.1335795989086,
+        "gross_before_execution_costs": 1464.3796456106911,
+        "slippage_cost": 590.1225365009808,
+        "entry_fee": 0.0,
+        "exit_fee": 0.0,
+        "funding_cost": 10.123529510802
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 8.641335795989086,
+        "gross_before_execution_costs": 14.64379645610691,
+        "slippage_cost": 5.901225365009808,
+        "entry_fee": 0.0,
+        "exit_fee": 0.0,
+        "funding_cost": 0.10123529510801998
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 1089.4965742811369,
+            "win_rate": 0.48148148148148145,
+            "mean_hours": 16.333333333333332
+          },
+          "1": {
+            "trades": 70,
+            "net_pnl": -225.3629946822287,
+            "win_rate": 0.2714285714285714,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 4316.320755980398,
+            "win_rate": 1.0,
+            "mean_hours": 18.272727272727273
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -3452.1871763814897,
+            "win_rate": 0.3008849557522124,
+            "mean_hours": 14.504424778761061
+          }
+        }
+      },
+      "trades_with_trailing_updates": 123,
+      "first_trail_at_loss_count": 68,
+      "median_first_trail_r": -0.026432144931738597,
+      "average_nominal_risk_fraction": 0.01893396134392634,
+      "median_nominal_risk_fraction": 0.019614036644271825,
+      "profit_factor": 1.1491448397550525,
+      "average_win": 147.95679234971607,
+      "average_loss": -73.3407857739027
+    }
+  },
+  {
+    "attempt": 3,
+    "phase": "one_component_diagnosis",
+    "label": "zero_slippage_diagnostic",
+    "changes": [],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 0.8676110706901314,
+    "development_mean_sharpe": 0.879693623928773,
+    "folds": [
+      {
+        "sharpe": 1.0617697530062835,
+        "return": 0.1408003966154443,
+        "max_drawdown": 0.09704885376477579,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.49333333333333335,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.7266739315261823,
+        "return": 0.26306615275968515,
+        "max_drawdown": 0.06820650667502515,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.4126984126984127,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.1493628127461467,
+        "return": -0.02959205818414734,
+        "max_drawdown": 0.12568844995359452,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.391304347826087,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.17464800523878157,
+      "return": 0.021889940891864912,
+      "max_drawdown": 0.11964538770260735,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.3467741935483871,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 124,
+      "totals_usdt": {
+        "net_pnl": 218.89940891863796,
+        "gross_before_execution_costs": 1344.9737857130522,
+        "slippage_cost": 0.0,
+        "entry_fee": 558.5079897599999,
+        "exit_fee": 557.8563218866884,
+        "funding_cost": 9.710065147724999
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 2.1889940891863793,
+        "gross_before_execution_costs": 13.449737857130522,
+        "slippage_cost": 0.0,
+        "entry_fee": 5.585079897599999,
+        "exit_fee": 5.578563218866884,
+        "funding_cost": 0.09710065147724999
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 813.9186550992614,
+            "win_rate": 0.46296296296296297,
+            "mean_hours": 16.333333333333332
+          },
+          "1": {
+            "trades": 70,
+            "net_pnl": -595.0192461806224,
+            "win_rate": 0.2571428571428571,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 3997.990581466713,
+            "win_rate": 1.0,
+            "mean_hours": 18.272727272727273
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -3779.091172548074,
+            "win_rate": 0.2831858407079646,
+            "mean_hours": 14.504424778761061
+          }
+        }
+      },
+      "trades_with_trailing_updates": 123,
+      "first_trail_at_loss_count": 64,
+      "median_first_trail_r": -0.013467625644106097,
+      "average_nominal_risk_fraction": 0.018436932322246392,
+      "median_nominal_risk_fraction": 0.018975651718901122,
+      "profit_factor": 1.0375537992115498,
+      "average_win": 140.64777895522093,
+      "average_loss": -71.96240847106002
+    }
+  },
+  {
+    "attempt": 4,
+    "phase": "one_component_diagnosis",
+    "label": "zero_funding_diagnostic",
+    "changes": [
+      "funding_enabled"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": false
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 0.7059220821773418,
+    "development_mean_sharpe": 0.7214246188337269,
+    "folds": [
+      {
+        "sharpe": 0.9032566321129111,
+        "return": 0.11662898893452223,
+        "max_drawdown": 0.1035422522754813,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.49333333333333335,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.5843351318342092,
+        "return": 0.2356506046904674,
+        "max_drawdown": 0.06861446846781849,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.38095238095238093,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.32331790744593947,
+        "return": -0.05265690483464369,
+        "max_drawdown": 0.14557220932502069,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.3695652173913043,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.09766954130007027,
+      "return": -0.030912803094434227,
+      "max_drawdown": 0.1555701752210723,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.31451612903225806,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 124,
+      "totals_usdt": {
+        "net_pnl": -309.1280309443436,
+        "gross_before_execution_costs": 1307.2643724932648,
+        "slippage_cost": 538.7975462483614,
+        "entry_fee": 539.1495531091739,
+        "exit_fee": 538.4453040800732,
+        "funding_cost": 0.0
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -3.091280309443436,
+        "gross_before_execution_costs": 13.072643724932648,
+        "slippage_cost": 5.387975462483614,
+        "entry_fee": 5.3914955310917385,
+        "exit_fee": 5.384453040800732,
+        "funding_cost": 0.0
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 557.2728797275666,
+            "win_rate": 0.4074074074074074,
+            "mean_hours": 16.333333333333332
+          },
+          "1": {
+            "trades": 70,
+            "net_pnl": -866.4009106719103,
+            "win_rate": 0.24285714285714285,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 3827.100566053299,
+            "win_rate": 1.0,
+            "mean_hours": 18.272727272727273
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -4136.228596997642,
+            "win_rate": 0.24778761061946902,
+            "mean_hours": 14.504424778761061
+          }
+        }
+      },
+      "trades_with_trailing_updates": 123,
+      "first_trail_at_loss_count": 68,
+      "median_first_trail_r": -0.026432144931738597,
+      "average_nominal_risk_fraction": 0.018275517276229065,
+      "median_nominal_risk_fraction": 0.018746998713034764,
+      "profit_factor": 0.9483016100516856,
+      "average_win": 145.3929172102232,
+      "average_loss": -70.3464917899182
+    }
+  },
+  {
+    "attempt": 5,
+    "phase": "one_component_diagnosis",
+    "label": "zero_all_costs_diagnostic",
+    "changes": [
+      "funding_enabled"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": false
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 0,
+      "slippage_bps": 0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 1.2488855559972285,
+    "development_mean_sharpe": 1.289493693940935,
+    "folds": [
+      {
+        "sharpe": 1.4279397352422014,
+        "return": 0.2026103058015476,
+        "max_drawdown": 0.08404429645215061,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.5066666666666667,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 2.0892206711372356,
+        "return": 0.34726498059938815,
+        "max_drawdown": 0.06752900761023384,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.42857142857142855,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.3513206754433673,
+        "return": 0.04200302221038088,
+        "max_drawdown": 0.09205944552557466,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.44565217391304346,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.7594871053435037,
+      "return": 0.15162946940915667,
+      "max_drawdown": 0.1052449502511571,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.3790322580645161,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 124,
+      "totals_usdt": {
+        "net_pnl": 1516.2946940915597,
+        "gross_before_execution_costs": 1516.2946940915597,
+        "slippage_cost": 0.0,
+        "entry_fee": 0.0,
+        "exit_fee": 0.0,
+        "funding_cost": 0.0
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 15.162946940915598,
+        "gross_before_execution_costs": 15.162946940915598,
+        "slippage_cost": 0.0,
+        "entry_fee": 0.0,
+        "exit_fee": 0.0,
+        "funding_cost": 0.0
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 1333.236168864844,
+            "win_rate": 0.5,
+            "mean_hours": 16.333333333333332
+          },
+          "1": {
+            "trades": 70,
+            "net_pnl": 183.05852522671586,
+            "win_rate": 0.2857142857142857,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 4536.407413756726,
+            "win_rate": 1.0,
+            "mean_hours": 18.272727272727273
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -3020.112719665165,
+            "win_rate": 0.3185840707964602,
+            "mean_hours": 14.504424778761061
+          }
+        }
+      },
+      "trades_with_trailing_updates": 123,
+      "first_trail_at_loss_count": 64,
+      "median_first_trail_r": -0.013467625644106097,
+      "average_nominal_risk_fraction": 0.019120066451684455,
+      "median_nominal_risk_fraction": 0.019871565754016267,
+      "profit_factor": 1.2688096777613698,
+      "average_win": 152.278061502403,
+      "average_loss": -73.25680774703089
+    }
+  },
+  {
+    "attempt": 6,
+    "phase": "one_component_diagnosis",
+    "label": "double_costs_stress",
+    "changes": [],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 12.0,
+      "slippage_bps": 6.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 0.14084947890042565,
+    "development_mean_sharpe": 0.12346646063524529,
+    "folds": [
+      {
+        "sharpe": 0.36065450035216073,
+        "return": 0.03910564891726076,
+        "max_drawdown": 0.12396585823948425,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.48,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.0619194190568357,
+        "return": 0.14093489316113983,
+        "max_drawdown": 0.0729508895916583,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.36507936507936506,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -1.0521745375032605,
+        "return": -0.13865239386321715,
+        "max_drawdown": 0.21155853248609013,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.34782608695652173,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -1.3669758280235418,
+      "return": -0.22177888095500053,
+      "max_drawdown": 0.2500044169522905,
+      "trades": 117,
+      "long_trades": 64,
+      "short_trades": 53,
+      "win_rate": 0.26495726495726496,
+      "days": 549,
+      "halted": true
+    },
+    "known_audit_attribution": {
+      "trades": 117,
+      "totals_usdt": {
+        "net_pnl": -2217.7888095500016,
+        "gross_before_execution_costs": 510.69740998779145,
+        "slippage_cost": 907.2327634003449,
+        "entry_fee": 908.3095730657038,
+        "exit_fee": 906.1555860328767,
+        "funding_cost": 6.788297038868
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -22.177888095500016,
+        "gross_before_execution_costs": 5.106974099877915,
+        "slippage_cost": 9.072327634003448,
+        "entry_fee": 9.083095730657039,
+        "exit_fee": 9.061555860328767,
+        "funding_cost": 0.06788297038868
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 53,
+            "net_pnl": 13.567705373829845,
+            "win_rate": 0.3584905660377358,
+            "mean_hours": 16.22641509433962
+          },
+          "1": {
+            "trades": 64,
+            "net_pnl": -2231.356514923831,
+            "win_rate": 0.1875,
+            "mean_hours": 13.8125
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 8,
+            "net_pnl": 2484.5680946604225,
+            "win_rate": 1.0,
+            "mean_hours": 20.375
+          },
+          "trailing_stop": {
+            "trades": 109,
+            "net_pnl": -4702.356904210425,
+            "win_rate": 0.21100917431192662,
+            "mean_hours": 14.504587155963304
+          }
+        }
+      },
+      "trades_with_trailing_updates": 117,
+      "first_trail_at_loss_count": 68,
+      "median_first_trail_r": -0.04000231029752542,
+      "average_nominal_risk_fraction": 0.017448516221406533,
+      "median_nominal_risk_fraction": 0.017707965817869396,
+      "profit_factor": 0.6316390268875607,
+      "average_win": 122.67437051864152,
+      "average_loss": -70.00807320497546
+    }
+  },
+  {
+    "attempt": 7,
+    "phase": "one_component_diagnosis",
+    "label": "long_only_diagnostic",
+    "changes": [
+      "direction"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 1,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 0.9257597261362817,
+    "development_mean_sharpe": 0.8876420406191046,
+    "folds": [
+      {
+        "sharpe": 1.0295398112695764,
+        "return": 0.0639208169056229,
+        "max_drawdown": 0.040194824300591514,
+        "trades": 31,
+        "long_trades": 31,
+        "short_trades": 0,
+        "win_rate": 0.5161290322580645,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.3100349361110761,
+        "return": 0.15019805287928967,
+        "max_drawdown": 0.06716906200510186,
+        "trades": 40,
+        "long_trades": 40,
+        "short_trades": 0,
+        "win_rate": 0.4,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.32335137447666135,
+        "return": 0.03254344950822552,
+        "max_drawdown": 0.10506644383871122,
+        "trades": 57,
+        "long_trades": 57,
+        "short_trades": 0,
+        "win_rate": 0.42105263157894735,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.6315178345532118,
+      "return": -0.08714499440766088,
+      "max_drawdown": 0.18603604327439105,
+      "trades": 70,
+      "long_trades": 70,
+      "short_trades": 0,
+      "win_rate": 0.24285714285714285,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 70,
+      "totals_usdt": {
+        "net_pnl": -871.4499440766244,
+        "gross_before_execution_costs": 121.9523690446778,
+        "slippage_cost": 319.46445431068264,
+        "entry_fee": 319.52369696057997,
+        "exit_fee": 319.40518970942037,
+        "funding_cost": 35.00897214061901
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -8.714499440766245,
+        "gross_before_execution_costs": 1.219523690446778,
+        "slippage_cost": 3.194644543106826,
+        "entry_fee": 3.1952369696057996,
+        "exit_fee": 3.194051897094204,
+        "funding_cost": 0.3500897214061901
+      },
+      "groups": {
+        "side": {
+          "1": {
+            "trades": 70,
+            "net_pnl": -871.4499440766244,
+            "win_rate": 0.24285714285714285,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 6,
+            "net_pnl": 1966.7848716125704,
+            "win_rate": 1.0,
+            "mean_hours": 14.833333333333334
+          },
+          "trailing_stop": {
+            "trades": 64,
+            "net_pnl": -2838.2348156891944,
+            "win_rate": 0.171875,
+            "mean_hours": 13.578125
+          }
+        }
+      },
+      "trades_with_trailing_updates": 69,
+      "first_trail_at_loss_count": 39,
+      "median_first_trail_r": -0.025268201929099204,
+      "average_nominal_risk_fraction": 0.018009247464685275,
+      "median_nominal_risk_fraction": 0.018634275239075234,
+      "profit_factor": 0.7575348917258409,
+      "average_win": 160.1573651588785,
+      "average_loss": -67.81368210901054
+    }
+  },
+  {
+    "attempt": 8,
+    "phase": "one_component_diagnosis",
+    "label": "short_only_diagnostic",
+    "changes": [
+      "direction"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": -1,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 0.22233763852004831,
+    "development_mean_sharpe": 0.011173901941216702,
+    "folds": [
+      {
+        "sharpe": 0.45570734593659296,
+        "return": 0.04751418334732982,
+        "max_drawdown": 0.08072372645776815,
+        "trades": 44,
+        "long_trades": 0,
+        "short_trades": 44,
+        "win_rate": 0.4772727272727273,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.865413845519555,
+        "return": 0.071856454480971,
+        "max_drawdown": 0.04826549037382244,
+        "trades": 23,
+        "long_trades": 0,
+        "short_trades": 23,
+        "win_rate": 0.391304347826087,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -1.287599485632498,
+        "return": -0.08851491193426975,
+        "max_drawdown": 0.11412279083921228,
+        "trades": 35,
+        "long_trades": 0,
+        "short_trades": 35,
+        "win_rate": 0.2571428571428571,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.4672112638694733,
+      "return": 0.06072760946873612,
+      "max_drawdown": 0.07206651387623575,
+      "trades": 54,
+      "long_trades": 0,
+      "short_trades": 54,
+      "win_rate": 0.4074074074074074,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 54,
+      "totals_usdt": {
+        "net_pnl": 607.276094687355,
+        "gross_before_execution_costs": 1246.5142117741682,
+        "slippage_cost": 222.7016237964419,
+        "entry_fee": 223.00865538658195,
+        "exit_fee": 222.39436783379534,
+        "funding_cost": -28.866529930006003
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 6.07276094687355,
+        "gross_before_execution_costs": 12.465142117741681,
+        "slippage_cost": 2.227016237964419,
+        "entry_fee": 2.2300865538658194,
+        "exit_fee": 2.223943678337953,
+        "funding_cost": -0.28866529930006
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 607.276094687355,
+            "win_rate": 0.4074074074074074,
+            "mean_hours": 16.333333333333332
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 5,
+            "net_pnl": 1888.004655162374,
+            "win_rate": 1.0,
+            "mean_hours": 22.4
+          },
+          "trailing_stop": {
+            "trades": 49,
+            "net_pnl": -1280.7285604750189,
+            "win_rate": 0.3469387755102041,
+            "mean_hours": 15.714285714285714
+          }
+        }
+      },
+      "trades_with_trailing_updates": 54,
+      "first_trail_at_loss_count": 29,
+      "median_first_trail_r": -0.029581401285384272,
+      "average_nominal_risk_fraction": 0.01862186292525911,
+      "median_nominal_risk_fraction": 0.01889989968051704,
+      "profit_factor": 1.251221698740411,
+      "average_win": 137.48034841678725,
+      "average_loss": -75.5403615775614
+    }
+  },
+  {
+    "attempt": 9,
+    "phase": "one_component_diagnosis",
+    "label": "risk_3pct_diagnostic",
+    "changes": [],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.03,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": false,
+    "eligible": false,
+    "development_score": 0.7706227280433268,
+    "development_mean_sharpe": 0.7014599561161017,
+    "folds": [
+      {
+        "sharpe": 0.971229038951946,
+        "return": 0.18350553465954667,
+        "max_drawdown": 0.14386054721418073,
+        "trades": 75,
+        "long_trades": 31,
+        "short_trades": 44,
+        "win_rate": 0.49333333333333335,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.5211684635374243,
+        "return": 0.3091419716164616,
+        "max_drawdown": 0.09988083574948514,
+        "trades": 63,
+        "long_trades": 40,
+        "short_trades": 23,
+        "win_rate": 0.3968253968253968,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.3880176341410655,
+        "return": -0.09092689133685139,
+        "max_drawdown": 0.21823157464216902,
+        "trades": 92,
+        "long_trades": 57,
+        "short_trades": 35,
+        "win_rate": 0.358695652173913,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.02295507324797219,
+      "return": -0.027922407960189632,
+      "max_drawdown": 0.1805091935048143,
+      "trades": 124,
+      "long_trades": 70,
+      "short_trades": 54,
+      "win_rate": 0.31451612903225806,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 124,
+      "totals_usdt": {
+        "net_pnl": -279.22407960189014,
+        "gross_before_execution_costs": 1718.7476181619793,
+        "slippage_cost": 663.7715337985262,
+        "entry_fee": 664.230593983938,
+        "exit_fee": 663.3121642386809,
+        "funding_cost": 6.657405742724001
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -2.7922407960189015,
+        "gross_before_execution_costs": 17.187476181619793,
+        "slippage_cost": 6.637715337985261,
+        "entry_fee": 6.64230593983938,
+        "exit_fee": 6.63312164238681,
+        "funding_cost": 0.06657405742724001
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 783.9426476897252,
+            "win_rate": 0.4074074074074074,
+            "mean_hours": 16.333333333333332
+          },
+          "1": {
+            "trades": 70,
+            "net_pnl": -1063.1667272916154,
+            "win_rate": 0.24285714285714285,
+            "mean_hours": 13.685714285714285
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 5120.191006015982,
+            "win_rate": 1.0,
+            "mean_hours": 18.272727272727273
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -5399.415085617872,
+            "win_rate": 0.24778761061946902,
+            "mean_hours": 14.504424778761061
+          }
+        }
+      },
+      "trades_with_trailing_updates": 123,
+      "first_trail_at_loss_count": 68,
+      "median_first_trail_r": -0.026432144931738597,
+      "average_nominal_risk_fraction": 0.023719163362675315,
+      "median_nominal_risk_fraction": 0.024545254895395593,
+      "profit_factor": 0.9640830652878829,
+      "average_win": 192.17790296675906,
+      "average_loss": -91.46073288594698
+    }
+  },
+  {
+    "attempt": 10,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_off",
+    "changes": [
+      "trail_enabled"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": false,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.1694981645452236,
+    "development_mean_sharpe": 0.22864486131821737,
+    "folds": [
+      {
+        "sharpe": 0.6371430834253663,
+        "return": 0.11530525681277926,
+        "max_drawdown": 0.22784294605224908,
+        "trades": 57,
+        "long_trades": 26,
+        "short_trades": 31,
+        "win_rate": 0.38596491228070173,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.2557861012851268,
+        "return": 0.03221380766158277,
+        "max_drawdown": 0.14514817570425165,
+        "trades": 51,
+        "long_trades": 33,
+        "short_trades": 18,
+        "win_rate": 0.4117647058823529,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.206994600755841,
+        "return": -0.06859389863223919,
+        "max_drawdown": 0.22542914342239595,
+        "trades": 70,
+        "long_trades": 39,
+        "short_trades": 31,
+        "win_rate": 0.32857142857142857,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.051714054361547024,
+      "return": -0.012702465014062136,
+      "max_drawdown": 0.2203944811292362,
+      "trades": 89,
+      "long_trades": 48,
+      "short_trades": 41,
+      "win_rate": 0.3595505617977528,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 89,
+      "totals_usdt": {
+        "net_pnl": -127.02465014065211,
+        "gross_before_execution_costs": 1041.535848693508,
+        "slippage_cost": 380.0812407014344,
+        "entry_fee": 380.46860861562,
+        "exit_fee": 379.6936853108666,
+        "funding_cost": 28.316964206239
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -1.2702465014065212,
+        "gross_before_execution_costs": 10.41535848693508,
+        "slippage_cost": 3.8008124070143445,
+        "entry_fee": 3.8046860861561997,
+        "exit_fee": 3.7969368531086665,
+        "funding_cost": 0.28316964206239004
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 41,
+            "net_pnl": 749.6140795355786,
+            "win_rate": 0.3902439024390244,
+            "mean_hours": 65.58536585365853
+          },
+          "1": {
+            "trades": 48,
+            "net_pnl": -876.6387296762308,
+            "win_rate": 0.3333333333333333,
+            "mean_hours": 70.16666666666667
+          }
+        },
+        "exit_detail": {
+          "anchor": {
+            "trades": 4,
+            "net_pnl": -564.6792678235543,
+            "win_rate": 0.0,
+            "mean_hours": 160.75
+          },
+          "initial_stop": {
+            "trades": 52,
+            "net_pnl": -10334.071915029821,
+            "win_rate": 0.0,
+            "mean_hours": 50.82692307692308
+          },
+          "target": {
+            "trades": 31,
+            "net_pnl": 10627.209837352199,
+            "win_rate": 1.0,
+            "mean_hours": 73.90322580645162
+          },
+          "timeout": {
+            "trades": 2,
+            "net_pnl": 144.51669536052265,
+            "win_rate": 0.5,
+            "mean_hours": 240.0
+          }
+        }
+      },
+      "trades_with_trailing_updates": 0,
+      "first_trail_at_loss_count": 0,
+      "median_first_trail_r": null,
+      "average_nominal_risk_fraction": 0.018477317889178776,
+      "median_nominal_risk_fraction": 0.018758803532187746,
+      "profit_factor": 0.988407625153861,
+      "average_win": 338.45559701939595,
+      "average_loss": -192.23866236423373
+    }
+  },
+  {
+    "attempt": 11,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_width_3",
+    "changes": [
+      "params.trail_atr"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 3.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.5111861672148871,
+    "development_mean_sharpe": 0.42759564553740154,
+    "folds": [
+      {
+        "sharpe": 0.5853812842368634,
+        "return": 0.08564039374223587,
+        "max_drawdown": 0.10242393264632643,
+        "trades": 70,
+        "long_trades": 30,
+        "short_trades": 40,
+        "win_rate": 0.38571428571428573,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.6855198960087631,
+        "return": 0.09518085957916789,
+        "max_drawdown": 0.1005272632583909,
+        "trades": 61,
+        "long_trades": 39,
+        "short_trades": 22,
+        "win_rate": 0.32786885245901637,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.01188575636657829,
+        "return": -0.011135898338994199,
+        "max_drawdown": 0.13950122026703682,
+        "trades": 81,
+        "long_trades": 49,
+        "short_trades": 32,
+        "win_rate": 0.3333333333333333,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.4772934352275922,
+      "return": -0.119413450910419,
+      "max_drawdown": 0.2460969786031384,
+      "trades": 112,
+      "long_trades": 60,
+      "short_trades": 52,
+      "win_rate": 0.29464285714285715,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 112,
+      "totals_usdt": {
+        "net_pnl": -1194.1345091041874,
+        "gross_before_execution_costs": 220.90056176806092,
+        "slippage_cost": 466.8656923831551,
+        "entry_fee": 466.84195067022597,
+        "exit_fee": 466.8893943340902,
+        "funding_cost": 14.438033484777003
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -11.941345091041873,
+        "gross_before_execution_costs": 2.209005617680609,
+        "slippage_cost": 4.668656923831551,
+        "entry_fee": 4.668419506702259,
+        "exit_fee": 4.668893943340901,
+        "funding_cost": 0.14438033484777002
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 52,
+            "net_pnl": -512.3667077995319,
+            "win_rate": 0.34615384615384615,
+            "mean_hours": 26.923076923076923
+          },
+          "1": {
+            "trades": 60,
+            "net_pnl": -681.7678013046551,
+            "win_rate": 0.25,
+            "mean_hours": 24.966666666666665
+          }
+        },
+        "exit_detail": {
+          "initial_stop": {
+            "trades": 3,
+            "net_pnl": -499.4038161983268,
+            "win_rate": 0.0,
+            "mean_hours": 8.666666666666666
+          },
+          "target": {
+            "trades": 18,
+            "net_pnl": 6015.7587354930165,
+            "win_rate": 1.0,
+            "mean_hours": 30.38888888888889
+          },
+          "trailing_stop": {
+            "trades": 91,
+            "net_pnl": -6710.489428398879,
+            "win_rate": 0.16483516483516483,
+            "mean_hours": 25.54945054945055
+          }
+        }
+      },
+      "trades_with_trailing_updates": 109,
+      "first_trail_at_loss_count": 58,
+      "median_first_trail_r": -0.02516022221151625,
+      "average_nominal_risk_fraction": 0.018389942465941927,
+      "median_nominal_risk_fraction": 0.01874287534888683,
+      "profit_factor": 0.8505167216132478,
+      "average_win": 205.8872968854418,
+      "average_loss": -101.11918109270593
+    }
+  },
+  {
+    "attempt": 12,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_width_4",
+    "changes": [
+      "params.trail_atr"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 4.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.21301317124976926,
+    "development_mean_sharpe": 0.05080311407374094,
+    "folds": [
+      {
+        "sharpe": 0.3422330726720159,
+        "return": 0.04679188985305571,
+        "max_drawdown": 0.17605191322322244,
+        "trades": 64,
+        "long_trades": 28,
+        "short_trades": 36,
+        "win_rate": 0.390625,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.31049198195731675,
+        "return": 0.03866556447806935,
+        "max_drawdown": 0.1294481386344153,
+        "trades": 58,
+        "long_trades": 36,
+        "short_trades": 22,
+        "win_rate": 0.3275862068965517,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.5003157124081098,
+        "return": -0.10349632030917144,
+        "max_drawdown": 0.19447579434116558,
+        "trades": 77,
+        "long_trades": 45,
+        "short_trades": 32,
+        "win_rate": 0.3116883116883117,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.155188537444499,
+      "return": 0.018495579764860937,
+      "max_drawdown": 0.19663183037493936,
+      "trades": 98,
+      "long_trades": 54,
+      "short_trades": 44,
+      "win_rate": 0.336734693877551,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 98,
+      "totals_usdt": {
+        "net_pnl": 184.95579764860554,
+        "gross_before_execution_costs": 1492.7342864958623,
+        "slippage_cost": 428.95083364346834,
+        "entry_fee": 429.30703789204796,
+        "exit_fee": 428.5943607027947,
+        "funding_cost": 20.926256608946005
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 1.8495579764860555,
+        "gross_before_execution_costs": 14.927342864958623,
+        "slippage_cost": 4.289508336434683,
+        "entry_fee": 4.293070378920479,
+        "exit_fee": 4.285943607027947,
+        "funding_cost": 0.20926256608946006
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 44,
+            "net_pnl": 842.330782831945,
+            "win_rate": 0.3409090909090909,
+            "mean_hours": 43.34090909090909
+          },
+          "1": {
+            "trades": 54,
+            "net_pnl": -657.37498518334,
+            "win_rate": 0.3333333333333333,
+            "mean_hours": 39.68518518518518
+          }
+        },
+        "exit_detail": {
+          "initial_stop": {
+            "trades": 11,
+            "net_pnl": -2203.791439769108,
+            "win_rate": 0.0,
+            "mean_hours": 19.181818181818183
+          },
+          "target": {
+            "trades": 23,
+            "net_pnl": 8194.495824875703,
+            "win_rate": 1.0,
+            "mean_hours": 43.52173913043478
+          },
+          "trailing_stop": {
+            "trades": 64,
+            "net_pnl": -5805.748587457989,
+            "win_rate": 0.15625,
+            "mean_hours": 44.34375
+          }
+        }
+      },
+      "trades_with_trailing_updates": 87,
+      "first_trail_at_loss_count": 19,
+      "median_first_trail_r": 0.0929065126050806,
+      "average_nominal_risk_fraction": 0.018450893171463603,
+      "median_nominal_risk_fraction": 0.018759377719813508,
+      "profit_factor": 1.0217193529624264,
+      "average_win": 263.65665991467705,
+      "average_loss": -131.0109843005498
+    }
+  },
+  {
+    "attempt": 13,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_width_6",
+    "changes": [
+      "params.trail_atr"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 6.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.3945633417915265,
+    "development_mean_sharpe": 0.6747410577453885,
+    "folds": [
+      {
+        "sharpe": 1.091861945936804,
+        "return": 0.21055080982869923,
+        "max_drawdown": 0.18618890737729143,
+        "trades": 58,
+        "long_trades": 27,
+        "short_trades": 31,
+        "win_rate": 0.39655172413793105,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.4683018652580584,
+        "return": 0.06996849697382124,
+        "max_drawdown": 0.12030690958362611,
+        "trades": 52,
+        "long_trades": 33,
+        "short_trades": 19,
+        "win_rate": 0.4230769230769231,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.46405936204130316,
+        "return": 0.08122418958483646,
+        "max_drawdown": 0.1680808977364151,
+        "trades": 71,
+        "long_trades": 40,
+        "short_trades": 31,
+        "win_rate": 0.3380281690140845,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.18009318052303588,
+      "return": 0.024955469148620457,
+      "max_drawdown": 0.1735991873684477,
+      "trades": 91,
+      "long_trades": 50,
+      "short_trades": 41,
+      "win_rate": 0.34065934065934067,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 91,
+      "totals_usdt": {
+        "net_pnl": 249.554691486215,
+        "gross_before_execution_costs": 1409.8249889457281,
+        "slippage_cost": 383.33325341924524,
+        "entry_fee": 383.92466655455394,
+        "exit_fee": 382.74158651550283,
+        "funding_cost": 10.270790970211003
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 2.49554691486215,
+        "gross_before_execution_costs": 14.098249889457282,
+        "slippage_cost": 3.8333325341924525,
+        "entry_fee": 3.8392466655455393,
+        "exit_fee": 3.8274158651550283,
+        "funding_cost": 0.10270790970211004
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 41,
+            "net_pnl": 1272.0207120885439,
+            "win_rate": 0.3902439024390244,
+            "mean_hours": 61.0
+          },
+          "1": {
+            "trades": 50,
+            "net_pnl": -1022.4660206023289,
+            "win_rate": 0.3,
+            "mean_hours": 57.3
+          }
+        },
+        "exit_detail": {
+          "initial_stop": {
+            "trades": 33,
+            "net_pnl": -6460.211591341989,
+            "win_rate": 0.0,
+            "mean_hours": 31.78787878787879
+          },
+          "target": {
+            "trades": 28,
+            "net_pnl": 9436.501661204416,
+            "win_rate": 1.0,
+            "mean_hours": 56.464285714285715
+          },
+          "trailing_stop": {
+            "trades": 30,
+            "net_pnl": -2726.73537837621,
+            "win_rate": 0.1,
+            "mean_hours": 91.2
+          }
+        }
+      },
+      "trades_with_trailing_updates": 57,
+      "first_trail_at_loss_count": 7,
+      "median_first_trail_r": 0.5371883114743637,
+      "average_nominal_risk_fraction": 0.01846942911629628,
+      "median_nominal_risk_fraction": 0.018704538266335575,
+      "profit_factor": 1.0269337901858375,
+      "average_win": 306.93683912786315,
+      "average_loss": -154.42478869129238
+    }
+  },
+  {
+    "attempt": 14,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_activation_0.5R",
+    "changes": [
+      "trail_start_r"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.5,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.8666606829031016,
+    "development_mean_sharpe": 0.7457448643409507,
+    "folds": [
+      {
+        "sharpe": 0.9951879721284539,
+        "return": 0.1509392229727251,
+        "max_drawdown": 0.1195725947253764,
+        "trades": 64,
+        "long_trades": 27,
+        "short_trades": 37,
+        "win_rate": 0.6875,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.2124588012640765,
+        "return": 0.20272533107388546,
+        "max_drawdown": 0.10051797065811918,
+        "trades": 55,
+        "long_trades": 37,
+        "short_trades": 18,
+        "win_rate": 0.5818181818181818,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.02958781963032171,
+        "return": -0.008516213795422667,
+        "max_drawdown": 0.1457288882668144,
+        "trades": 75,
+        "long_trades": 44,
+        "short_trades": 31,
+        "win_rate": 0.52,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.21372258561367563,
+      "return": -0.06877159410316613,
+      "max_drawdown": 0.2151623147101276,
+      "trades": 101,
+      "long_trades": 55,
+      "short_trades": 46,
+      "win_rate": 0.5346534653465347,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 101,
+      "totals_usdt": {
+        "net_pnl": -687.7159410316791,
+        "gross_before_execution_costs": 592.046915395505,
+        "slippage_cost": 421.58566365392545,
+        "entry_fee": 421.4834255532059,
+        "exit_fee": 421.6877951862858,
+        "funding_cost": 15.005972033766998
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -6.877159410316791,
+        "gross_before_execution_costs": 5.92046915395505,
+        "slippage_cost": 4.215856636539255,
+        "entry_fee": 4.214834255532059,
+        "exit_fee": 4.216877951862858,
+        "funding_cost": 0.15005972033766998
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 46,
+            "net_pnl": -358.7791824115748,
+            "win_rate": 0.5434782608695652,
+            "mean_hours": 46.91304347826087
+          },
+          "1": {
+            "trades": 55,
+            "net_pnl": -328.9367586201041,
+            "win_rate": 0.5272727272727272,
+            "mean_hours": 41.763636363636365
+          }
+        },
+        "exit_detail": {
+          "anchor": {
+            "trades": 1,
+            "net_pnl": -167.0655345795907,
+            "win_rate": 0.0,
+            "mean_hours": 141.0
+          },
+          "initial_stop": {
+            "trades": 42,
+            "net_pnl": -7946.518150803711,
+            "win_rate": 0.0,
+            "mean_hours": 44.404761904761905
+          },
+          "target": {
+            "trades": 15,
+            "net_pnl": 4989.396513864901,
+            "win_rate": 1.0,
+            "mean_hours": 39.4
+          },
+          "timeout": {
+            "trades": 1,
+            "net_pnl": -56.49846903163122,
+            "win_rate": 0.0,
+            "mean_hours": 240.0
+          },
+          "trailing_stop": {
+            "trades": 42,
+            "net_pnl": 2492.969699518353,
+            "win_rate": 0.9285714285714286,
+            "mean_hours": 38.523809523809526
+          }
+        }
+      },
+      "trades_with_trailing_updates": 57,
+      "first_trail_at_loss_count": 0,
+      "median_first_trail_r": 0.620131575035129,
+      "average_nominal_risk_fraction": 0.01842706039195142,
+      "median_nominal_risk_fraction": 0.018780242547911,
+      "profit_factor": 0.9161676668505635,
+      "average_win": 139.1806110638506,
+      "average_loss": -174.5418923080768
+    }
+  },
+  {
+    "attempt": 15,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_activation_1.0R",
+    "changes": [
+      "trail_start_r"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 1.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.22177791577606687,
+    "development_mean_sharpe": 0.30677864515265524,
+    "folds": [
+      {
+        "sharpe": 0.34141618831437853,
+        "return": 0.04730485921302119,
+        "max_drawdown": 0.20383111414976662,
+        "trades": 61,
+        "long_trades": 26,
+        "short_trades": 35,
+        "win_rate": 0.5081967213114754,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.8747971870890695,
+        "return": 0.14896609902855174,
+        "max_drawdown": 0.10441405771610635,
+        "trades": 52,
+        "long_trades": 34,
+        "short_trades": 18,
+        "win_rate": 0.5192307692307693,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.29587743994548243,
+        "return": -0.07368497982836975,
+        "max_drawdown": 0.22963537626929031,
+        "trades": 73,
+        "long_trades": 42,
+        "short_trades": 31,
+        "win_rate": 0.4657534246575342,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.44639190699430775,
+      "return": -0.1152835957413092,
+      "max_drawdown": 0.25061391301687763,
+      "trades": 76,
+      "long_trades": 39,
+      "short_trades": 37,
+      "win_rate": 0.4342105263157895,
+      "days": 549,
+      "halted": true
+    },
+    "known_audit_attribution": {
+      "trades": 76,
+      "totals_usdt": {
+        "net_pnl": -1152.8359574130852,
+        "gross_before_execution_costs": -109.99477825933731,
+        "slippage_cost": 342.77962441400535,
+        "entry_fee": 342.57351164214,
+        "exit_fee": 342.98575698500986,
+        "funding_cost": 14.502286112593003
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -11.528359574130851,
+        "gross_before_execution_costs": -1.0999477825933732,
+        "slippage_cost": 3.427796244140054,
+        "entry_fee": 3.4257351164213996,
+        "exit_fee": 3.4298575698500984,
+        "funding_cost": 0.14502286112593005
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 37,
+            "net_pnl": -809.1195276347539,
+            "win_rate": 0.43243243243243246,
+            "mean_hours": 48.24324324324324
+          },
+          "1": {
+            "trades": 39,
+            "net_pnl": -343.7164297783311,
+            "win_rate": 0.4358974358974359,
+            "mean_hours": 56.02564102564103
+          }
+        },
+        "exit_detail": {
+          "anchor": {
+            "trades": 2,
+            "net_pnl": -335.15195765435305,
+            "win_rate": 0.0,
+            "mean_hours": 149.0
+          },
+          "drawdown": {
+            "trades": 1,
+            "net_pnl": -103.23913827240166,
+            "win_rate": 0.0,
+            "mean_hours": 24.0
+          },
+          "initial_stop": {
+            "trades": 40,
+            "net_pnl": -8239.564560905912,
+            "win_rate": 0.0,
+            "mean_hours": 40.275
+          },
+          "target": {
+            "trades": 14,
+            "net_pnl": 5051.963155945386,
+            "win_rate": 1.0,
+            "mean_hours": 51.142857142857146
+          },
+          "trailing_stop": {
+            "trades": 19,
+            "net_pnl": 2473.156543474197,
+            "win_rate": 1.0,
+            "mean_hours": 69.52631578947368
+          }
+        }
+      },
+      "trades_with_trailing_updates": 30,
+      "first_trail_at_loss_count": 0,
+      "median_first_trail_r": 1.1105352055721034,
+      "average_nominal_risk_fraction": 0.018513639018243443,
+      "median_nominal_risk_fraction": 0.01878389495523882,
+      "profit_factor": 0.8671535090749871,
+      "average_win": 228.0339302854419,
+      "average_loss": -201.81292225192252
+    }
+  },
+  {
+    "attempt": 16,
+    "phase": "one_component_diagnosis",
+    "label": "trailing_activation_2.0R",
+    "changes": [
+      "trail_start_r"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 2.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.1694981645452236,
+    "development_mean_sharpe": 0.22864486131821737,
+    "folds": [
+      {
+        "sharpe": 0.6371430834253663,
+        "return": 0.11530525681277926,
+        "max_drawdown": 0.22784294605224908,
+        "trades": 57,
+        "long_trades": 26,
+        "short_trades": 31,
+        "win_rate": 0.38596491228070173,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.2557861012851268,
+        "return": 0.03221380766158277,
+        "max_drawdown": 0.14514817570425165,
+        "trades": 51,
+        "long_trades": 33,
+        "short_trades": 18,
+        "win_rate": 0.4117647058823529,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.206994600755841,
+        "return": -0.06859389863223919,
+        "max_drawdown": 0.22542914342239595,
+        "trades": 70,
+        "long_trades": 39,
+        "short_trades": 31,
+        "win_rate": 0.32857142857142857,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.051714054361547024,
+      "return": -0.012702465014062136,
+      "max_drawdown": 0.2203944811292362,
+      "trades": 89,
+      "long_trades": 48,
+      "short_trades": 41,
+      "win_rate": 0.3595505617977528,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 89,
+      "totals_usdt": {
+        "net_pnl": -127.02465014065211,
+        "gross_before_execution_costs": 1041.535848693508,
+        "slippage_cost": 380.0812407014344,
+        "entry_fee": 380.46860861562,
+        "exit_fee": 379.6936853108666,
+        "funding_cost": 28.316964206239
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -1.2702465014065212,
+        "gross_before_execution_costs": 10.41535848693508,
+        "slippage_cost": 3.8008124070143445,
+        "entry_fee": 3.8046860861561997,
+        "exit_fee": 3.7969368531086665,
+        "funding_cost": 0.28316964206239004
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 41,
+            "net_pnl": 749.6140795355786,
+            "win_rate": 0.3902439024390244,
+            "mean_hours": 65.58536585365853
+          },
+          "1": {
+            "trades": 48,
+            "net_pnl": -876.6387296762308,
+            "win_rate": 0.3333333333333333,
+            "mean_hours": 70.16666666666667
+          }
+        },
+        "exit_detail": {
+          "anchor": {
+            "trades": 4,
+            "net_pnl": -564.6792678235543,
+            "win_rate": 0.0,
+            "mean_hours": 160.75
+          },
+          "initial_stop": {
+            "trades": 52,
+            "net_pnl": -10334.071915029821,
+            "win_rate": 0.0,
+            "mean_hours": 50.82692307692308
+          },
+          "target": {
+            "trades": 31,
+            "net_pnl": 10627.209837352199,
+            "win_rate": 1.0,
+            "mean_hours": 73.90322580645162
+          },
+          "timeout": {
+            "trades": 2,
+            "net_pnl": 144.51669536052265,
+            "win_rate": 0.5,
+            "mean_hours": 240.0
+          }
+        }
+      },
+      "trades_with_trailing_updates": 0,
+      "first_trail_at_loss_count": 0,
+      "median_first_trail_r": null,
+      "average_nominal_risk_fraction": 0.018477317889178776,
+      "median_nominal_risk_fraction": 0.018758803532187746,
+      "profit_factor": 0.988407625153861,
+      "average_win": 338.45559701939595,
+      "average_loss": -192.23866236423373
+    }
+  },
+  {
+    "attempt": 17,
+    "phase": "one_component_diagnosis",
+    "label": "target_off",
+    "changes": [
+      "target_enabled"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": false,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.6814127997862942,
+    "development_mean_sharpe": 0.595946673936414,
+    "folds": [
+      {
+        "sharpe": 0.8679216721412824,
+        "return": 0.1137070024674236,
+        "max_drawdown": 0.11321033695730365,
+        "trades": 70,
+        "long_trades": 29,
+        "short_trades": 41,
+        "win_rate": 0.5,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.342781709364391,
+        "return": 0.1983604712280418,
+        "max_drawdown": 0.06886113865752452,
+        "trades": 55,
+        "long_trades": 35,
+        "short_trades": 20,
+        "win_rate": 0.34545454545454546,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.4228633596964313,
+        "return": -0.06652456505523274,
+        "max_drawdown": 0.15735349101131657,
+        "trades": 86,
+        "long_trades": 52,
+        "short_trades": 34,
+        "win_rate": 0.3372093023255814,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.20492851004310406,
+      "return": 0.02921728384224953,
+      "max_drawdown": 0.1681881570046765,
+      "trades": 115,
+      "long_trades": 64,
+      "short_trades": 51,
+      "win_rate": 0.30434782608695654,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 115,
+      "totals_usdt": {
+        "net_pnl": 292.17283842250316,
+        "gross_before_execution_costs": 1838.0166079175674,
+        "slippage_cost": 510.29517613615894,
+        "entry_fee": 510.31824808289997,
+        "exit_fee": 510.27177334653436,
+        "funding_cost": 14.958571929471004
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 2.9217283842250317,
+        "gross_before_execution_costs": 18.380166079175673,
+        "slippage_cost": 5.10295176136159,
+        "entry_fee": 5.103182480828999,
+        "exit_fee": 5.102717733465344,
+        "funding_cost": 0.14958571929471004
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 51,
+            "net_pnl": 333.19824074637967,
+            "win_rate": 0.4117647058823529,
+            "mean_hours": 18.254901960784313
+          },
+          "1": {
+            "trades": 64,
+            "net_pnl": -41.02540232387685,
+            "win_rate": 0.21875,
+            "mean_hours": 15.46875
+          }
+        },
+        "exit_detail": {
+          "trailing_stop": {
+            "trades": 115,
+            "net_pnl": 292.17283842250316,
+            "win_rate": 0.30434782608695654,
+            "mean_hours": 16.704347826086956
+          }
+        }
+      },
+      "trades_with_trailing_updates": 115,
+      "first_trail_at_loss_count": 63,
+      "median_first_trail_r": -0.025268201929099204,
+      "average_nominal_risk_fraction": 0.018209847719931994,
+      "median_nominal_risk_fraction": 0.018720450178656416,
+      "profit_factor": 1.0518846293295097,
+      "average_win": 169.2392865895911,
+      "average_loss": -70.39002740266481
+    }
+  },
+  {
+    "attempt": 18,
+    "phase": "one_component_diagnosis",
+    "label": "target_3R",
+    "changes": [
+      "params.reward"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 3.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.7582008061909508,
+    "development_mean_sharpe": 0.5492676099344679,
+    "folds": [
+      {
+        "sharpe": 0.9402142829072836,
+        "return": 0.12530134176293872,
+        "max_drawdown": 0.11324198716433065,
+        "trades": 73,
+        "long_trades": 30,
+        "short_trades": 43,
+        "win_rate": 0.4794520547945205,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.1786968501935955,
+        "return": 0.1571214207508742,
+        "max_drawdown": 0.06886113865752452,
+        "trades": 61,
+        "long_trades": 39,
+        "short_trades": 22,
+        "win_rate": 0.3442622950819672,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.4711083032974752,
+        "return": -0.07194932013345245,
+        "max_drawdown": 0.15887456919789733,
+        "trades": 88,
+        "long_trades": 54,
+        "short_trades": 34,
+        "win_rate": 0.3409090909090909,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.28525199561679404,
+      "return": 0.045964328319803016,
+      "max_drawdown": 0.12229877124493238,
+      "trades": 120,
+      "long_trades": 67,
+      "short_trades": 53,
+      "win_rate": 0.30833333333333335,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 120,
+      "totals_usdt": {
+        "net_pnl": 459.64328319803417,
+        "gross_before_execution_costs": 2099.740216538993,
+        "slippage_cost": 541.3519805221993,
+        "entry_fee": 541.66655577012,
+        "exit_fee": 541.0370273211532,
+        "funding_cost": 16.041369727485
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 4.596432831980342,
+        "gross_before_execution_costs": 20.997402165389932,
+        "slippage_cost": 5.413519805221992,
+        "entry_fee": 5.4166655577012,
+        "exit_fee": 5.410370273211532,
+        "funding_cost": 0.16041369727485003
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 53,
+            "net_pnl": 910.0008814611228,
+            "win_rate": 0.39622641509433965,
+            "mean_hours": 16.79245283018868
+          },
+          "1": {
+            "trades": 67,
+            "net_pnl": -450.35759826308805,
+            "win_rate": 0.23880597014925373,
+            "mean_hours": 15.08955223880597
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 7,
+            "net_pnl": 3709.257697110795,
+            "win_rate": 1.0,
+            "mean_hours": 23.571428571428573
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -3249.6144139127605,
+            "win_rate": 0.26548672566371684,
+            "mean_hours": 15.36283185840708
+          }
+        }
+      },
+      "trades_with_trailing_updates": 119,
+      "first_trail_at_loss_count": 68,
+      "median_first_trail_r": -0.03273065763902994,
+      "average_nominal_risk_fraction": 0.018256555921327123,
+      "median_nominal_risk_fraction": 0.01870487311709548,
+      "profit_factor": 1.075366873537584,
+      "average_win": 177.25371588351962,
+      "average_loss": -73.47884583725529
+    }
+  },
+  {
+    "attempt": 19,
+    "phase": "one_component_diagnosis",
+    "label": "target_4R",
+    "changes": [
+      "params.reward"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 4.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.6640980834359612,
+    "development_mean_sharpe": 0.5802959001484441,
+    "folds": [
+      {
+        "sharpe": 0.8679216721412824,
+        "return": 0.1137070024674236,
+        "max_drawdown": 0.11321033695730365,
+        "trades": 70,
+        "long_trades": 29,
+        "short_trades": 41,
+        "win_rate": 0.5,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.403442624978312,
+        "return": 0.20467024412887858,
+        "max_drawdown": 0.06886113865752452,
+        "trades": 57,
+        "long_trades": 36,
+        "short_trades": 21,
+        "win_rate": 0.3508771929824561,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.530476596674262,
+        "return": -0.0782185820814364,
+        "max_drawdown": 0.158063524757881,
+        "trades": 87,
+        "long_trades": 53,
+        "short_trades": 34,
+        "win_rate": 0.3448275862068966,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.24350830981573443,
+      "return": 0.0387290946530896,
+      "max_drawdown": 0.1323379786933817,
+      "trades": 117,
+      "long_trades": 66,
+      "short_trades": 51,
+      "win_rate": 0.3076923076923077,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 117,
+      "totals_usdt": {
+        "net_pnl": 387.29094653090755,
+        "gross_before_execution_costs": 1985.3425351660462,
+        "slippage_cost": 527.9829251001076,
+        "entry_fee": 528.2612054059499,
+        "exit_fee": 527.704287432721,
+        "funding_cost": 14.103170696360001
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 3.872909465309075,
+        "gross_before_execution_costs": 19.853425351660462,
+        "slippage_cost": 5.279829251001076,
+        "entry_fee": 5.2826120540594985,
+        "exit_fee": 5.2770428743272095,
+        "funding_cost": 0.1410317069636
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 51,
+            "net_pnl": 811.2081905739152,
+            "win_rate": 0.4117647058823529,
+            "mean_hours": 17.647058823529413
+          },
+          "1": {
+            "trades": 66,
+            "net_pnl": -423.9172440430081,
+            "win_rate": 0.22727272727272727,
+            "mean_hours": 15.272727272727273
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 3,
+            "net_pnl": 2055.1835275791104,
+            "win_rate": 1.0,
+            "mean_hours": 13.666666666666666
+          },
+          "trailing_stop": {
+            "trades": 114,
+            "net_pnl": -1667.8925810482033,
+            "win_rate": 0.2894736842105263,
+            "mean_hours": 16.37719298245614
+          }
+        }
+      },
+      "trades_with_trailing_updates": 116,
+      "first_trail_at_loss_count": 65,
+      "median_first_trail_r": -0.029515723969271206,
+      "average_nominal_risk_fraction": 0.018226606003638155,
+      "median_nominal_risk_fraction": 0.01873178898333585,
+      "profit_factor": 1.06542206358096,
+      "average_win": 175.19926971687374,
+      "average_loss": -73.0849723861302
+    }
+  },
+  {
+    "attempt": 20,
+    "phase": "one_component_diagnosis",
+    "label": "initial_stop_2ATR",
+    "changes": [
+      "params.stop_atr"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 2.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.6400742862091524,
+    "development_mean_sharpe": 0.4684429039896349,
+    "folds": [
+      {
+        "sharpe": 0.7746812136864945,
+        "return": 0.16229747785248816,
+        "max_drawdown": 0.18169964939741345,
+        "trades": 98,
+        "long_trades": 42,
+        "short_trades": 56,
+        "win_rate": 0.3979591836734694,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.9190788082942347,
+        "return": 0.14401172993836253,
+        "max_drawdown": 0.08996667774254052,
+        "trades": 78,
+        "long_trades": 52,
+        "short_trades": 26,
+        "win_rate": 0.38461538461538464,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.2884313100118244,
+        "return": -0.07400701239196972,
+        "max_drawdown": 0.1887369008186992,
+        "trades": 115,
+        "long_trades": 72,
+        "short_trades": 43,
+        "win_rate": 0.3217391304347826,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.8388517181782031,
+      "return": -0.19984926401014058,
+      "max_drawdown": 0.2506782911948179,
+      "trades": 144,
+      "long_trades": 73,
+      "short_trades": 71,
+      "win_rate": 0.2916666666666667,
+      "days": 549,
+      "halted": true
+    },
+    "known_audit_attribution": {
+      "trades": 144,
+      "totals_usdt": {
+        "net_pnl": -1998.4926401014147,
+        "gross_before_execution_costs": 307.9117927577547,
+        "slippage_cost": 768.6370338077325,
+        "entry_fee": 769.4828681553299,
+        "exit_fee": 767.7911440361788,
+        "funding_cost": 0.493386859928
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -19.984926401014146,
+        "gross_before_execution_costs": 3.079117927577547,
+        "slippage_cost": 7.686370338077325,
+        "entry_fee": 7.694828681553299,
+        "exit_fee": 7.677911440361789,
+        "funding_cost": 0.00493386859928
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 71,
+            "net_pnl": 487.89059325898813,
+            "win_rate": 0.36619718309859156,
+            "mean_hours": 10.56338028169014
+          },
+          "1": {
+            "trades": 73,
+            "net_pnl": -2486.383233360403,
+            "win_rate": 0.2191780821917808,
+            "mean_hours": 10.73972602739726
+          }
+        },
+        "exit_detail": {
+          "drawdown": {
+            "trades": 1,
+            "net_pnl": -42.00861322397726,
+            "win_rate": 0.0,
+            "mean_hours": 2.0
+          },
+          "initial_stop": {
+            "trades": 34,
+            "net_pnl": -4587.339487211721,
+            "win_rate": 0.0,
+            "mean_hours": 3.4705882352941178
+          },
+          "target": {
+            "trades": 30,
+            "net_pnl": 6945.8931512118315,
+            "win_rate": 1.0,
+            "mean_hours": 8.833333333333334
+          },
+          "trailing_stop": {
+            "trades": 79,
+            "net_pnl": -4315.037690877548,
+            "win_rate": 0.1518987341772152,
+            "mean_hours": 14.544303797468354
+          }
+        }
+      },
+      "trades_with_trailing_updates": 106,
+      "first_trail_at_loss_count": 10,
+      "median_first_trail_r": 0.18599499552204304,
+      "average_nominal_risk_fraction": 0.01312120750420158,
+      "median_nominal_risk_fraction": 0.012472586215129805,
+      "profit_factor": 0.7872732307017665,
+      "average_win": 176.09888368122296,
+      "average_loss": -92.10437014424294
+    }
+  },
+  {
+    "attempt": 21,
+    "phase": "one_component_diagnosis",
+    "label": "initial_stop_3ATR",
+    "changes": [
+      "params.stop_atr"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 3.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.7768568192232829,
+    "development_mean_sharpe": 0.7757364506236653,
+    "folds": [
+      {
+        "sharpe": 0.9239943488608738,
+        "return": 0.15356769364949296,
+        "max_drawdown": 0.15062464211925408,
+        "trades": 81,
+        "long_trades": 34,
+        "short_trades": 47,
+        "win_rate": 0.4444444444444444,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.4109040260814791,
+        "return": 0.23045200011931288,
+        "max_drawdown": 0.08254112769809019,
+        "trades": 70,
+        "long_trades": 45,
+        "short_trades": 25,
+        "win_rate": 0.38571428571428573,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.007689023071357155,
+        "return": -0.016017979897761103,
+        "max_drawdown": 0.15107995467805935,
+        "trades": 97,
+        "long_trades": 60,
+        "short_trades": 37,
+        "win_rate": 0.36082474226804123,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.09954386182836227,
+      "return": 0.005690240630478405,
+      "max_drawdown": 0.1429811432640028,
+      "trades": 130,
+      "long_trades": 71,
+      "short_trades": 59,
+      "win_rate": 0.33076923076923076,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 130,
+      "totals_usdt": {
+        "net_pnl": 56.90240630477831,
+        "gross_before_execution_costs": 2073.1462573741233,
+        "slippage_cost": 668.5943122508927,
+        "entry_fee": 669.206884821996,
+        "exit_fee": 667.9813665135891,
+        "funding_cost": 10.461287482866997
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": 0.5690240630477831,
+        "gross_before_execution_costs": 20.731462573741233,
+        "slippage_cost": 6.6859431225089265,
+        "entry_fee": 6.692068848219961,
+        "exit_fee": 6.679813665135892,
+        "funding_cost": 0.10461287482866996
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 59,
+            "net_pnl": 1204.1788908845738,
+            "win_rate": 0.423728813559322,
+            "mean_hours": 14.694915254237289
+          },
+          "1": {
+            "trades": 71,
+            "net_pnl": -1147.276484579795,
+            "win_rate": 0.2535211267605634,
+            "mean_hours": 13.112676056338028
+          }
+        },
+        "exit_detail": {
+          "initial_stop": {
+            "trades": 7,
+            "net_pnl": -1232.7084955212604,
+            "win_rate": 0.0,
+            "mean_hours": 3.0
+          },
+          "target": {
+            "trades": 20,
+            "net_pnl": 6579.480520460438,
+            "win_rate": 1.0,
+            "mean_hours": 14.2
+          },
+          "trailing_stop": {
+            "trades": 103,
+            "net_pnl": -5289.8696186344,
+            "win_rate": 0.22330097087378642,
+            "mean_hours": 14.495145631067961
+          }
+        }
+      },
+      "trades_with_trailing_updates": 122,
+      "first_trail_at_loss_count": 63,
+      "median_first_trail_r": -0.012336796831954832,
+      "average_nominal_risk_fraction": 0.016743422068328993,
+      "median_nominal_risk_fraction": 0.01842248350197444,
+      "profit_factor": 1.007337601941192,
+      "average_win": 181.66994070528938,
+      "average_loss": -89.13683958646742
+    }
+  },
+  {
+    "attempt": 22,
+    "phase": "one_component_diagnosis",
+    "label": "initial_stop_5ATR",
+    "changes": [
+      "params.stop_atr"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 5.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.6105033554246525,
+    "development_mean_sharpe": 0.5390860103206051,
+    "folds": [
+      {
+        "sharpe": 0.8092976689008465,
+        "return": 0.08755976961842094,
+        "max_drawdown": 0.10108125091316245,
+        "trades": 73,
+        "long_trades": 30,
+        "short_trades": 43,
+        "win_rate": 0.5068493150684932,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.3493370143832655,
+        "return": 0.16984065459501885,
+        "max_drawdown": 0.05765878850326811,
+        "trades": 62,
+        "long_trades": 39,
+        "short_trades": 23,
+        "win_rate": 0.3870967741935484,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.5413766523222967,
+        "return": -0.06604976175776212,
+        "max_drawdown": 0.12814693324357218,
+        "trades": 91,
+        "long_trades": 57,
+        "short_trades": 34,
+        "win_rate": 0.34065934065934067,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": 0.01650098737895903,
+      "return": -0.0059543639659414005,
+      "max_drawdown": 0.13291348477014087,
+      "trades": 122,
+      "long_trades": 68,
+      "short_trades": 54,
+      "win_rate": 0.3114754098360656,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 122,
+      "totals_usdt": {
+        "net_pnl": -59.54363965939858,
+        "gross_before_execution_costs": 1306.9999452401194,
+        "slippage_cost": 451.70647855799467,
+        "entry_fee": 451.906483913916,
+        "exit_fee": 451.50623794217825,
+        "funding_cost": 11.424384485429002
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -0.5954363965939858,
+        "gross_before_execution_costs": 13.069999452401193,
+        "slippage_cost": 4.517064785579946,
+        "entry_fee": 4.51906483913916,
+        "exit_fee": 4.515062379421782,
+        "funding_cost": 0.11424384485429002
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 54,
+            "net_pnl": 438.06580802495074,
+            "win_rate": 0.3888888888888889,
+            "mean_hours": 16.61111111111111
+          },
+          "1": {
+            "trades": 68,
+            "net_pnl": -497.60944768434916,
+            "win_rate": 0.25,
+            "mean_hours": 14.485294117647058
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 9,
+            "net_pnl": 3238.8902032005963,
+            "win_rate": 1.0,
+            "mean_hours": 25.77777777777778
+          },
+          "trailing_stop": {
+            "trades": 113,
+            "net_pnl": -3298.4338428599954,
+            "win_rate": 0.25663716814159293,
+            "mean_hours": 14.601769911504425
+          }
+        }
+      },
+      "trades_with_trailing_updates": 121,
+      "first_trail_at_loss_count": 69,
+      "median_first_trail_r": -0.026184526111223957,
+      "average_nominal_risk_fraction": 0.018797975416792526,
+      "median_nominal_risk_fraction": 0.018935716979519165,
+      "profit_factor": 0.9881711639646963,
+      "average_win": 130.9006930034431,
+      "average_loss": -59.92583302131235
+    }
+  },
+  {
+    "attempt": 23,
+    "phase": "one_component_diagnosis",
+    "label": "ADX_15",
+    "changes": [
+      "adx_min"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 15.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.11431531148815954,
+    "development_mean_sharpe": 0.5287723407289658,
+    "folds": [
+      {
+        "sharpe": 0.34205836158550323,
+        "return": 0.03541101848547101,
+        "max_drawdown": 0.12235493482906867,
+        "trades": 72,
+        "long_trades": 28,
+        "short_trades": 44,
+        "win_rate": 0.4583333333333333,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.7260581968123485,
+        "return": 0.25842812636438794,
+        "max_drawdown": 0.06886113865752452,
+        "trades": 58,
+        "long_trades": 39,
+        "short_trades": 19,
+        "win_rate": 0.41379310344827586,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.4817995362109543,
+        "return": -0.07009779755648526,
+        "max_drawdown": 0.14060171684570932,
+        "trades": 89,
+        "long_trades": 54,
+        "short_trades": 35,
+        "win_rate": 0.34831460674157305,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.027819123692084433,
+      "return": -0.017103068669445,
+      "max_drawdown": 0.14874320976870292,
+      "trades": 119,
+      "long_trades": 68,
+      "short_trades": 51,
+      "win_rate": 0.31092436974789917,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 119,
+      "totals_usdt": {
+        "net_pnl": -171.03068669445634,
+        "gross_before_execution_costs": 1396.6820399224257,
+        "slippage_cost": 520.9315581754859,
+        "entry_fee": 521.395487812266,
+        "exit_fee": 520.4673771360427,
+        "funding_cost": 4.918303493088001
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -1.7103068669445634,
+        "gross_before_execution_costs": 13.966820399224256,
+        "slippage_cost": 5.209315581754859,
+        "entry_fee": 5.21395487812266,
+        "exit_fee": 5.204673771360428,
+        "funding_cost": 0.04918303493088001
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 51,
+            "net_pnl": 845.369453288186,
+            "win_rate": 0.4117647058823529,
+            "mean_hours": 16.764705882352942
+          },
+          "1": {
+            "trades": 68,
+            "net_pnl": -1016.4001399826423,
+            "win_rate": 0.23529411764705882,
+            "mean_hours": 13.264705882352942
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 11,
+            "net_pnl": 3844.3688916476735,
+            "win_rate": 1.0,
+            "mean_hours": 16.363636363636363
+          },
+          "trailing_stop": {
+            "trades": 108,
+            "net_pnl": -4015.39957834213,
+            "win_rate": 0.24074074074074073,
+            "mean_hours": 14.601851851851851
+          }
+        }
+      },
+      "trades_with_trailing_updates": 118,
+      "first_trail_at_loss_count": 66,
+      "median_first_trail_r": -0.02922402242610491,
+      "average_nominal_risk_fraction": 0.018258984077355035,
+      "median_nominal_risk_fraction": 0.01873176587670716,
+      "profit_factor": 0.9703482813333207,
+      "average_win": 151.26905208448548,
+      "average_loss": -70.34128797341975
+    }
+  },
+  {
+    "attempt": 24,
+    "phase": "one_component_diagnosis",
+    "label": "ADX_20",
+    "changes": [
+      "adx_min"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 20.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": -0.35532272519845026,
+    "development_mean_sharpe": 0.2182272163140463,
+    "folds": [
+      {
+        "sharpe": -0.09736500793126635,
+        "return": -0.01733888687468721,
+        "max_drawdown": 0.1616423857071133,
+        "trades": 67,
+        "long_trades": 26,
+        "short_trades": 41,
+        "win_rate": 0.417910447761194,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.6098440506413654,
+        "return": 0.1969018492417749,
+        "max_drawdown": 0.0549854562008073,
+        "trades": 49,
+        "long_trades": 33,
+        "short_trades": 16,
+        "win_rate": 0.3877551020408163,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.85779739376796,
+        "return": -0.10574967348929754,
+        "max_drawdown": 0.14377410747426622,
+        "trades": 79,
+        "long_trades": 47,
+        "short_trades": 32,
+        "win_rate": 0.31645569620253167,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.0745058518452049,
+      "return": -0.023796550687315343,
+      "max_drawdown": 0.1453173064840152,
+      "trades": 103,
+      "long_trades": 56,
+      "short_trades": 47,
+      "win_rate": 0.3106796116504854,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 103,
+      "totals_usdt": {
+        "net_pnl": -237.9655068731466,
+        "gross_before_execution_costs": 1087.6353675943276,
+        "slippage_cost": 441.60255959966764,
+        "entry_fee": 441.820480321638,
+        "exit_fee": 441.3844431034214,
+        "funding_cost": 0.7933914427470011
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -2.379655068731466,
+        "gross_before_execution_costs": 10.876353675943276,
+        "slippage_cost": 4.416025595996676,
+        "entry_fee": 4.41820480321638,
+        "exit_fee": 4.413844431034214,
+        "funding_cost": 0.007933914427470011
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 47,
+            "net_pnl": 353.3529077854122,
+            "win_rate": 0.3829787234042553,
+            "mean_hours": 16.78723404255319
+          },
+          "1": {
+            "trades": 56,
+            "net_pnl": -591.3184146585588,
+            "win_rate": 0.25,
+            "mean_hours": 13.25
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 10,
+            "net_pnl": 3462.2711811479116,
+            "win_rate": 1.0,
+            "mean_hours": 17.0
+          },
+          "trailing_stop": {
+            "trades": 93,
+            "net_pnl": -3700.2366880210584,
+            "win_rate": 0.23655913978494625,
+            "mean_hours": 14.634408602150538
+          }
+        }
+      },
+      "trades_with_trailing_updates": 102,
+      "first_trail_at_loss_count": 58,
+      "median_first_trail_r": -0.0258501734304189,
+      "average_nominal_risk_fraction": 0.01830316880502074,
+      "median_nominal_risk_fraction": 0.018718786580380238,
+      "profit_factor": 0.9532956446139512,
+      "average_win": 151.78688863397485,
+      "average_loss": -71.76261891775128
+    }
+  },
+  {
+    "attempt": 25,
+    "phase": "one_component_diagnosis",
+    "label": "ADX_25",
+    "changes": [
+      "adx_min"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 25.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": -0.3223283313561994,
+    "development_mean_sharpe": 0.15501035337641678,
+    "folds": [
+      {
+        "sharpe": -0.11172450665363028,
+        "return": -0.015169010435720831,
+        "max_drawdown": 0.08160581790786403,
+        "trades": 52,
+        "long_trades": 20,
+        "short_trades": 32,
+        "win_rate": 0.40384615384615385,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.2939297160821268,
+        "return": 0.12644769470394812,
+        "max_drawdown": 0.04804432496837863,
+        "trades": 40,
+        "long_trades": 30,
+        "short_trades": 10,
+        "win_rate": 0.35,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.7171741492992462,
+        "return": -0.07665969913647697,
+        "max_drawdown": 0.12067960735547556,
+        "trades": 61,
+        "long_trades": 36,
+        "short_trades": 25,
+        "win_rate": 0.32786885245901637,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.3571666871834033,
+      "return": -0.060606595379528505,
+      "max_drawdown": 0.15913456116651326,
+      "trades": 74,
+      "long_trades": 40,
+      "short_trades": 34,
+      "win_rate": 0.28378378378378377,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 74,
+      "totals_usdt": {
+        "net_pnl": -606.0659537952857,
+        "gross_before_execution_costs": 309.16945583487785,
+        "slippage_cost": 302.9253417103356,
+        "entry_fee": 302.930566284918,
+        "exit_fee": 302.9200614853186,
+        "funding_cost": 6.459440149591002
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -6.060659537952858,
+        "gross_before_execution_costs": 3.0916945583487783,
+        "slippage_cost": 3.029253417103356,
+        "entry_fee": 3.0293056628491795,
+        "exit_fee": 3.0292006148531865,
+        "funding_cost": 0.06459440149591002
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 34,
+            "net_pnl": -218.82213264585016,
+            "win_rate": 0.35294117647058826,
+            "mean_hours": 16.705882352941178
+          },
+          "1": {
+            "trades": 40,
+            "net_pnl": -387.24382114943535,
+            "win_rate": 0.225,
+            "mean_hours": 14.225
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 6,
+            "net_pnl": 2104.4046702248797,
+            "win_rate": 1.0,
+            "mean_hours": 22.666666666666668
+          },
+          "trailing_stop": {
+            "trades": 68,
+            "net_pnl": -2710.4706240201654,
+            "win_rate": 0.22058823529411764,
+            "mean_hours": 14.720588235294118
+          }
+        }
+      },
+      "trades_with_trailing_updates": 74,
+      "first_trail_at_loss_count": 46,
+      "median_first_trail_r": -0.049215010271444086,
+      "average_nominal_risk_fraction": 0.01851833795578539,
+      "median_nominal_risk_fraction": 0.01881571874118365,
+      "profit_factor": 0.8440461995665374,
+      "average_win": 156.1963385999627,
+      "average_loss": -73.32432196970758
+    }
+  },
+  {
+    "attempt": 26,
+    "phase": "one_component_diagnosis",
+    "label": "cooldown_6h",
+    "changes": [
+      "cooldown_hours"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 6,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.28025383823134237,
+    "development_mean_sharpe": 0.19356667135396946,
+    "folds": [
+      {
+        "sharpe": 0.9537848511920862,
+        "return": 0.11416430153600854,
+        "max_drawdown": 0.08320095340760325,
+        "trades": 70,
+        "long_trades": 29,
+        "short_trades": 41,
+        "win_rate": 0.4857142857142857,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.47005261280824245,
+        "return": 0.048395944214286724,
+        "max_drawdown": 0.09061324505985846,
+        "trades": 59,
+        "long_trades": 38,
+        "short_trades": 21,
+        "win_rate": 0.3389830508474576,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.8431374499384202,
+        "return": -0.11016684465896065,
+        "max_drawdown": 0.194050408188712,
+        "trades": 88,
+        "long_trades": 54,
+        "short_trades": 34,
+        "win_rate": 0.3409090909090909,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.31725998091818475,
+      "return": -0.06489927548852159,
+      "max_drawdown": 0.17835772672077865,
+      "trades": 116,
+      "long_trades": 65,
+      "short_trades": 51,
+      "win_rate": 0.3017241379310345,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 116,
+      "totals_usdt": {
+        "net_pnl": -648.9927548852188,
+        "gross_before_execution_costs": 888.9356924961204,
+        "slippage_cost": 510.4579202595183,
+        "entry_fee": 510.85182007154395,
+        "exit_fee": 510.0638604391734,
+        "funding_cost": 6.554846611104001
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -6.489927548852188,
+        "gross_before_execution_costs": 8.889356924961204,
+        "slippage_cost": 5.104579202595183,
+        "entry_fee": 5.108518200715439,
+        "exit_fee": 5.100638604391734,
+        "funding_cost": 0.06554846611104001
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 51,
+            "net_pnl": 477.1282993364831,
+            "win_rate": 0.39215686274509803,
+            "mean_hours": 16.607843137254903
+          },
+          "1": {
+            "trades": 65,
+            "net_pnl": -1126.1210542217023,
+            "win_rate": 0.23076923076923078,
+            "mean_hours": 13.36923076923077
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 10,
+            "net_pnl": 3471.263043648993,
+            "win_rate": 1.0,
+            "mean_hours": 18.6
+          },
+          "trailing_stop": {
+            "trades": 106,
+            "net_pnl": -4120.255798534212,
+            "win_rate": 0.2358490566037736,
+            "mean_hours": 14.433962264150944
+          }
+        }
+      },
+      "trades_with_trailing_updates": 115,
+      "first_trail_at_loss_count": 62,
+      "median_first_trail_r": -0.02516022221151625,
+      "average_nominal_risk_fraction": 0.018232091255841954,
+      "median_nominal_risk_fraction": 0.018735710169382802,
+      "profit_factor": 0.8884912891014176,
+      "average_win": 147.7461535794634,
+      "average_loss": -71.85318679217824
+    }
+  },
+  {
+    "attempt": 27,
+    "phase": "one_component_diagnosis",
+    "label": "cooldown_12h",
+    "changes": [
+      "cooldown_hours"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 12,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.4796444085720651,
+    "development_mean_sharpe": 0.34941520505264895,
+    "folds": [
+      {
+        "sharpe": 1.0747766688119513,
+        "return": 0.1311813660695813,
+        "max_drawdown": 0.08793504435747201,
+        "trades": 66,
+        "long_trades": 28,
+        "short_trades": 38,
+        "win_rate": 0.48484848484848486,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.6689437061325638,
+        "return": 0.07341080269398148,
+        "max_drawdown": 0.07965565407665065,
+        "trades": 55,
+        "long_trades": 35,
+        "short_trades": 20,
+        "win_rate": 0.34545454545454546,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.6954747597865684,
+        "return": -0.09019549536844262,
+        "max_drawdown": 0.17575807365478124,
+        "trades": 80,
+        "long_trades": 51,
+        "short_trades": 29,
+        "win_rate": 0.35,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.21105949401194474,
+      "return": -0.0456389699160934,
+      "max_drawdown": 0.1385132121938245,
+      "trades": 107,
+      "long_trades": 58,
+      "short_trades": 49,
+      "win_rate": 0.29906542056074764,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 107,
+      "totals_usdt": {
+        "net_pnl": -456.38969916093475,
+        "gross_before_execution_costs": 985.4150437916356,
+        "slippage_cost": 479.8708077847355,
+        "entry_fee": 480.34813568208,
+        "exit_fee": 479.3933025127832,
+        "funding_cost": 2.192496972972001
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -4.563896991609347,
+        "gross_before_execution_costs": 9.854150437916356,
+        "slippage_cost": 4.798708077847355,
+        "entry_fee": 4.8034813568208,
+        "exit_fee": 4.793933025127832,
+        "funding_cost": 0.02192496972972001
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 49,
+            "net_pnl": 681.3281995843947,
+            "win_rate": 0.3877551020408163,
+            "mean_hours": 17.428571428571427
+          },
+          "1": {
+            "trades": 58,
+            "net_pnl": -1137.7178987453294,
+            "win_rate": 0.22413793103448276,
+            "mean_hours": 14.120689655172415
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 9,
+            "net_pnl": 3270.176901193922,
+            "win_rate": 1.0,
+            "mean_hours": 21.555555555555557
+          },
+          "trailing_stop": {
+            "trades": 98,
+            "net_pnl": -3726.5666003548567,
+            "win_rate": 0.23469387755102042,
+            "mean_hours": 15.091836734693878
+          }
+        }
+      },
+      "trades_with_trailing_updates": 107,
+      "first_trail_at_loss_count": 59,
+      "median_first_trail_r": -0.03259930300680381,
+      "average_nominal_risk_fraction": 0.018310887155834496,
+      "median_nominal_risk_fraction": 0.01874005854391713,
+      "profit_factor": 0.915611167925905,
+      "average_win": 154.7433377763161,
+      "average_loss": -72.10902010670733
+    }
+  },
+  {
+    "attempt": 28,
+    "phase": "one_component_diagnosis",
+    "label": "pullback_EMA20",
+    "changes": [
+      "entry_mode"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "pullback",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": false,
+    "development_score": -1.598366445980882,
+    "development_mean_sharpe": -1.571918126329322,
+    "folds": [
+      {
+        "sharpe": -1.457955354413365,
+        "return": -0.24090266921393444,
+        "max_drawdown": 0.2505606744227472,
+        "trades": 225,
+        "long_trades": 73,
+        "short_trades": 152,
+        "win_rate": 0.3466666666666667,
+        "days": 385,
+        "halted": true
+      },
+      {
+        "sharpe": -2.3096534738676078,
+        "return": -0.24924899665742006,
+        "max_drawdown": 0.25057042274885577,
+        "trades": 99,
+        "long_trades": 55,
+        "short_trades": 44,
+        "win_rate": 0.24242424242424243,
+        "days": 385,
+        "halted": true
+      },
+      {
+        "sharpe": -0.9481455507069932,
+        "return": -0.19351851154652056,
+        "max_drawdown": 0.2504365343082723,
+        "trades": 272,
+        "long_trades": 159,
+        "short_trades": 113,
+        "win_rate": 0.3492647058823529,
+        "days": 385,
+        "halted": true
+      }
+    ],
+    "known_audit": {
+      "sharpe": -1.5262397774836802,
+      "return": -0.23938999474412448,
+      "max_drawdown": 0.25067050294029103,
+      "trades": 128,
+      "long_trades": 89,
+      "short_trades": 39,
+      "win_rate": 0.25,
+      "days": 549,
+      "halted": true
+    },
+    "known_audit_attribution": {
+      "trades": 128,
+      "totals_usdt": {
+        "net_pnl": -2393.8999474412485,
+        "gross_before_execution_costs": -761.1539143875423,
+        "slippage_cost": 533.7628556507577,
+        "entry_fee": 534.0566644185719,
+        "exit_fee": 533.4691838907739,
+        "funding_cost": 31.457329093603008
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -23.938999474412483,
+        "gross_before_execution_costs": -7.611539143875423,
+        "slippage_cost": 5.337628556507577,
+        "entry_fee": 5.34056664418572,
+        "exit_fee": 5.334691838907739,
+        "funding_cost": 0.31457329093603004
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 39,
+            "net_pnl": -437.10140094890784,
+            "win_rate": 0.3076923076923077,
+            "mean_hours": 12.846153846153847
+          },
+          "1": {
+            "trades": 89,
+            "net_pnl": -1956.7985464923408,
+            "win_rate": 0.2247191011235955,
+            "mean_hours": 13.314606741573034
+          }
+        },
+        "exit_detail": {
+          "anchor": {
+            "trades": 2,
+            "net_pnl": -164.74156037175362,
+            "win_rate": 0.0,
+            "mean_hours": 5.0
+          },
+          "drawdown": {
+            "trades": 1,
+            "net_pnl": -18.52145647187622,
+            "win_rate": 0.0,
+            "mean_hours": 1.0
+          },
+          "target": {
+            "trades": 8,
+            "net_pnl": 2283.7467557012533,
+            "win_rate": 1.0,
+            "mean_hours": 17.375
+          },
+          "trailing_stop": {
+            "trades": 117,
+            "net_pnl": -4494.383686298874,
+            "win_rate": 0.20512820512820512,
+            "mean_hours": 13.128205128205128
+          }
+        }
+      },
+      "trades_with_trailing_updates": 128,
+      "first_trail_at_loss_count": 77,
+      "median_first_trail_r": -0.039181951934447144,
+      "average_nominal_risk_fraction": 0.017720160116284946,
+      "median_nominal_risk_fraction": 0.018646935058001843,
+      "profit_factor": 0.5936812742468532,
+      "average_win": 109.30562951089493,
+      "average_loss": -61.37166762281132
+    }
+  },
+  {
+    "attempt": 29,
+    "phase": "one_component_diagnosis",
+    "label": "anchor_EMA20_100",
+    "changes": [
+      "params.fast",
+      "params.slow"
+    ],
+    "spec": {
+      "params": {
+        "fast": 20,
+        "slow": 100,
+        "breakout": 168,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.3832263056887504,
+    "development_mean_sharpe": 0.5384334802478236,
+    "folds": [
+      {
+        "sharpe": 0.49175314336703546,
+        "return": 0.051082362222267585,
+        "max_drawdown": 0.0921932253745874,
+        "trades": 64,
+        "long_trades": 24,
+        "short_trades": 40,
+        "win_rate": 0.484375,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.0919052337935518,
+        "return": 0.13886034975145223,
+        "max_drawdown": 0.07960061586639655,
+        "trades": 53,
+        "long_trades": 36,
+        "short_trades": 17,
+        "win_rate": 0.37735849056603776,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 0.03164206358288357,
+        "return": -0.0035487748056765023,
+        "max_drawdown": 0.12309311048648386,
+        "trades": 79,
+        "long_trades": 51,
+        "short_trades": 28,
+        "win_rate": 0.379746835443038,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.1511948649749264,
+      "return": -0.03748197638446005,
+      "max_drawdown": 0.16414533144334853,
+      "trades": 102,
+      "long_trades": 58,
+      "short_trades": 44,
+      "win_rate": 0.29411764705882354,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 102,
+      "totals_usdt": {
+        "net_pnl": -374.8197638446073,
+        "gross_before_execution_costs": 912.1737354068506,
+        "slippage_cost": 425.6847793576105,
+        "entry_fee": 425.7867391574819,
+        "exit_fee": 425.58265536656154,
+        "funding_cost": 9.939325369804003
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -3.7481976384460727,
+        "gross_before_execution_costs": 9.121737354068506,
+        "slippage_cost": 4.256847793576105,
+        "entry_fee": 4.257867391574819,
+        "exit_fee": 4.2558265536656155,
+        "funding_cost": 0.09939325369804003
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 44,
+            "net_pnl": 124.92609632615765,
+            "win_rate": 0.36363636363636365,
+            "mean_hours": 16.15909090909091
+          },
+          "1": {
+            "trades": 58,
+            "net_pnl": -499.74586017076484,
+            "win_rate": 0.2413793103448276,
+            "mean_hours": 14.03448275862069
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 10,
+            "net_pnl": 3418.5730802586177,
+            "win_rate": 1.0,
+            "mean_hours": 20.0
+          },
+          "trailing_stop": {
+            "trades": 92,
+            "net_pnl": -3793.392844103225,
+            "win_rate": 0.21739130434782608,
+            "mean_hours": 14.402173913043478
+          }
+        }
+      },
+      "trades_with_trailing_updates": 101,
+      "first_trail_at_loss_count": 60,
+      "median_first_trail_r": -0.03273065763902994,
+      "average_nominal_risk_fraction": 0.018376358066951377,
+      "median_nominal_risk_fraction": 0.01878150825513074,
+      "profit_factor": 0.9287765556992048,
+      "average_win": 162.92566428986822,
+      "average_loss": -73.0915235075091
+    }
+  },
+  {
+    "attempt": 30,
+    "phase": "one_component_diagnosis",
+    "label": "breakout_72h",
+    "changes": [
+      "params.breakout"
+    ],
+    "spec": {
+      "params": {
+        "fast": 8,
+        "slow": 60,
+        "breakout": 72,
+        "atr_period": 14,
+        "stop_atr": 4.0,
+        "trail_atr": 2.0,
+        "reward": 2.0,
+        "min_trend": 0.0,
+        "max_hours": 240
+      },
+      "trail_enabled": true,
+      "trail_start_r": 0.0,
+      "target_enabled": true,
+      "adx_min": 0.0,
+      "entry_mode": "breakout",
+      "cooldown_hours": 0,
+      "direction": 0,
+      "funding_enabled": true
+    },
+    "risk": {
+      "capital": 10000.0,
+      "fraction": 0.02,
+      "fee_bps": 6.0,
+      "slippage_bps": 3.0,
+      "max_exposure": 1.0,
+      "max_drawdown": 0.25,
+      "quantity_step": 0.001,
+      "minimum_notional": 10.0
+    },
+    "selectable": true,
+    "eligible": true,
+    "development_score": 0.09086334618657474,
+    "development_mean_sharpe": 0.38931666404729937,
+    "folds": [
+      {
+        "sharpe": 0.29534871377468197,
+        "return": 0.033200655490770004,
+        "max_drawdown": 0.14429542890977554,
+        "trades": 98,
+        "long_trades": 39,
+        "short_trades": 59,
+        "win_rate": 0.42857142857142855,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": 1.4347593972826154,
+        "return": 0.24161486509984842,
+        "max_drawdown": 0.10016800444418272,
+        "trades": 84,
+        "long_trades": 51,
+        "short_trades": 33,
+        "win_rate": 0.35714285714285715,
+        "days": 385,
+        "halted": false
+      },
+      {
+        "sharpe": -0.5621581189153994,
+        "return": -0.09227493235134587,
+        "max_drawdown": 0.20143956969684795,
+        "trades": 117,
+        "long_trades": 66,
+        "short_trades": 51,
+        "win_rate": 0.3162393162393162,
+        "days": 385,
+        "halted": false
+      }
+    ],
+    "known_audit": {
+      "sharpe": -0.2219510645583603,
+      "return": -0.06165333143506435,
+      "max_drawdown": 0.22641450734068014,
+      "trades": 168,
+      "long_trades": 90,
+      "short_trades": 78,
+      "win_rate": 0.3273809523809524,
+      "days": 549,
+      "halted": false
+    },
+    "known_audit_attribution": {
+      "trades": 168,
+      "totals_usdt": {
+        "net_pnl": -616.5333143506494,
+        "gross_before_execution_costs": 1594.4820744706444,
+        "slippage_cost": 733.6550654316019,
+        "entry_fee": 734.0921477471159,
+        "exit_fee": 733.2176961094813,
+        "funding_cost": 10.050479533095
+      },
+      "percentage_points_of_initial_capital": {
+        "net_pnl": -6.165333143506495,
+        "gross_before_execution_costs": 15.944820744706444,
+        "slippage_cost": 7.336550654316019,
+        "entry_fee": 7.340921477471158,
+        "exit_fee": 7.332176961094812,
+        "funding_cost": 0.10050479533095
+      },
+      "groups": {
+        "side": {
+          "-1": {
+            "trades": 78,
+            "net_pnl": 587.0835234418113,
+            "win_rate": 0.3717948717948718,
+            "mean_hours": 16.487179487179485
+          },
+          "1": {
+            "trades": 90,
+            "net_pnl": -1203.6168377924607,
+            "win_rate": 0.28888888888888886,
+            "mean_hours": 13.866666666666667
+          }
+        },
+        "exit_detail": {
+          "target": {
+            "trades": 14,
+            "net_pnl": 4821.5206659488495,
+            "win_rate": 1.0,
+            "mean_hours": 17.071428571428573
+          },
+          "trailing_stop": {
+            "trades": 154,
+            "net_pnl": -5438.053980299498,
+            "win_rate": 0.2662337662337662,
+            "mean_hours": 14.902597402597403
+          }
+        }
+      },
+      "trades_with_trailing_updates": 167,
+      "first_trail_at_loss_count": 92,
+      "median_first_trail_r": -0.024074236527098915,
+      "average_nominal_risk_fraction": 0.018151004788688124,
+      "median_nominal_risk_fraction": 0.018770295863380103,
+      "profit_factor": 0.9242697290195951,
+      "average_win": 136.81164912578058,
+      "average_loss": -72.04578775458923
+    }
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "pytest": "40 passed in 1.15s",
+  "research_archived_cli_exit_code": 1,
+  "optimization_attempts": 0,
+  "credential_values_found_in_publishable_files": 0,
+  "env_ignored_by_git": true,
+  "docker_build": "NOT_RUN_DOCKER_UNAVAILABLE",
+  "orders_sent": 0,
+  "selected_config_sha256": "d6a0e4274435e6a80a210bbe0d277509be3f8927971bcd1df593292cdc3a160f",
+  "verification_scope": "Unit tests and public OKX universe audit; no end-to-end portfolio or demo execution validation."
+}

@@ -1,0 +1,14 @@
+{
+  "KITE-USDT-SWAP": {
+    "current_listing_time": "2026-04-09 03:00:00+00:00",
+    "earlier_historical_membership": "2025-11-01 00:00:00+00:00"
+  },
+  "OL-USDT-SWAP": {
+    "current_listing_time": "2025-10-29 10:15:00.938000+00:00",
+    "earlier_historical_membership": "2025-03-01 00:00:00+00:00"
+  },
+  "PIPPIN-USDT-SWAP": {
+    "current_listing_time": "2025-12-02 15:00:00+00:00",
+    "earlier_historical_membership": "2025-03-01 00:00:00+00:00"
+  }
+}
