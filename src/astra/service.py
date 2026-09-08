@@ -10,6 +10,7 @@ import sqlite3
 import threading
 import time
 import pandas as pd
+from .accounting import deposit_adjusted_equity, modified_dietz_return
 from .data import validate
 from .engine import Risk
 from .directional_strategy import Params, features
@@ -172,8 +173,15 @@ class Service:
         if any(x['instId']!=INSTRUMENT or x.get('posSide')!='net' or x.get('mgnMode')!='isolated' for x in positions) or len(positions)>1:
             raise ExchangeError('Unexpected position; dedicated account reconciliation required')
         equity=self.x.equity()
-        peak=max(self.s.get('peak',equity),equity);self.s.save('peak',peak)
-        halted=self.s.get('halted',False) or equity<=peak*(1-self.r.max_drawdown)
+        inception_ms=self.s.get('inception_ms')
+        if inception_ms is None:
+            inception_ms=int(now.timestamp()*1000)
+            self.s.save('inception_ms',inception_ms)
+            self.s.save('inception_equity',equity)
+        bills=self.x.bills(inception_ms)
+        adjusted=deposit_adjusted_equity(equity,bills)
+        peak=max(self.s.get('peak',adjusted),adjusted);self.s.save('peak',peak)
+        halted=self.s.get('halted',False) or adjusted<=peak*(1-self.r.max_drawdown)
         self.s.save('halted',halted)
         owned=self.s.get('position')
         pending=self.x.pending()

@@ -123,6 +123,20 @@ class OKX:
     def ticker(self):
         return self.request('GET','/api/v5/market/ticker',{'instId':INSTRUMENT})[0]
 
+    def bills(self, since_ms):
+        """Trading-account ledger (fills, transfers, funding) from since_ms
+        (inclusive, epoch milliseconds) to now. Paginated via billId."""
+        results, after = [], None
+        while True:
+            params={'instType':'SWAP','begin':str(since_ms),'limit':'100'}
+            if after is not None:
+                params['after']=after
+            page=self.request('GET','/api/v5/account/bills',params,private=True)
+            results.extend(page)
+            if len(page)<100:
+                return results
+            after=page[-1]['billId']
+
     def order(self,client_id):
         return self.request('GET','/api/v5/trade/order',{'instId':INSTRUMENT,'clOrdId':client_id},private=True)[0]
 
