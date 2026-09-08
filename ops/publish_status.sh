@@ -38,18 +38,20 @@ DOCKER_PS=$(sudo docker ps -a --filter "name=${CONTAINER}" --format '{{.Names}}\
 HEALTH=$(sudo docker exec "$CONTAINER" sh -c 'astra health --state "$ASTRA_STATE" 2>&1; echo EXIT:$?' || true)
 STATE=$(sudo docker exec "$CONTAINER" python -c "$STATE_SCRIPT" || echo '{}')
 OKX=$(sudo docker exec "$CONTAINER" python -c "$OKX_SCRIPT" || echo '{}')
+PERFORMANCE=$(sudo docker exec "$CONTAINER" sh -c 'astra performance --state "$ASTRA_STATE"' || echo '{}')
 LOGS=$(sudo docker logs "$CONTAINER" --since 90m 2>&1 | tail -c 4000 || true)
 
 mkdir -p docs/status
-python3 - "$DOCKER_PS" "$HEALTH" "$STATE" "$OKX" "$LOGS" > docs/status/latest.json <<'PYEOF'
+python3 - "$DOCKER_PS" "$HEALTH" "$STATE" "$OKX" "$PERFORMANCE" "$LOGS" > docs/status/latest.json <<'PYEOF'
 import json, sys, datetime
-docker_ps, health, state, okx, logs = sys.argv[1:6]
+docker_ps, health, state, okx, performance, logs = sys.argv[1:7]
 print(json.dumps({
     "generated_at_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
     "docker_ps": docker_ps,
     "health": health,
     "state": json.loads(state) if state.strip().startswith("{") else state,
     "okx": json.loads(okx) if okx.strip().startswith("{") else okx,
+    "performance": json.loads(performance) if performance.strip().startswith("{") else performance,
     "logs_tail": logs,
 }, indent=2))
 PYEOF

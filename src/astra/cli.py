@@ -27,6 +27,7 @@ def main():
     dg=sub.add_parser('diagnostics');dg.add_argument('--repetitions',type=int,default=400)
     h=sub.add_parser('health');h.add_argument('--state',default='state/observe.db')
     v=sub.add_parser('review');v.add_argument('--trades',default='reports/run-001/holdout_trades.csv')
+    pf=sub.add_parser('performance');pf.add_argument('--selected',default='configs/selected.json');pf.add_argument('--state',default='state/observe.db')
     args=parser.parse_args()
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s')
     load_env(args.env_file)
@@ -69,6 +70,37 @@ def main():
             if not row or pd.Timestamp.now(tz='UTC')-pd.Timestamp(json.loads(row[0]))>pd.Timedelta(minutes=3):
                 raise RuntimeError('Stale or missing heartbeat')
             print('healthy')
+        elif args.command=='performance':
+            from .accounting import deposit_adjusted_equity, modified_dietz_return
+            cfg=json.loads(Path(args.selected).read_text());risk=Risk(**cfg['risk'])
+            with sqlite3.connect(f'file:{Path(args.state).resolve()}?mode=ro',uri=True) as db:
+                kv=dict(db.execute('SELECT key,value FROM kv').fetchall())
+            inception_ms=json.loads(kv['inception_ms']) if 'inception_ms' in kv else None
+            inception_equity=json.loads(kv['inception_equity']) if 'inception_equity' in kv else None
+            peak=json.loads(kv['peak']) if 'peak' in kv else None
+            halted=json.loads(kv['halted']) if 'halted' in kv else False
+            if inception_ms is None or peak is None:
+                print(json.dumps({'note':'No performance data yet; service has not completed a demo tick.'},indent=2));return
+            x=OKX(demo=True);equity=x.equity();bills=x.bills(inception_ms)
+            from .accounting import net_transfers
+            transfers=net_transfers(bills)
+            adjusted=deposit_adjusted_equity(equity,bills)
+            drawdown_pct=max(0.,(peak-adjusted)/peak*100) if peak>0 else 0.
+            now_ms=int(pd.Timestamp.now(tz='UTC').timestamp()*1000)
+            period_days=(now_ms-inception_ms)/86400000
+            try:
+                twr_pct=modified_dietz_return(inception_equity,equity,bills,inception_ms,now_ms)*100
+            except ValueError:
+                twr_pct=None
+            print(json.dumps({
+                'equity':equity,'adjusted_equity':adjusted,'peak':peak,
+                'drawdown_pct':drawdown_pct,'max_drawdown_pct':risk.max_drawdown*100,
+                'distance_to_halt_pct':max(0.,risk.max_drawdown*100-drawdown_pct),
+                'halted':halted,'net_transfers':transfers,
+                'inception_equity':inception_equity,'period_days':period_days,
+                'time_weighted_return_pct':twr_pct,
+                'note':'time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy.'
+            },indent=2))
         elif args.command=='review':
             t=pd.read_csv(args.trades)
             if t.empty:print('No completed trades.');return
