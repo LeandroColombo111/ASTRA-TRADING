@@ -9,6 +9,13 @@ REPO_DIR="/opt/astra/ASTRA-TRADING"
 CONTAINER="astra-demo"
 cd "$REPO_DIR"
 
+# The cloud health-check routine also commits to this repo (docs/checks/).
+# Sync to the tip of origin first so our snapshot commit is never rejected
+# as non-fast-forward; this file is a pure overwrite each run, so discarding
+# any uncommitted local state here is safe.
+git fetch origin main -q
+git reset --hard origin/main -q
+
 STATE_SCRIPT='
 import sqlite3, os, json
 db = sqlite3.connect(os.environ["ASTRA_STATE"])
@@ -50,5 +57,12 @@ PYEOF
 git add docs/status/latest.json
 if ! git diff --cached --quiet -- docs/status/latest.json; then
   git -c user.name="astra-demo-vm" -c user.email="astra-demo-vm@localhost" commit -m "status: $(date -u +%Y-%m-%dT%H:%M:%SZ)" -q
-  git push origin main -q
+  for attempt in 1 2 3; do
+    if git push origin main -q; then
+      break
+    fi
+    echo "push rejected (attempt $attempt), resyncing" >&2
+    git fetch origin main -q
+    git rebase origin/main -q || { git rebase --abort -q; git reset --hard origin/main -q; break; }
+  done
 fi
