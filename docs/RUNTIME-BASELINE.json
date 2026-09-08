@@ -1,8 +1,17 @@
 {
-  "started_at_utc": "2026-09-08T16:15:54.572240917Z",
+  "started_at_utc": "2026-09-08T18:35:01Z",
+  "host": {
+    "platform": "Google Cloud Compute Engine",
+    "project_id": "datasolutions-493815",
+    "zone": "us-central1-a",
+    "instance_name": "astra-demo",
+    "machine_type": "e2-micro",
+    "tier": "GCP Always Free (e2-micro en region elegible + disco estandar <=30GB, sin IP estatica reservada)",
+    "ssh_check": "gcloud compute ssh astra-demo --project=datasolutions-493815 --zone=us-central1-a --tunnel-through-iap"
+  },
   "container": {
     "name": "astra-demo",
-    "id": "2162bc1b6e7c3c86cee4cf09ee682523ffb831ff1a170516346d38c3f1f2eff5",
+    "id": "bec3f0ad5e6c44112566c6b3a2450bd7bd70b1f739bf603cce1ef51c31aa7870",
     "volume": "astra-trading_astra-state",
     "volume_mount": "/app/state"
   },
@@ -16,7 +25,7 @@
     "sha256": "930b0e7d8d7191977adedff94bf47c9e7664cadf41c399588a1f8041aa196fa4"
   },
   "state_at_start": {
-    "last_closed": "2026-09-08 16:00:00+00:00",
+    "last_closed": "2026-09-08 18:00:00+00:00",
     "events_count": 0,
     "open_position": null,
     "pending_intent": null,
@@ -35,15 +44,24 @@
     "orders_sent": 0,
     "live_enabled": false
   },
-  "check_command": "docker exec astra-demo astra health --state \"$(docker exec astra-demo sh -c 'echo $ASTRA_STATE')\"",
-  "warning": "El servicio esta disenado para detenerse antes que operar a ciegas: el loop aborta tras 3 ciclos fallidos consecutivos y compose reintenta 3 veces. Puede quedar detenido sin aviso. Por eso hace falta el chequeo periodico con el comando de arriba (o 'docker ps --filter name=astra-demo' para ver el estado 'healthy'/'unhealthy'/ausente).",
+  "check_command": "gcloud compute ssh astra-demo --project=datasolutions-493815 --zone=us-central1-a --tunnel-through-iap --command=\"sudo docker ps --filter name=astra-demo\"",
+  "warning": "El servicio esta disenado para detenerse antes que operar a ciegas: el loop aborta tras 3 ciclos fallidos consecutivos y compose reintenta 3 veces. Puede quedar detenido sin aviso. Por eso hace falta el chequeo periodico con el comando de arriba. IMPORTANTE: no correr una segunda instancia (ni local ni en otra VM) contra la misma cuenta demo de OKX al mismo tiempo -- el lock de instancia unica (fcntl.flock) solo protege dos procesos que comparten el MISMO archivo de estado, no dos maquinas distintas con estados separados. Antes de levantar el bot en otro lado, parar esta instancia primero.",
   "previous_runs": [
     {
       "started_at_utc": "2026-09-08T15:20:14.933747Z",
+      "host": "Mac local (docker compose run)",
       "container_id": "693e21e693b9c367d50d23f8d43f733c859eb608f393fccbc3229ce962f4e479",
       "stopped_at_utc": "2026-09-08T15:51:49.561911634Z",
       "exit_code": 1,
       "reason": "3 ciclos consecutivos fallidos: ExchangeError OKX HTTP 401 en /api/v5/account/positions. Autenticacion intermitente del lado de OKX; no fue drift de reloj (VM Docker sincronizada con el host) ni credencial invalida (astra doctor autentico normalmente antes y despues). Sin posiciones, pending orders ni algo orders remanentes en OKX al momento de la caida. No se modifico codigo ni configuracion; se relanzo el contenedor tras confirmar con astra doctor que la cuenta volvia a autenticar."
+    },
+    {
+      "started_at_utc": "2026-09-08T16:15:54.572240917Z",
+      "host": "Mac local (docker compose run)",
+      "container_id": "2162bc1b6e7c3c86cee4cf09ee682523ffb831ff1a170516346d38c3f1f2eff5",
+      "stopped_at_utc": "2026-09-08T18:41:00Z",
+      "exit_code": null,
+      "reason": "Detenido manualmente (docker stop/rm) al migrar la instancia unica a la VM de GCP (datasolutions-493815/astra-demo), para evitar dos instancias corriendo en simultaneo contra la misma cuenta demo de OKX. Sin posicion abierta ni intent pendiente al momento de pararlo."
     }
   ]
 }
