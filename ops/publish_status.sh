@@ -47,8 +47,8 @@ print(json.dumps({
 }, indent=2))
 PYEOF
 
-if ! git diff --quiet -- docs/status/latest.json; then
-  git add docs/status/latest.json
+git add docs/status/latest.json
+if ! git diff --cached --quiet -- docs/status/latest.json; then
   git -c user.name="astra-demo-vm" -c user.email="astra-demo-vm@localhost" commit -m "status: $(date -u +%Y-%m-%dT%H:%M:%SZ)" -q
   git push origin main -q
 fi
