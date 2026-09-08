@@ -1,14 +1,14 @@
 {
-  "generated_at_utc": "2026-09-08T19:57:43.165731+00:00",
-  "docker_ps": "astra-demo\tUp About an hour (healthy)\t2026-09-08 18:34:50 +0000 UTC",
+  "generated_at_utc": "2026-09-08T20:28:46.236564+00:00",
+  "docker_ps": "astra-demo\tUp 2 hours (healthy)\t2026-09-08 18:34:50 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "peak": "74944.44869563001",
       "halted": "false",
-      "last_closed": "\"2026-09-08 19:00:00+00:00\"",
-      "heartbeat": "\"2026-09-08 19:57:30.245076+00:00\""
+      "last_closed": "\"2026-09-08 20:00:00+00:00\"",
+      "heartbeat": "\"2026-09-08 20:28:34.128490+00:00\""
     },
     "events_by_kind": {},
     "events_total": 0,
@@ -20,5 +20,5 @@
     "pending": [],
     "algos": []
   },
-  "logs_tail": "2026-09-08 18:35:02,591 INFO Serving strategy v4_hourly from configs/selected.json"
+  "logs_tail": ""
 }
