@@ -1,16 +1,16 @@
 {
-  "generated_at_utc": "2026-09-09T01:12:51.422332+00:00",
-  "docker_ps": "astra-demo\tUp 3 hours (healthy)\t2026-09-08 22:16:07 +0000 UTC",
+  "generated_at_utc": "2026-09-09T17:22:24.702786+00:00",
+  "docker_ps": "astra-demo\tUp 2 minutes (healthy)\t2026-09-09 17:19:31 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
-      "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "inception_ms": "1788905850836",
       "inception_equity": "74944.44869563001",
+      "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "peak": "74944.44869563001",
       "halted": "false",
-      "last_closed": "\"2026-09-09 01:00:00+00:00\"",
-      "heartbeat": "\"2026-09-09 01:12:39.402272+00:00\""
+      "last_closed": "\"2026-09-09 17:00:00+00:00\"",
+      "heartbeat": "\"2026-09-09 17:22:15.929960+00:00\""
     },
     "events_by_kind": {},
     "events_total": 0,
@@ -32,9 +32,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 0.12175755787037038,
+    "period_days": 0.7950616319444445,
     "time_weighted_return_pct": 0.0,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": ""
+  "logs_tail": "2026-09-09 17:19:34,399 INFO Serving strategy v4_hourly from configs/selected.json"
 }
