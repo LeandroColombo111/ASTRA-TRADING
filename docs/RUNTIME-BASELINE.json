@@ -2,15 +2,15 @@
   "started_at_utc": "2026-09-08T18:35:01Z",
   "host": {
     "platform": "Google Cloud Compute Engine",
-    "project_id": "datasolutions-493815",
-    "zone": "us-central1-a",
-    "instance_name": "astra-demo",
+    "project_id": "[gcp-project-redacted]",
+    "zone": "[gcp-zone-redacted]",
+    "instance_name": "[gcp-instance-redacted]",
     "machine_type": "e2-micro",
     "tier": "GCP Always Free (e2-micro en region elegible + disco estandar <=30GB, sin IP estatica reservada)",
-    "ssh_check": "gcloud compute ssh astra-demo --project=datasolutions-493815 --zone=us-central1-a --tunnel-through-iap"
+    "ssh_check": "gcloud compute ssh <instance> --project=<project> --zone=<zone> --tunnel-through-iap"
   },
   "container": {
-    "name": "astra-demo",
+    "name": "[gcp-instance-redacted]",
     "id": "bec3f0ad5e6c44112566c6b3a2450bd7bd70b1f739bf603cce1ef51c31aa7870",
     "volume": "astra-trading_astra-state",
     "volume_mount": "/app/state"
@@ -44,7 +44,7 @@
     "orders_sent": 0,
     "live_enabled": false
   },
-  "check_command": "gcloud compute ssh astra-demo --project=datasolutions-493815 --zone=us-central1-a --tunnel-through-iap --command=\"sudo docker ps --filter name=astra-demo\"",
+  "check_command": "gcloud compute ssh <instance> --project=<project> --zone=<zone> --tunnel-through-iap --command=\"sudo docker ps --filter name=<instance>\"",
   "warning": "El servicio esta disenado para detenerse antes que operar a ciegas: el loop aborta tras 3 ciclos fallidos consecutivos y compose reintenta 3 veces. Puede quedar detenido sin aviso. Por eso hace falta el chequeo periodico con el comando de arriba. IMPORTANTE: no correr una segunda instancia (ni local ni en otra VM) contra la misma cuenta demo de OKX al mismo tiempo -- el lock de instancia unica (fcntl.flock) solo protege dos procesos que comparten el MISMO archivo de estado, no dos maquinas distintas con estados separados. Antes de levantar el bot en otro lado, parar esta instancia primero.",
   "previous_runs": [
     {
@@ -61,7 +61,7 @@
       "container_id": "2162bc1b6e7c3c86cee4cf09ee682523ffb831ff1a170516346d38c3f1f2eff5",
       "stopped_at_utc": "2026-09-08T18:41:00Z",
       "exit_code": null,
-      "reason": "Detenido manualmente (docker stop/rm) al migrar la instancia unica a la VM de GCP (datasolutions-493815/astra-demo), para evitar dos instancias corriendo en simultaneo contra la misma cuenta demo de OKX. Sin posicion abierta ni intent pendiente al momento de pararlo."
+      "reason": "Detenido manualmente (docker stop/rm) al migrar la instancia unica a la VM de GCP ([gcp-project-redacted]/[gcp-instance-redacted]), para evitar dos instancias corriendo en simultaneo contra la misma cuenta demo de OKX. Sin posicion abierta ni intent pendiente al momento de pararlo."
     }
   ]
 }
