@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-12T06:37:50.558161+00:00",
+  "generated_at_utc": "2026-09-12T07:08:09.179494+00:00",
   "docker_ps": "astra-demo\tUp 2 days (healthy)\t2026-09-09 17:19:31 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
@@ -9,8 +9,8 @@
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "peak": "74944.44869563001",
       "halted": "false",
-      "last_closed": "\"2026-09-12 06:00:00+00:00\"",
-      "heartbeat": "\"2026-09-12 06:37:41.757046+00:00\""
+      "last_closed": "\"2026-09-12 07:00:00+00:00\"",
+      "heartbeat": "\"2026-09-12 07:07:57.253801+00:00\""
     },
     "events_by_kind": {},
     "events_total": 0,
@@ -32,7 +32,7 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 3.3474450231481483,
+    "period_days": 3.3684912847222224,
     "time_weighted_return_pct": 0.0,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
