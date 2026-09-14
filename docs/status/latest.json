@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-09-14T16:53:03.495928+00:00",
-  "docker_ps": "astra-demo\tExited (1) About an hour ago\t2026-09-09 17:19:31 +0000 UTC",
+  "generated_at_utc": "2026-09-14T17:23:07.490421+00:00",
+  "docker_ps": "astra-demo\tExited (1) 2 hours ago\t2026-09-09 17:19:31 +0000 UTC",
   "health": "",
   "state": {},
   "okx": {},
   "performance": {},
-  "logs_tail": "2026-09-14 15:51:04,006 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-14 15:51:14,422 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-14 15:51:24,829 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\nExchangeError: OKX HTTP 503 on /api/v5/account/positions"
+  "logs_tail": ""
 }
