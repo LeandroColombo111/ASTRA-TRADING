@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-15T21:49:00.251541+00:00",
-  "docker_ps": "astra-demo\tUp About an hour (healthy)\t2026-09-15 20:31:13 +0000 UTC",
+  "generated_at_utc": "2026-09-15T22:19:08.103282+00:00",
+  "docker_ps": "astra-demo\tUp 2 hours (healthy)\t2026-09-15 20:31:13 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
@@ -11,8 +11,8 @@
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "peak": "74944.44869563001",
       "halted": "false",
-      "last_closed": "\"2026-09-15 21:00:00+00:00\"",
-      "heartbeat": "\"2026-09-15 21:48:48.729726+00:00\""
+      "last_closed": "\"2026-09-15 22:00:00+00:00\"",
+      "heartbeat": "\"2026-09-15 22:18:57.532630+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -70,9 +70,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 6.9801953125,
+    "period_days": 7.001110868055555,
     "time_weighted_return_pct": -0.1032051170429212,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-15 20:31:21,143 INFO Serving strategy v4_hourly from configs/selected.json"
+  "logs_tail": ""
 }
