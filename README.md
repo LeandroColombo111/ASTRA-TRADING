@@ -47,6 +47,7 @@ El servicio (`src/astra/service.py`) corre 24/7 en una VM de GCP (free tier), co
 - **Kill-switch de drawdown ajustado por depósitos** ([src/astra/accounting.py](src/astra/accounting.py)): un depósito no puede enmascarar una pérdida real inflando el pico de referencia.
 - **Guardas adicionales**: apalancamiento máximo 2x, detección de posiciones/órdenes no reconocidas, verificación de stop-loss confirmado en el exchange antes de operar, chequeo de antigüedad de cotización, detección de huecos en la caché de velas.
 - **Monitoreo automatizado**: un timer en la VM publica el estado a [docs/status/latest.json](docs/status/latest.json); una rutina en la nube lo audita periódicamente y deja registro en [docs/checks/](docs/checks/).
+- **Reinicio automático ante cortes transitorios**: el proceso corre bajo un servicio `systemd` (`Restart=on-failure`, backoff de 120s). Si el loop interno aborta por 3 fallos seguidos (por ejemplo, un 5xx transitorio de OKX), se reinicia solo en vez de quedar caído hasta que alguien lo note manualmente. No relaja ninguna guarda: si el problema es real (no transitorio), simplemente vuelve a frenarse cada vez, de forma visible.
 
 Línea base del despliegue actual: [docs/RUNTIME-BASELINE.json](docs/RUNTIME-BASELINE.json).
 
