@@ -193,7 +193,7 @@ class Service:
                 raise ExchangeError('Unowned position found: reconcile manually before running')
             pos=positions[0];side=1 if float(pos['pos'])>0 else -1
             protection=[a for a in algos if a['instId']==INSTRUMENT and a.get('algoClOrdId')==owned['client_id']+'s']
-            if not protection or any(not a.get('slTriggerPx') for a in protection):
+            if not protection or any(not a.get('slTriggerPx') or not a.get('tpTriggerPx') for a in protection):
                 self.s.save('halted',True)
                 self.close_position(pos,'missing_protection',now)
                 raise ExchangeError('Missing confirmed protection: close requested, service halted')
