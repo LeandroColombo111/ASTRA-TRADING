@@ -1,0 +1,68 @@
+{
+  "symbol": "SOL",
+  "data_source": "OKX native (public API), not Binance proxy",
+  "window": "2022-01-17..2026-09-01",
+  "params_source": "configs/selected.json (frozen, unmodified)",
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "full_period_maker": {
+    "sharpe": 0.24259157460357939,
+    "return": 0.13064566219000695,
+    "max_drawdown": 0.25009041404106624,
+    "trades": 114,
+    "long_trades": 68,
+    "short_trades": 46,
+    "win_rate": 0.32456140350877194,
+    "days": 1688
+  },
+  "annualised_return": 0.02690652264318527,
+  "calmar": 0.10758718100553454,
+  "monte_carlo_7d": {
+    "simulations": 2000,
+    "block_days": 7,
+    "seed": 42,
+    "sharpe_p05": -0.5321816578807881,
+    "sharpe_p50": 0.22803165766594352,
+    "sharpe_p95": 0.9276316393244672,
+    "drawdown_p95": 0.45638793751217294,
+    "probability_loss": 0.3755,
+    "probability_drawdown_over_25pct": 0.568,
+    "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+  },
+  "taker_stress": {
+    "sharpe": 0.21703792967561605,
+    "return": 0.10114931589152021,
+    "max_drawdown": 0.2503672500487326,
+    "trades": 80,
+    "long_trades": 48,
+    "short_trades": 32,
+    "win_rate": 0.325,
+    "days": 1688
+  },
+  "halted": true,
+  "attribution": {
+    "trades": 114,
+    "net_pnl_usdt": 1306.456621900072,
+    "estimated_costs_usdt": 240.20640494000003,
+    "gross_before_costs_usdt": 1546.663026840072,
+    "cost_ratio": 0.1553062307506998,
+    "mean_effective_risk_fraction": 0.01988242551719581,
+    "max_effective_risk_fraction": 0.019999994736389748,
+    "long_trades": 68,
+    "short_trades": 46,
+    "win_rate": 0.32456140350877194,
+    "mean_days_held": 1.5946637426900585,
+    "max_days_held": 13.5
+  },
+  "note": "No DSR: same fixed hypothesis as the Binance-proxy research, re-evaluated on real OKX data."
+}
