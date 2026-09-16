@@ -1,0 +1,68 @@
+{
+  "symbol": "ETH",
+  "data_source": "OKX native (public API), not Binance proxy",
+  "window": "2022-01-17..2026-09-01",
+  "params_source": "configs/selected.json (frozen, unmodified)",
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "full_period_maker": {
+    "sharpe": 0.695555091343569,
+    "return": 0.5417234714580803,
+    "max_drawdown": 0.1614754027173444,
+    "trades": 112,
+    "long_trades": 63,
+    "short_trades": 49,
+    "win_rate": 0.375,
+    "days": 1688
+  },
+  "annualised_return": 0.09812824164466583,
+  "calmar": 0.6076977669251273,
+  "monte_carlo_7d": {
+    "simulations": 2000,
+    "block_days": 7,
+    "seed": 42,
+    "sharpe_p05": -0.08815907433745307,
+    "sharpe_p50": 0.6837396403195898,
+    "sharpe_p95": 1.4096407062905585,
+    "drawdown_p95": 0.34763867542927884,
+    "probability_loss": 0.095,
+    "probability_drawdown_over_25pct": 0.254,
+    "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+  },
+  "taker_stress": {
+    "sharpe": 0.6026859687960842,
+    "return": 0.4325176627425722,
+    "max_drawdown": 0.16168715647644138,
+    "trades": 112,
+    "long_trades": 63,
+    "short_trades": 49,
+    "win_rate": 0.375,
+    "days": 1688
+  },
+  "halted": false,
+  "attribution": {
+    "trades": 112,
+    "net_pnl_usdt": 5417.234714580791,
+    "estimated_costs_usdt": 334.088241468,
+    "gross_before_costs_usdt": 5751.322956048791,
+    "cost_ratio": 0.05808893780110751,
+    "mean_effective_risk_fraction": 0.019882536624566526,
+    "max_effective_risk_fraction": 0.01999991713311214,
+    "long_trades": 63,
+    "short_trades": 49,
+    "win_rate": 0.375,
+    "mean_days_held": 2.0494791666666665,
+    "max_days_held": 20.0
+  },
+  "note": "No DSR: same fixed hypothesis as the Binance-proxy research, re-evaluated on real OKX data."
+}

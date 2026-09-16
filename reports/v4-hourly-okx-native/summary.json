@@ -1,0 +1,125 @@
+{
+  "window": "2022-01-17..2026-09-01",
+  "btc_binance_proxy_reference": {
+    "sharpe_maker": 0.8749847831238833,
+    "sharpe_taker": 0.7385202598236399,
+    "annualised_return": 0.13904571054253867,
+    "max_drawdown": 0.20952300490132447,
+    "calmar": 0.6636298033622737,
+    "trades": 120,
+    "deflated_sharpe": 0.7174140641527482,
+    "monte_carlo_p05_7d": 0.026392505079278317
+  },
+  "btc_okx_native": {
+    "full_period_maker": {
+      "sharpe": 1.0671689109085853,
+      "return": 1.0973459109265424,
+      "max_drawdown": 0.19084767886838228,
+      "trades": 118,
+      "long_trades": 74,
+      "short_trades": 44,
+      "win_rate": 0.4067796610169492,
+      "days": 1688
+    },
+    "annualised_return": 0.1736954862184863,
+    "calmar": 0.9101262705860576,
+    "taker_stress": {
+      "sharpe": 0.7769801917383056,
+      "return": 0.6574932195432699,
+      "max_drawdown": 0.19992765590924266,
+      "trades": 121,
+      "long_trades": 74,
+      "short_trades": 47,
+      "win_rate": 0.3884297520661157,
+      "days": 1688
+    },
+    "monte_carlo_7d": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 42,
+      "sharpe_p05": 0.19691240064950546,
+      "sharpe_p50": 1.0450287973630659,
+      "sharpe_p95": 1.8043063480277186,
+      "drawdown_p95": 0.3339505857994831,
+      "probability_loss": 0.03,
+      "probability_drawdown_over_25pct": 0.216,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "halted": false
+  },
+  "eth_okx_native": {
+    "full_period_maker": {
+      "sharpe": 0.695555091343569,
+      "return": 0.5417234714580803,
+      "max_drawdown": 0.1614754027173444,
+      "trades": 112,
+      "long_trades": 63,
+      "short_trades": 49,
+      "win_rate": 0.375,
+      "days": 1688
+    },
+    "annualised_return": 0.09812824164466583,
+    "calmar": 0.6076977669251273,
+    "taker_stress": {
+      "sharpe": 0.6026859687960842,
+      "return": 0.4325176627425722,
+      "max_drawdown": 0.16168715647644138,
+      "trades": 112,
+      "long_trades": 63,
+      "short_trades": 49,
+      "win_rate": 0.375,
+      "days": 1688
+    },
+    "monte_carlo_7d": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 42,
+      "sharpe_p05": -0.08815907433745307,
+      "sharpe_p50": 0.6837396403195898,
+      "sharpe_p95": 1.4096407062905585,
+      "drawdown_p95": 0.34763867542927884,
+      "probability_loss": 0.095,
+      "probability_drawdown_over_25pct": 0.254,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "halted": false
+  },
+  "sol_okx_native": {
+    "full_period_maker": {
+      "sharpe": 0.24259157460357939,
+      "return": 0.13064566219000695,
+      "max_drawdown": 0.25009041404106624,
+      "trades": 114,
+      "long_trades": 68,
+      "short_trades": 46,
+      "win_rate": 0.32456140350877194,
+      "days": 1688
+    },
+    "annualised_return": 0.02690652264318527,
+    "calmar": 0.10758718100553454,
+    "taker_stress": {
+      "sharpe": 0.21703792967561605,
+      "return": 0.10114931589152021,
+      "max_drawdown": 0.2503672500487326,
+      "trades": 80,
+      "long_trades": 48,
+      "short_trades": 32,
+      "win_rate": 0.325,
+      "days": 1688
+    },
+    "monte_carlo_7d": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 42,
+      "sharpe_p05": -0.5321816578807881,
+      "sharpe_p50": 0.22803165766594352,
+      "sharpe_p95": 0.9276316393244672,
+      "drawdown_p95": 0.45638793751217294,
+      "probability_loss": 0.3755,
+      "probability_drawdown_over_25pct": 0.568,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "halted": true
+  },
+  "disclosure": "Real OKX data (candles + funding archive), frozen BTC-selected params, unmodified. Window starts 2022-01-17 (earliest funding archive day) instead of 2021-01-01: this is a real data-availability limit, not a choice, and it shortens the window versus the Binance-proxy research -- results are not directly comparable period-for-period. Still not an independent holdout: same calendar period already used to design the strategy, just the correct data source instead of the Binance stand-in."
+}
