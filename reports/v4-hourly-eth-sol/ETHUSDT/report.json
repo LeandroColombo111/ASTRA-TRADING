@@ -1,0 +1,66 @@
+{
+  "symbol": "ETHUSDT",
+  "params_source": "configs/selected.json (frozen, unmodified)",
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "full_period_maker": {
+    "sharpe": 0.5334698971240895,
+    "return": 0.5146789253710173,
+    "max_drawdown": 0.16159381860461164,
+    "trades": 144,
+    "long_trades": 88,
+    "short_trades": 56,
+    "win_rate": 0.375,
+    "days": 2069
+  },
+  "annualised_return": 0.07599691453673452,
+  "calmar": 0.47029592587748703,
+  "monte_carlo_7d": {
+    "simulations": 2000,
+    "block_days": 7,
+    "seed": 42,
+    "sharpe_p05": -0.15205343054046483,
+    "sharpe_p50": 0.5271661006777926,
+    "sharpe_p95": 1.1472350307629413,
+    "drawdown_p95": 0.3989260447362725,
+    "probability_loss": 0.132,
+    "probability_drawdown_over_25pct": 0.432,
+    "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+  },
+  "taker_stress": {
+    "sharpe": 0.44884036646952863,
+    "return": 0.3942771741887807,
+    "max_drawdown": 0.16172239451868675,
+    "trades": 142,
+    "long_trades": 87,
+    "short_trades": 55,
+    "win_rate": 0.3732394366197183,
+    "days": 2069
+  },
+  "halted": false,
+  "attribution": {
+    "trades": 144,
+    "net_pnl_usdt": 5146.78925371016,
+    "estimated_costs_usdt": 396.13223995600003,
+    "gross_before_costs_usdt": 5542.92149366616,
+    "cost_ratio": 0.07146632699175991,
+    "mean_effective_risk_fraction": 0.019893686702659136,
+    "max_effective_risk_fraction": 0.019999943926760914,
+    "long_trades": 88,
+    "short_trades": 56,
+    "win_rate": 0.375,
+    "mean_days_held": 2.099826388888889,
+    "max_days_held": 20.0
+  },
+  "note": "No DSR: this is one fixed hypothesis carried over from BTC, not a new search."
+}
