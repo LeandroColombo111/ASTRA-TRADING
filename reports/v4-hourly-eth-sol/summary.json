@@ -1,0 +1,87 @@
+{
+  "btc_reference": {
+    "sharpe_maker": 0.8749847831238833,
+    "sharpe_taker": 0.7385202598236399,
+    "annualised_return": 0.13904571054253867,
+    "max_drawdown": 0.20952300490132447,
+    "calmar": 0.6636298033622737,
+    "trades": 120,
+    "deflated_sharpe": 0.7174140641527482,
+    "monte_carlo_p05_7d": 0.026392505079278317
+  },
+  "eth": {
+    "full_period_maker": {
+      "sharpe": 0.5334698971240895,
+      "return": 0.5146789253710173,
+      "max_drawdown": 0.16159381860461164,
+      "trades": 144,
+      "long_trades": 88,
+      "short_trades": 56,
+      "win_rate": 0.375,
+      "days": 2069
+    },
+    "annualised_return": 0.07599691453673452,
+    "calmar": 0.47029592587748703,
+    "taker_stress": {
+      "sharpe": 0.44884036646952863,
+      "return": 0.3942771741887807,
+      "max_drawdown": 0.16172239451868675,
+      "trades": 142,
+      "long_trades": 87,
+      "short_trades": 55,
+      "win_rate": 0.3732394366197183,
+      "days": 2069
+    },
+    "monte_carlo_7d": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 42,
+      "sharpe_p05": -0.15205343054046483,
+      "sharpe_p50": 0.5271661006777926,
+      "sharpe_p95": 1.1472350307629413,
+      "drawdown_p95": 0.3989260447362725,
+      "probability_loss": 0.132,
+      "probability_drawdown_over_25pct": 0.432,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "halted": false
+  },
+  "sol": {
+    "full_period_maker": {
+      "sharpe": 0.44037519031527733,
+      "return": 0.3025325056733177,
+      "max_drawdown": 0.23664787333523252,
+      "trades": 115,
+      "long_trades": 72,
+      "short_trades": 43,
+      "win_rate": 0.3391304347826087,
+      "days": 1584
+    },
+    "annualised_return": 0.06279780570953242,
+    "calmar": 0.2653639131612808,
+    "taker_stress": {
+      "sharpe": 0.3642302759256241,
+      "return": 0.22359585414711924,
+      "max_drawdown": 0.24507354916643598,
+      "trades": 117,
+      "long_trades": 73,
+      "short_trades": 44,
+      "win_rate": 0.3333333333333333,
+      "days": 1584
+    },
+    "monte_carlo_7d": {
+      "simulations": 2000,
+      "block_days": 7,
+      "seed": 42,
+      "sharpe_p05": -0.3876645111024766,
+      "sharpe_p50": 0.41212301231366166,
+      "sharpe_p95": 1.1473379758730478,
+      "drawdown_p95": 0.4220061861467443,
+      "probability_loss": 0.2305,
+      "probability_drawdown_over_25pct": 0.495,
+      "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+    },
+    "halted": false
+  },
+  "disclosure": "Frozen BTC params applied unmodified to ETH and SOL. No DSR: not a search. Same Binance-as-OKX-proxy caveat as the BTC research applies."
+}
