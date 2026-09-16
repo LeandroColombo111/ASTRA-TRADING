@@ -56,8 +56,39 @@ print(json.dumps({
 }, indent=2))
 PYEOF
 
-git add docs/status/latest.json
-if ! git diff --cached --quiet -- docs/status/latest.json; then
+# Commit only if something other than the timestamp/log tail actually changed.
+# Those two fields differ on every single run by construction (a fresh
+# timestamp, a shifting log window), so comparing the raw file would commit
+# every 30 minutes forever even when the bot's state is completely static.
+CHANGED=$(python3 - <<'PYEOF'
+import json, subprocess, sys
+
+def normalize(raw):
+    try:
+        data = json.loads(raw)
+    except (json.JSONDecodeError, TypeError):
+        return raw
+    data.pop("generated_at_utc", None)
+    data.pop("logs_tail", None)
+    return json.dumps(data, sort_keys=True)
+
+try:
+    prev_raw = subprocess.run(
+        ["git", "show", "HEAD:docs/status/latest.json"],
+        capture_output=True, text=True, check=True,
+    ).stdout
+except subprocess.CalledProcessError:
+    prev_raw = ""
+
+with open("docs/status/latest.json") as f:
+    new_raw = f.read()
+
+print("1" if normalize(prev_raw) != normalize(new_raw) else "0")
+PYEOF
+)
+
+if [ "$CHANGED" = "1" ]; then
+  git add docs/status/latest.json
   git -c user.name="astra-demo-vm" -c user.email="astra-demo-vm@localhost" commit -m "status: $(date -u +%Y-%m-%dT%H:%M:%SZ)" -q
   for attempt in 1 2 3; do
     if git push origin main -q; then
