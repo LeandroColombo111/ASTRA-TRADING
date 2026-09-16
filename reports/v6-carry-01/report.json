@@ -1,0 +1,62 @@
+{
+  "params": {
+    "min_funding_apr": 0.1,
+    "fee_bps_per_leg": 5.0,
+    "smoothing_events": 21
+  },
+  "window": "2022-01-17..2026-09-01",
+  "results": {
+    "taker": {
+      "sharpe": 2.410361853247988,
+      "total_return": 0.07303815846290518,
+      "annualised_return": 0.015350684942230464,
+      "max_drawdown": 0.02277402228206593,
+      "calmar": 0.6740436428886262,
+      "direction_flips": 27,
+      "days": 1689,
+      "monte_carlo_7d": {
+        "simulations": 2000,
+        "block_days": 7,
+        "seed": 7,
+        "sharpe_p05": 1.0755201065714488,
+        "sharpe_p50": 2.4161112859353038,
+        "sharpe_p95": 3.6215233694210296,
+        "drawdown_p95": 0.016981491781399693,
+        "probability_loss": 0.0015,
+        "probability_drawdown_over_25pct": 0.0,
+        "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+      }
+    },
+    "maker": {
+      "sharpe": 4.162444309067088,
+      "total_return": 0.10839910028757793,
+      "annualised_return": 0.022489905294754475,
+      "max_drawdown": 0.008552160705115996,
+      "calmar": 2.629733709435648,
+      "direction_flips": 27,
+      "days": 1689,
+      "monte_carlo_7d": {
+        "simulations": 2000,
+        "block_days": 7,
+        "seed": 7,
+        "sharpe_p05": 3.1166731785731385,
+        "sharpe_p50": 4.1754261920267535,
+        "sharpe_p95": 5.089083055262254,
+        "drawdown_p95": 0.0051249795816343865,
+        "probability_loss": 0.0,
+        "probability_drawdown_over_25pct": 0.0,
+        "limitation": "Conditional on observed daily returns, not proof against overfitting; paths do not re-execute strategy or drawdown halt."
+      }
+    }
+  },
+  "correlation_with_existing_sleeves": {
+    "carry_vs_daily_trend": 0.15235694538454914,
+    "carry_vs_hourly_trend": 0.0028529226525675472
+  },
+  "note": "No DSR: zero tuned parameters, nothing searched.",
+  "limitations": [
+    "Hourly mark-to-market approximates a continuously hedged book; not exact.",
+    "No lot-size/minimum-notional mismatch between spot and perp legs modelled.",
+    "Signal uses the previous funding period only (fully causal); OKX publishes a predicted next-period rate this backtest ignores, so live performance could be better, not just worse, if that prediction is used instead."
+  ]
+}
