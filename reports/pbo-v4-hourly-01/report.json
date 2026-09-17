@@ -1,0 +1,12 @@
+{
+  "pbo": 0.3121989121989122,
+  "n_combinations": 12870,
+  "logit_mean": 0.6012697505859467,
+  "logit_median": 0.6443570163905131,
+  "logit_std": 1.2693094548412807,
+  "blocks": 16,
+  "block_size_days": 104,
+  "configurations": 60,
+  "data_days": 1669,
+  "source_run": "reports/v4-hourly-01"
+}
