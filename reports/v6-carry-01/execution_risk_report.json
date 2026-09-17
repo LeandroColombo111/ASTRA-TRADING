@@ -1,0 +1,27 @@
+{
+  "baseline_no_execution_risk": {
+    "sharpe": 2.4103618532480007,
+    "total_return": 0.07303815846290518,
+    "max_drawdown": 0.02277402228206593
+  },
+  "basis_change_stats_bps": {
+    "std": 1.4875482912403803,
+    "worst_abs": 44.093462614668525
+  },
+  "flips_modelled": 27,
+  "simulations": 2000,
+  "full_distribution": {
+    "total_return_p05": 0.06927106831118529,
+    "total_return_p50": 0.0701886538255524,
+    "total_return_p95": 0.0709357189602084,
+    "total_return_mean": 0.07013891579562577,
+    "probability_return_turns_negative": 0.0
+  },
+  "stress_tail_5pct": {
+    "total_return_p05": 0.0602320746630132,
+    "total_return_p50": 0.06235198796570729,
+    "total_return_p95": 0.06329248571680637,
+    "total_return_mean": 0.06215261963962628,
+    "probability_return_turns_negative": 0.0
+  }
+}

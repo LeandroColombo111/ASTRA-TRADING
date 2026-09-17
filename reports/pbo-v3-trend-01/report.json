@@ -1,0 +1,12 @@
+{
+  "pbo": 0.4114996114996115,
+  "n_combinations": 12870,
+  "logit_mean": 0.16944855562300634,
+  "logit_median": 0.29725152346793154,
+  "logit_std": 1.631899224624974,
+  "blocks": 16,
+  "block_size_days": 104,
+  "configurations": 60,
+  "data_days": 1669,
+  "source_run": "reports/v3-trend-01"
+}
