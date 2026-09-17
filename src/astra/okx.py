@@ -156,11 +156,23 @@ class OKX:
         if ids:
             return self.request('POST','/api/v5/trade/cancel-algos',body=[{'instId':INSTRUMENT,'algoId':x} for x in ids],private=True)
 
+    def cancel_order(self,client_id):
+        if not self.demo:
+            raise ExchangeError('Real execution disabled')
+        return self.request('POST','/api/v5/trade/cancel-order',body={'instId':INSTRUMENT,'clOrdId':client_id},private=True)
 
-def entry_plan(meta,side,price,atr,p,risk,equity,client_id):
+
+def entry_plan(meta,side,price,atr,p,risk,equity,client_id,maker_price=None):
+    """maker_price, when given, requests a post-only (maker) entry resting at
+    that price (the current best bid for a long, best ask for a short)
+    instead of a market order. Sizing, stop and target still use `price` --
+    the taker-equivalent reference price -- unchanged, since the risk per
+    trade should not depend on which execution style is used."""
     from .engine import size
     if side not in (-1,1) or not atr>0 or not price>0:
         raise ValueError('Invalid signal')
+    if maker_price is not None and not maker_price>0:
+        raise ValueError('Invalid maker price')
     # Reserve adverse fill/slippage in sizing; round stops toward entry.
     expected=price*(1+side*risk.slippage_bps/10000)
     distance=atr*p.stop_atr
@@ -173,4 +185,8 @@ def entry_plan(meta,side,price,atr,p,risk,equity,client_id):
     contracts=rounded(Decimal(str(base_qty))/multiplier,meta['lotSz'])
     if Decimal(contracts)<Decimal(meta['minSz']):
         raise ValueError('Position smaller than OKX minimum')
-    return {'instId':INSTRUMENT,'tdMode':'isolated','posSide':'net','clOrdId':client_id,'side':'buy' if side==1 else 'sell','ordType':'market','sz':contracts,'attachAlgoOrds':[{'attachAlgoClOrdId':client_id+'s','slTriggerPx':stop,'slOrdPx':'-1','slTriggerPxType':'last','tpTriggerPx':target,'tpOrdPx':'-1','tpTriggerPxType':'last'}]}
+    body={'instId':INSTRUMENT,'tdMode':'isolated','posSide':'net','clOrdId':client_id,'side':'buy' if side==1 else 'sell','ordType':'market','sz':contracts,'attachAlgoOrds':[{'attachAlgoClOrdId':client_id+'s','slTriggerPx':stop,'slOrdPx':'-1','slTriggerPxType':'last','tpTriggerPx':target,'tpOrdPx':'-1','tpTriggerPxType':'last'}]}
+    if maker_price is not None:
+        body['ordType']='post_only'
+        body['px']=str(maker_price)
+    return body
