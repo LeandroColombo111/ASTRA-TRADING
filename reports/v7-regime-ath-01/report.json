@@ -1,0 +1,40 @@
+{
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0
+  },
+  "note": "No DSR: same frozen entry params as v4_hourly, only exit logic changed.",
+  "results": {
+    "taker": {
+      "sharpe": 0.07079010811894704,
+      "annualised_return": -0.01054916499698022,
+      "max_drawdown": 0.41584773319765866,
+      "calmar": -0.02536785499793994,
+      "trades": 132,
+      "win_rate": 0.6439393939393939,
+      "monte_carlo_7d_p05": -0.7252545084057238
+    },
+    "maker": {
+      "sharpe": 0.30033398818259904,
+      "annualised_return": 0.04420953566034447,
+      "max_drawdown": 0.3610714098616533,
+      "calmar": 0.12243986771836524,
+      "trades": 129,
+      "win_rate": 0.6976744186046512,
+      "monte_carlo_7d_p05": -0.5216175410911795
+    }
+  },
+  "design": [
+    "Bull regime: longs only, no stop, hold to new all-time-high, no timeout.",
+    "Bear regime: shorts only, normal v4_hourly stop/target/trailing.",
+    "A long that is still open when regime flips to bear gets a stop/target attached from that point on and stays protected for the rest of that trade."
+  ]
+}
