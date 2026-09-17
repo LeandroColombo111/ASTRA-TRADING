@@ -147,6 +147,28 @@ class Service:
         self.x.place(body)
         self.reconcile_intent()
 
+    def submit_maker_entry(self,body,when,poll_attempts=6,poll_interval=2.0):
+        """Post-only entries do not resolve instantly like a market order, so
+        reconcile_intent() would see 'live' and halt thinking something went
+        wrong. Wait a bounded amount of time for a natural fill; if it's
+        still resting after that, cancel it ourselves so that by the time
+        reconcile_intent() looks, the order is already in a terminal state
+        it already knows how to handle -- that function is NOT modified."""
+        assert body['ordType']=='post_only'
+        intent={'clOrdId':body['clOrdId'],'kind':'entry','time':str(when),
+                'stop':body['attachAlgoOrds'][0]['slTriggerPx'],'target':body['attachAlgoOrds'][0]['tpTriggerPx']}
+        self.s.save('intent',intent) # fsync/commit BEFORE network write.
+        self.s.event('order_intent',body)
+        self.x.place(body)
+        for _ in range(poll_attempts):
+            if self.x.order(body['clOrdId'])['state']!='live':
+                break
+            time.sleep(poll_interval)
+        else:
+            self.x.cancel_order(body['clOrdId'])
+            self.s.event('maker_entry_unfilled',{'client_id':body['clOrdId']})
+        self.reconcile_intent()
+
     def close_position(self,pos,reason,when):
         cid='ast'+sha256((str(when)+reason+pos['posId']).encode()).hexdigest()[:24]
         self.submit({'instId':INSTRUMENT,'tdMode':'isolated','posSide':'net','side':'sell' if float(pos['pos'])>0 else 'buy','ordType':'market','sz':str(abs(float(pos['pos']))),'reduceOnly':True,'clOrdId':cid},'exit',when)
@@ -233,8 +255,14 @@ class Service:
                     self.s.event('skipped_gap',{'time':str(closed)})
                 else:
                     cid='ast'+sha256(str(closed).encode()).hexdigest()[:24]
-                    plan=entry_plan(self.meta,side,price,float(cur.atr),self.p,self.r,equity,cid)
-                    self.submit(plan,'entry',closed)
+                    # Post-only (maker) entry: rest at the current best bid
+                    # (long) / best ask (short) instead of crossing the
+                    # spread like a market order would. `price` above (the
+                    # opposite side of book) still sets sizing/stop/target,
+                    # so risk per trade is identical either way.
+                    maker_price=float(ticker['bidPx'] if side==1 else ticker['askPx'])
+                    plan=entry_plan(self.meta,side,price,float(cur.atr),self.p,self.r,equity,cid,maker_price=maker_price)
+                    self.submit_maker_entry(plan,closed)
         self.s.save('last_closed',str(closed));self.s.save('heartbeat',str(now))
 
 
