@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-17T12:54:52.938739+00:00",
+  "generated_at_utc": "2026-09-17T13:25:01.470895+00:00",
   "docker_ps": "astra-demo\tUp 5 hours (healthy)\t2026-09-17 08:01:50 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
@@ -11,8 +11,8 @@
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "peak": "74944.44869563001",
       "halted": "false",
-      "heartbeat": "\"2026-09-17 12:54:33.393916+00:00\"",
-      "last_closed": "\"2026-09-17 12:00:00+00:00\""
+      "last_closed": "\"2026-09-17 13:00:00+00:00\"",
+      "heartbeat": "\"2026-09-17 13:24:49.990154+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -70,9 +70,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 8.609277800925925,
+    "period_days": 8.630207905092593,
     "time_weighted_return_pct": -0.1032051170429212,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": ""
+  "logs_tail": "2026-09-17 13:15:17,957 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle"
 }
