@@ -1,0 +1,55 @@
+{
+  "strategy": "v4_hourly_macro",
+  "params": {
+    "fast": 40,
+    "slow": 300,
+    "breakout": 720,
+    "atr_period": 24,
+    "stop_atr": 3.0,
+    "trail_atr": 3.0,
+    "reward": 3.0,
+    "min_trend": 0.0,
+    "max_hours": 480,
+    "trail_start_r": 2.0,
+    "macro_fast": 20,
+    "macro_slow": 100
+  },
+  "risk": {
+    "capital": 10000.0,
+    "fraction": 0.02,
+    "fee_bps": 5.0,
+    "slippage_bps": 3.0,
+    "max_exposure": 1.0,
+    "max_drawdown": 0.25,
+    "quantity_step": 0.001,
+    "minimum_notional": 10.0
+  },
+  "point_8_preserved": true,
+  "signal_bar": "1h",
+  "anchor_bar": "4h",
+  "macro_bar": "1d",
+  "source_run": "reports/backtest2-v1",
+  "measured_research": {
+    "engine": "backtest2 (real funding, impact slippage, OKX fees, liquidation)",
+    "walk_forward": "365d train / 90d test / 90d step, 14 windows, params fixed (not re-optimized), macro warmup >= 150d",
+    "oos_sharpe_mean": 0.424,
+    "oos_sharpe_median": 0.843,
+    "windows_ge_1_5": "7/14",
+    "baseline_oos_sharpe_median": -0.372,
+    "buy_and_hold_oos_sharpe_median": 0.685,
+    "monte_carlo_prob_below_1_5": 0.962
+  },
+  "approved_for_live": false,
+  "intended_modes": [
+    "observe",
+    "demo"
+  ],
+  "disclosures": [
+    "Median out-of-sample Sharpe 0.84 is below the project's 1.5 gate; Monte Carlo puts the probability of falling below 1.5 at ~96%. Forward paper trading is the validation, not this backtest.",
+    "The daily macro pair (20/100) was chosen once with a stated reason and NOT re-optimized per window; re-optimizing it per window measured worse. Do not tune it per period.",
+    "SlippageModel impact_k=1.0 in the research is an uncalibrated placeholder; results carry that uncertainty.",
+    "Only 14 walk-forward windows; the estimate is noisy. The asymmetric long/short variant produced results identical to the symmetric filter.",
+    "The service needs >= 3600 hourly candles of history for this family (macro EMA convergence). It refuses to compute features with less rather than silently blocking every entry.",
+    "Serving this config changes the state fingerprint: run it with its own --state file (e.g. state/observe_macro.db), never on top of the state of configs/selected.json."
+  ]
+}
