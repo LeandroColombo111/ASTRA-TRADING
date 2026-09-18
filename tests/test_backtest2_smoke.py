@@ -4,6 +4,7 @@ These don't re-litigate that verification (see reports/backtest2-v1/); they
 just guard against the pieces silently breaking on the next change."""
 import json
 
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -21,9 +22,22 @@ from astra.backtest2.friction.liquidation import LiquidationModel, PositionTiers
 
 
 def load_bars(n=6000):
-    bars = pd.read_csv('data/BTC-USDT-SWAP-okx-1h.csv', index_col='time', parse_dates=True)
-    bars.index = pd.to_datetime(bars.index, utc=True)
-    return bars.iloc[:n]
+    """Deterministic synthetic hourly bars. These tests must not read
+    data/ (gitignored, absent on CI) -- a first version did and passed
+    locally while failing every CI run with FileNotFoundError. Same column
+    layout as the real OKX CSV: OHLC, volume, funding (zero except at the
+    three UTC settlement hours, like the real file)."""
+    rng = np.random.default_rng(7)
+    index = pd.date_range('2022-01-17', periods=n, freq='h', tz='UTC')
+    drift = np.sin(np.arange(n) / 900.) * 0.0004  # slow up/down regimes so both signal sides occur
+    close = 40000. * np.exp(np.cumsum(drift + rng.normal(0, 0.004, n)))
+    open_ = np.r_[close[0], close[:-1]]
+    spread = np.abs(rng.normal(0, 0.003, n)) * close
+    high = np.maximum(open_, close) + spread
+    low = np.minimum(open_, close) - spread
+    funding = np.where(index.hour.isin([0, 8, 16]), 0.0001, 0.)
+    return pd.DataFrame({'open': open_, 'high': high, 'low': low, 'close': close,
+                         'volume': rng.uniform(1e5, 2e5, n), 'funding': funding}, index=index)
 
 
 def make_sim(risk):
