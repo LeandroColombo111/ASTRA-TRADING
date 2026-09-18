@@ -31,13 +31,21 @@
   "source_run": "reports/backtest2-v1",
   "measured_research": {
     "engine": "backtest2 (real funding, impact slippage, OKX fees, liquidation)",
-    "walk_forward": "365d train / 90d test / 90d step, 14 windows, params fixed (not re-optimized), macro warmup >= 150d",
-    "oos_sharpe_mean": 0.424,
-    "oos_sharpe_median": 0.843,
+    "walk_forward": "365d train / 90d test / 90d step, 14 windows, params fixed, warmup 250d for every variant",
+    "oos_sharpe_mean": 0.42,
+    "oos_sharpe_median": 0.84,
     "windows_ge_1_5": "7/14",
-    "baseline_oos_sharpe_median": -0.372,
-    "buy_and_hold_oos_sharpe_median": 0.685,
-    "monte_carlo_prob_below_1_5": 0.962
+    "original_v4_hourly_same_windows": {
+      "oos_sharpe_mean": 0.52,
+      "oos_sharpe_median": 1.0,
+      "windows_ge_1_5": "5/14"
+    },
+    "buy_and_hold_same_windows": {
+      "oos_sharpe_mean": 0.77,
+      "oos_sharpe_median": 0.63,
+      "total_return": 1.834
+    },
+    "verdict": "macro filter does NOT beat the original when compared like-for-like; see reports/backtest2-v1/CORRECTION_2026-09-18.md"
   },
   "approved_for_live": false,
   "intended_modes": [
@@ -45,11 +53,10 @@
     "demo"
   ],
   "disclosures": [
-    "Median out-of-sample Sharpe 0.84 is below the project's 1.5 gate; Monte Carlo puts the probability of falling below 1.5 at ~96%. Forward paper trading is the validation, not this backtest.",
-    "The daily macro pair (20/100) was chosen once with a stated reason and NOT re-optimized per window; re-optimizing it per window measured worse. Do not tune it per period.",
-    "SlippageModel impact_k=1.0 in the research is an uncalibrated placeholder; results carry that uncertainty.",
-    "Only 14 walk-forward windows; the estimate is noisy. The asymmetric long/short variant produced results identical to the symmetric filter.",
-    "The service needs >= 3600 hourly candles of history for this family (macro EMA convergence). It refuses to compute features with less rather than silently blocking every entry.",
-    "Serving this config changes the state fingerprint: run it with its own --state file (e.g. state/observe_macro.db), never on top of the state of configs/selected.json."
+    "CORRECTION: earlier figures (baseline median -0.37, macro +0.84) compared a warmup-starved baseline with a warmed-up variant. Like-for-like, the macro filter is slightly WORSE than the original (median 0.84 vs 1.00). Do not activate this config expecting an improvement.",
+    "Neither this config nor the original beats buy-and-hold on total return (+183% over the same windows vs ~+55%).",
+    "SlippageModel impact_k=1.0 in the research is an uncalibrated placeholder.",
+    "The service needs >= 3600 hourly candles of history for this family and refuses to compute features with less.",
+    "Serving this config changes the state fingerprint: use its own --state file, never the state of configs/selected.json."
   ]
 }
