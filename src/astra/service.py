@@ -138,16 +138,19 @@ class Service:
             self.s.save('position',{'client_id':intent['clOrdId'],'opened':intent['time'],'stop':intent['stop'],'target':intent['target'],'entry':float(order['avgPx']),'initial_distance':abs(float(order['avgPx'])-float(intent['stop'])),'peak_favorable_r':0.})
         self.s.save('intent',None)
 
-    def submit(self,body,kind,when):
+    def submit(self,body,kind,when,reference_price=None):
         intent={'clOrdId':body['clOrdId'],'kind':kind,'time':str(when)}
         if kind=='entry':
             intent.update(stop=body['attachAlgoOrds'][0]['slTriggerPx'],target=body['attachAlgoOrds'][0]['tpTriggerPx'])
         self.s.save('intent',intent) # fsync/commit BEFORE network write.
-        self.s.event('order_intent',body)
+        # reference_price is logged only, never sent to OKX (body is placed unmodified):
+        # the price the decision was made against, so a fill can later be
+        # compared to it to calibrate real execution slippage/impact.
+        self.s.event('order_intent',{**body,'_reference_price':reference_price})
         self.x.place(body)
         self.reconcile_intent()
 
-    def submit_maker_entry(self,body,when,poll_attempts=6,poll_interval=2.0):
+    def submit_maker_entry(self,body,when,reference_price=None,poll_attempts=6,poll_interval=2.0):
         """Post-only entries do not resolve instantly like a market order, so
         reconcile_intent() would see 'live' and halt thinking something went
         wrong. Wait a bounded amount of time for a natural fill; if it's
@@ -158,7 +161,7 @@ class Service:
         intent={'clOrdId':body['clOrdId'],'kind':'entry','time':str(when),
                 'stop':body['attachAlgoOrds'][0]['slTriggerPx'],'target':body['attachAlgoOrds'][0]['tpTriggerPx']}
         self.s.save('intent',intent) # fsync/commit BEFORE network write.
-        self.s.event('order_intent',body)
+        self.s.event('order_intent',{**body,'_reference_price':reference_price})
         self.x.place(body)
         for _ in range(poll_attempts):
             if self.x.order(body['clOrdId'])['state']!='live':
@@ -169,9 +172,9 @@ class Service:
             self.s.event('maker_entry_unfilled',{'client_id':body['clOrdId']})
         self.reconcile_intent()
 
-    def close_position(self,pos,reason,when):
+    def close_position(self,pos,reason,when,reference_price=None):
         cid='ast'+sha256((str(when)+reason+pos['posId']).encode()).hexdigest()[:24]
-        self.submit({'instId':INSTRUMENT,'tdMode':'isolated','posSide':'net','side':'sell' if float(pos['pos'])>0 else 'buy','ordType':'market','sz':str(abs(float(pos['pos']))),'reduceOnly':True,'clOrdId':cid},'exit',when)
+        self.submit({'instId':INSTRUMENT,'tdMode':'isolated','posSide':'net','side':'sell' if float(pos['pos'])>0 else 'buy','ordType':'market','sz':str(abs(float(pos['pos']))),'reduceOnly':True,'clOrdId':cid},'exit',when,reference_price=reference_price)
         self.s.event('exit_reason',{'reason':reason})
         # Keep exchange protection in place until position is confirmed flat.
 
@@ -231,7 +234,7 @@ class Service:
                 trail=(float(bars.close.iloc[-1])-side*float(cur.atr)*self.p.trail_atr) if owned['peak_favorable_r']>=self.p.trail_start_r else float(owned['stop'])
                 stop=max(float(owned['stop']),trail) if side==1 else min(float(owned['stop']),trail)
                 if (side==1 and price<=stop) or (side==-1 and price>=stop):
-                    self.close_position(pos,'trailing_stop',closed)
+                    self.close_position(pos,'trailing_stop',closed,reference_price=price)
                 elif stop!=float(owned['stop']):
                     newstop=rounded(stop,self.meta['tickSz'],up=side==1)
                     for a in protection:self.x.amend_stop(a['algoId'],newstop)
@@ -262,7 +265,7 @@ class Service:
                     # so risk per trade is identical either way.
                     maker_price=float(ticker['bidPx'] if side==1 else ticker['askPx'])
                     plan=entry_plan(self.meta,side,price,float(cur.atr),self.p,self.r,equity,cid,maker_price=maker_price)
-                    self.submit_maker_entry(plan,closed)
+                    self.submit_maker_entry(plan,closed,reference_price=price)
         self.s.save('last_closed',str(closed));self.s.save('heartbeat',str(now))
 
 

@@ -1,0 +1,94 @@
+{
+  "walkforward_windows": [
+    {
+      "label": "baseline_v4_hourly",
+      "windows": 14,
+      "oos_sharpe_mean": -0.801409020200171,
+      "oos_sharpe_median": -0.3724370310754661,
+      "windows_ge_1_5": 3,
+      "windows_total": 14,
+      "corr_is_oos": 0.01951368080241994,
+      "buy_and_hold_sharpe_mean": 0.8492242017993422,
+      "buy_and_hold_sharpe_median": 0.6852104330579619,
+      "beats_buy_and_hold_mean": false
+    },
+    {
+      "label": "symmetric_macro_filter",
+      "windows": 14,
+      "oos_sharpe_mean": 0.4237286101076635,
+      "oos_sharpe_median": 0.8431989003841757,
+      "windows_ge_1_5": 7,
+      "windows_total": 14,
+      "corr_is_oos": -0.3333078487434519,
+      "buy_and_hold_sharpe_mean": 0.8492242017993422,
+      "buy_and_hold_sharpe_median": 0.6852104330579619,
+      "beats_buy_and_hold_mean": false
+    },
+    {
+      "label": "asymmetric_macro_filter",
+      "windows": 14,
+      "oos_sharpe_mean": 0.4237286101076635,
+      "oos_sharpe_median": 0.8431989003841757,
+      "windows_ge_1_5": 7,
+      "windows_total": 14,
+      "corr_is_oos": -0.3336621947729164,
+      "buy_and_hold_sharpe_mean": 0.8492242017993422,
+      "buy_and_hold_sharpe_median": 0.6852104330579619,
+      "beats_buy_and_hold_mean": false
+    }
+  ],
+  "full_period_monte_carlo": {
+    "baseline_v4_hourly": {
+      "n_trades": 118,
+      "bootstrap_block7": {
+        "p5": 0.2726811005410516,
+        "p50": 0.9725344146062955,
+        "p95": 1.5827114291263786,
+        "mean": 0.9588984721144707,
+        "prob_below_threshold": 0.9195
+      },
+      "shuffle_order": {
+        "p5": 0.9543313056545543,
+        "p50": 0.9900155889610858,
+        "p95": 1.0191483988727799,
+        "mean": 0.9885650817763999,
+        "prob_below_threshold": 1.0
+      }
+    },
+    "symmetric_macro_filter": {
+      "n_trades": 81,
+      "bootstrap_block7": {
+        "p5": -0.14720933294717709,
+        "p50": 0.7282961127044648,
+        "p95": 1.4560898309487025,
+        "mean": 0.6996703155399127,
+        "prob_below_threshold": 0.962
+      },
+      "shuffle_order": {
+        "p5": 0.6961041211541313,
+        "p50": 0.7240630546910096,
+        "p95": 0.7457695712890146,
+        "mean": 0.7228054947917533,
+        "prob_below_threshold": 1.0
+      }
+    },
+    "asymmetric_macro_filter": {
+      "n_trades": 81,
+      "bootstrap_block7": {
+        "p5": -0.14720933294717709,
+        "p50": 0.7282961127044648,
+        "p95": 1.4560898309487025,
+        "mean": 0.6996703155399127,
+        "prob_below_threshold": 0.962
+      },
+      "shuffle_order": {
+        "p5": 0.6961041211541313,
+        "p50": 0.7240630546910096,
+        "p95": 0.7457695712890146,
+        "mean": 0.7228054947917533,
+        "prob_below_threshold": 1.0
+      }
+    }
+  },
+  "note": "Every config here is FIXED (not re-optimized per window). No change to configs/selected.json or approved_for_live regardless of outcome."
+}
