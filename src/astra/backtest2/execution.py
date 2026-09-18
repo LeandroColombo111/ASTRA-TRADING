@@ -42,10 +42,21 @@ class ExecutionSimulator:
     fee_model: FeeModel
     liquidation_model: LiquidationModel
     leverage: float  # derived from Risk.max_exposure to match the existing sizing model, not a free parameter
+    target_exposure: float | None = None  # fixed notional/equity per entry; None keeps risk-based sizing
 
     def __post_init__(self):
         if self.leverage <= 0:
             raise ValueError("leverage must be positive")
+
+    def _quantity(self, cash, price, distance, risk, previous):
+        """Risk-based by default. A signal row may carry its own 'exposure' (fraction of equity, e.g. vol-targeted);
+        otherwise target_exposure applies. Always capped by risk.max_exposure and the exchange lot rules."""
+        exposure = previous.get("exposure", self.target_exposure)
+        if exposure is None or not np.isfinite(exposure):
+            return size(cash, price, distance, risk)
+        exposure = min(float(exposure), risk.max_exposure)
+        q = np.floor(cash * exposure / price / risk.quantity_step) * risk.quantity_step
+        return float(q) if q * price >= risk.minimum_notional else 0.
 
     def step(self, s: Account, timestamp: pd.Timestamp, bar: dict, previous: dict, current: dict,
               p, risk: Risk, force_close: bool = False) -> list[dict]:
@@ -102,7 +113,7 @@ class ExecutionSimulator:
             if direction and np.isfinite(atr_prev) and atr_prev > 0:
                 distance = atr_prev * p.stop_atr
                 if distance < o:
-                    quantity = size(s.cash, o, distance, risk)
+                    quantity = self._quantity(s.cash, o, distance, risk, previous)
                     if quantity:
                         s.entry_equity = s.cash  # flat here, so cash == equity: the "before this trade" baseline for Monte Carlo
                         fill = self.slippage_model.fill_price(
