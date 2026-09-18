@@ -160,9 +160,13 @@ class ExecutionSimulator:
     def run(self, bars: pd.DataFrame, signal: pd.DataFrame, p, risk: Risk,
             start=None, end=None) -> tuple[pd.Series, list[dict], dict]:
         """Same output shape as engine.backtest(): equity curve, trade list, final account state."""
+        def utc(t):
+            t = pd.Timestamp(t)
+            return t.tz_localize("UTC") if t.tzinfo is None else t
+
         positions = np.flatnonzero(
-            (bars.index >= (pd.Timestamp(start) if start is not None else bars.index[0]))
-            & (bars.index < (pd.Timestamp(end) if end is not None else bars.index[-1] + pd.Timedelta(hours=1)))
+            (bars.index >= (utc(start) if start is not None else bars.index[0]))
+            & (bars.index < (utc(end) if end is not None else bars.index[-1] + pd.Timedelta(hours=1)))
         )
         if len(positions) == 0:
             raise ValueError("Requested range has no bars")
