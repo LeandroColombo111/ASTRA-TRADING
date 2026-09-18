@@ -26,6 +26,9 @@ def strategy_for(name):
     if name == 'v4_hourly':
         from .v4_hourly import HourlyParams, features as hourly_features
         return HourlyParams, hourly_features
+    if name == 'v4_hourly_macro':
+        from .v4_macro import MacroHourlyParams, features as macro_features
+        return MacroHourlyParams, macro_features
     raise ValueError('Unknown strategy in config: ' + str(name))
 
 
@@ -39,6 +42,9 @@ def backtest_for(name):
     if name == 'v4_hourly':
         from .v4_hourly import backtest as hourly_backtest
         return hourly_backtest
+    if name == 'v4_hourly_macro':
+        from .v4_macro import backtest as macro_backtest
+        return macro_backtest
     raise ValueError('Unknown strategy in config: ' + str(name))
 from .okx import OKX, INSTRUMENT, ExchangeError, entry_plan, rounded
 
@@ -105,7 +111,7 @@ class Service:
         self.s.add_candles(self.x.candles())
         b=self.s.candles()
         # Warmup must cover the slowest anchor EMA and the breakout lookback.
-        minimum=max(1200,self.p.slow*4+400,getattr(self.p,'breakout',0)+400)
+        minimum=max(1200,self.p.slow*4+400,getattr(self.p,'breakout',0)+400,getattr(self.p,'min_history_hours',0))
         while len(b)<minimum:
             older=self.x.candles(int(b.index[0].timestamp()*1000))
             self.s.add_candles(older)

@@ -38,7 +38,7 @@ def test_config_loads_through_its_declared_strategy(path):
     # that the resolver hands back a matched set, verified below.
     assert params_class.__module__ == features_fn.__module__, (
         'Parameters and features must come from one family')
-    expected = {'v4_hourly': 'astra.v4_hourly'}.get(name, 'astra.engine')
+    expected = {'v4_hourly': 'astra.v4_hourly', 'v4_hourly_macro': 'astra.v4_macro'}.get(name, 'astra.engine')
     assert backtest.__module__ == expected, (
         'Config %s routes to backtest %s, expected %s' % (path.name, backtest.__module__, expected))
 
