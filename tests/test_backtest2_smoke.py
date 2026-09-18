@@ -125,3 +125,22 @@ def test_montecarlo_bootstrap_and_shuffle_summaries_are_well_formed():
         summary = mc.summarize(sharpes, threshold=1.5)
         assert summary['p5'] <= summary['p50'] <= summary['p95']
         assert 0. <= summary['prob_below_threshold'] <= 1.
+
+
+def test_exposure_mode_sizes_by_fixed_fraction_and_default_is_untouched():
+    from dataclasses import replace
+    from astra.backtest2.exposure_strategies import HoldParams, hold_signal
+    p, risk = load_config()
+    bars = load_bars()
+    # default (target_exposure=None, no 'exposure' column) must equal the risk-based result
+    sim = make_sim(risk)
+    sig = features(bars, p)
+    eq_default, _, _ = sim.run(bars, sig, p, risk)
+    eq_explicit_none, _, _ = replace(sim, target_exposure=None).run(bars, sig, p, risk)
+    assert eq_default.equals(eq_explicit_none)
+    # exposure mode: first entry notional is ~exposure * equity (lot rounding only)
+    hp = HoldParams(macro_fast=5, macro_slow=20, exposure=0.5)
+    equity, trades, _ = sim.run(bars, hold_signal(bars, hp), hp, risk)
+    assert trades, 'hold strategy should trade on synthetic data with slow regimes'
+    first = trades[0]
+    assert abs(first['quantity'] * first['entry'] / risk.capital - 0.5) < 0.02
