@@ -34,6 +34,24 @@ Por eso este camino sirve para descartar o confirmar problemas de ejecucion, no 
 - El freno de drawdown del 25% no se desactiva ni durante esta prueba.
 - Nadie retoca parametros mirando estos resultados. Si se quiere probar una idea nueva, se pre-registra aparte y corre en paralelo.
 
+## Meta de rendimiento (fijada antes de tener datos, 2026-09-19)
+
+Origen: tres mediciones del backtest (2022-2026 ~13% anual en BTC; 2020-2021 datos nuevos ~9% en BTC y ~-5% en ETH; validacion cruzada con purga 2020-2026
+~9% en BTC), con un valor central de 8% a 9% recortado por el sobreajuste visto en `reports/backtest2-v2/`. Es una meta de modelo, no una promesa.
+
+| Nivel | Criterio | Lectura |
+|---|---|---|
+| Meta | 6% a 8% anual sobre el capital asignado al bot, drawdown maximo < 20% | Lo que el modelo puede razonablemente sostener |
+| Piso de aceptable | Retorno > 0% con drawdown < 25% (el freno del sistema) | El bot no se rompe y respeta sus frenos |
+| Senal de alarma | Sharpe negativo con >= 30 trades | Se revisa la hipotesis completa; no se retocan parametros para arreglarlo |
+| No es una meta | Igualar al HODL (~42% anual en 2022-2026) | El bot compite en riesgo, no en retorno |
+
+- **Un ano no alcanza para juzgar la meta.** Con ~30 trades por ano, el resultado de un ano concreto puede caer entre 0% y 13% solo por azar. La meta se evalua
+  en el hito de 30 trades (~1 ano) y de forma definitiva en el de 60 trades.
+- El valor esperado del bot es de riesgo (drawdown chico: 5% a 20% en el historico contra 54% del HODL), no de retorno. Si se quiere mas retorno, la via es
+  la cartera hibrida con una tenencia, que sube retorno y riesgo a la vez: es una decision de asignacion, no de este bot.
+- Esta meta no aprueba nada por si sola: `approved_for_live` sigue exigiendo PSR >= 0.95 y drawdown en vivo dentro de lo modelado (tabla de hitos).
+
 ## Notas de infraestructura
 
 - 2026-09-18: VM pasada de e2-micro a e2-small (falta de memoria) e IP externa reservada. Sin cambios de estrategia.
