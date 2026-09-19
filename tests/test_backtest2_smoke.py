@@ -144,3 +144,21 @@ def test_exposure_mode_sizes_by_fixed_fraction_and_default_is_untouched():
     assert trades, 'hold strategy should trade on synthetic data with slow regimes'
     first = trades[0]
     assert abs(first['quantity'] * first['entry'] / risk.capital - 0.5) < 0.02
+
+
+def test_per_trade_time_barrier_overrides_and_default_is_untouched():
+    from astra.backtest2.exposure_strategies import DynTimeParams, dyntime_signal
+    p, risk = load_config()
+    bars = load_bars()
+    sim = make_sim(risk)
+    sig = features(bars, p)
+    eq_a, tr_a, _ = sim.run(bars, sig, p, risk)
+    sig_same = sig.copy()
+    sig_same['max_hours'] = float(p.max_hours)
+    eq_b, tr_b, _ = sim.run(bars, sig_same, p, risk)
+    assert eq_a.equals(eq_b), 'a max_hours column equal to the param must not change anything'
+    short = sig.copy()
+    short['max_hours'] = 6.
+    _, tr_c, _ = sim.run(bars, short, p, risk)
+    held = [(pd.Timestamp(t['exit_time']) - pd.Timestamp(t['entry_time'])) / pd.Timedelta(hours=1) for t in tr_c]
+    assert max(held) <= 8, 'a 6h per-trade limit must close every trade within a few hours'

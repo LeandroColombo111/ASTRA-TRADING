@@ -145,3 +145,54 @@ def blendvol_signal(bars, p):
     out = base.copy()
     out['atr'] = np.sqrt(p.blend_w * base['atr'] ** 2 + (1 - p.blend_w) * slow ** 2).to_numpy()
     return out
+
+
+@dataclass(frozen=True)
+class DynTimeParams(HourlyParams):
+    """Per-trade time barrier from the volatility regime: T = max_hours * ratio**(-gamma), clipped.
+    ratio = realised vol over short_days / over long_days at the signal bar. gamma>0: high-vol regimes get a SHORTER
+    limit and calm ones a longer one; gamma<0 is the opposite (control). Price barriers are unchanged."""
+    gamma: float = 1.0
+    short_days: int = 7
+    long_days: int = 60
+    min_hours: float = 240.
+    max_cap_hours: float = 960.
+
+
+def dyntime_signal(bars, p):
+    base = v4_features(bars, p)
+    r = np.log(bars.close).diff()
+    ratio = (r.rolling(p.short_days * 24).std() / r.rolling(p.long_days * 24).std()).to_numpy()
+    limit = np.where(np.isfinite(ratio) & (ratio > 0), p.max_hours * np.power(np.where(ratio > 0, ratio, 1.), -p.gamma), p.max_hours)
+    out = base.copy()
+    out['max_hours'] = np.clip(limit, p.min_hours, p.max_cap_hours)
+    return out
+
+
+@dataclass(frozen=True)
+class VolumeParams(HourlyParams):
+    """Gate v4_hourly ENTRIES with participation, using only the hourly `volume` column.
+    surge = mean volume over vol_short_hours / mean volume over vol_long_days; vol_ratio_min keeps only breakouts with above-normal
+    participation, vol_ratio_max the opposite (control). obv_days > 0 additionally requires on-balance volume (signed by the candle,
+    cumulative) above its EMA for longs and below it for shorts (accumulation / distribution)."""
+    vol_short_hours: int = 24
+    vol_long_days: int = 30
+    vol_ratio_min: float = 0.0
+    vol_ratio_max: float = 1e9
+    obv_days: int = 0
+
+
+def volume_signal(bars, p):
+    base = v4_features(bars, p)
+    v = bars.volume.astype(float)
+    ratio = (v.rolling(p.vol_short_hours).mean() / v.rolling(p.vol_long_days * 24).mean()).to_numpy()
+    ok = np.isfinite(ratio) & (ratio >= p.vol_ratio_min) & (ratio <= p.vol_ratio_max)
+    sig = base['signal'].to_numpy()
+    if p.obv_days > 0:
+        obv = (np.sign(bars.close - bars.open) * v).cumsum()
+        ema = obv.ewm(span=p.obv_days * 24, adjust=False, min_periods=p.obv_days * 24).mean()
+        acc = (obv - ema).to_numpy()
+        ok = ok & np.isfinite(acc) & (((sig == 1) & (acc > 0)) | ((sig == -1) & (acc < 0)))
+    out = base.copy()
+    out['signal'] = np.where(ok, sig, 0)
+    return out
