@@ -52,6 +52,7 @@ class NullLiquidityBook(LiquidityBook):
 class SlippageModel:
     liquidity_book: LiquidityBook
     impact_k: float  # calibrated from live paper-trading fill logs, not assumed
+    max_impact: float = 0.05  # guardrail: zero-volume bars (exchange outages) would otherwise give an unbounded price
 
     def __post_init__(self):
         if self.impact_k < 0:
@@ -96,5 +97,5 @@ class SlippageModel:
         if atr < 0 or not math.isfinite(atr):
             raise ValueError("atr must be a finite, non-negative number")
         relative_volatility = atr / mid_price
-        impact = self.impact_k * relative_volatility * math.sqrt(order_notional / bar_volume_notional)
+        impact = min(self.impact_k * relative_volatility * math.sqrt(order_notional / bar_volume_notional), self.max_impact)
         return mid_price * (1 + side * impact)
