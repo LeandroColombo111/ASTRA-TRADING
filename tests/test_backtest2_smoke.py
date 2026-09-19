@@ -162,3 +162,12 @@ def test_per_trade_time_barrier_overrides_and_default_is_untouched():
     _, tr_c, _ = sim.run(bars, short, p, risk)
     held = [(pd.Timestamp(t['exit_time']) - pd.Timestamp(t['entry_time'])) / pd.Timedelta(hours=1) for t in tr_c]
     assert max(held) <= 8, 'a 6h per-trade limit must close every trade within a few hours'
+
+
+def test_zero_volume_bar_cannot_produce_absurd_fill_price():
+    model = SlippageModel(NullLiquidityBook(), impact_k=1.0)
+    # execution.py floors an outage bar's volume to 1e-9; the fill must stay within the guardrail
+    px = model.fill_price(pd.Timestamp('2024-10-28 20:00', tz='UTC'), 69566.1, 1, 10000., 1e-9, 300.).price
+    assert 69566.1 < px <= 69566.1 * (1 + model.max_impact) + 1e-6
+    sell = model.fill_price(pd.Timestamp('2024-10-28 20:00', tz='UTC'), 69566.1, -1, 10000., 1e-9, 300.).price
+    assert sell >= 69566.1 * (1 - model.max_impact) - 1e-6
