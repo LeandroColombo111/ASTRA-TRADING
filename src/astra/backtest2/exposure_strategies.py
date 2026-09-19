@@ -105,3 +105,43 @@ def longonly_signal(bars, p):
     out['signal'] = np.where(base['signal'] == 1, 1, 0)
     out['anchor'] = np.where(base['anchor'] == 1, 1, 0)
     return out
+
+
+@dataclass(frozen=True)
+class VolRegimeParams(HourlyParams):
+    """Gate v4_hourly ENTRIES by the volatility regime: ratio = realised vol over `short_days` / over `long_days`.
+    ratio_min keeps only expanding-vol entries (persistence of high volatility); ratio_max keeps only calm ones.
+    Exits, stops and sizing are v4_hourly's."""
+    short_days: int = 7
+    long_days: int = 60
+    ratio_min: float = 0.0
+    ratio_max: float = 1e9
+
+
+def volregime_signal(bars, p):
+    base = v4_features(bars, p)
+    r = np.log(bars.close).diff()
+    ratio = (r.rolling(p.short_days * 24).std() / r.rolling(p.long_days * 24).std()).to_numpy()
+    ok = np.isfinite(ratio) & (ratio >= p.ratio_min) & (ratio <= p.ratio_max)
+    out = base.copy()
+    out['signal'] = np.where(ok, base['signal'].to_numpy(), 0)
+    return out
+
+
+@dataclass(frozen=True)
+class BlendVolParams(HourlyParams):
+    """Barriers scaled by a volatility FORECAST instead of the short ATR alone: a mix of the short estimate
+    (atr_period, captures clustering) and a slow one (atr_slow, the long-run level volatility reverts to),
+    like the GARCH(1,1) structure. blend_w is the weight on the SHORT estimate."""
+    atr_slow: int = 720
+    blend_w: float = 0.5
+
+
+def blendvol_signal(bars, p):
+    base = v4_features(bars, p)
+    prev = bars.close.shift(1)
+    tr = pd.concat([bars.high - bars.low, (bars.high - prev).abs(), (bars.low - prev).abs()], axis=1).max(axis=1)
+    slow = tr.ewm(alpha=1 / p.atr_slow, adjust=False, min_periods=p.atr_slow).mean()
+    out = base.copy()
+    out['atr'] = np.sqrt(p.blend_w * base['atr'] ** 2 + (1 - p.blend_w) * slow ** 2).to_numpy()
+    return out
