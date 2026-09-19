@@ -105,7 +105,7 @@ class ExecutionSimulator:
             if self.liquidation_model.check(l, h, side, liq_price):
                 close(liq_price, "liquidated")
 
-        if s.qty and (int(previous["anchor"]) != np.sign(s.qty) or s.age >= p.max_hours):
+        if s.qty and (int(previous["anchor"]) != np.sign(s.qty) or s.age >= getattr(s, "max_hours_entry", p.max_hours)):
             close(o, "anchor_or_timeout")
 
         if not s.qty and not had_position and not s.halted and not force_close:
@@ -126,6 +126,8 @@ class ExecutionSimulator:
                         s.initial_distance = distance
                         s.peak_favorable_r = 0.
                         s.age, s.entry_time = 0, str(timestamp)
+                        limit = previous.get("max_hours")  # optional per-trade time barrier from the signal row
+                        s.max_hours_entry = float(limit) if limit is not None and np.isfinite(limit) else p.max_hours
                         s.trade_cost = commission
                         s.cash -= commission
 
