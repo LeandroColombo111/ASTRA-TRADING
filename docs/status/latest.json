@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-20T14:22:34.746278+00:00",
-  "docker_ps": "astra-demo\tUp 19 hours (healthy)\t2026-09-19 19:04:48 +0000 UTC",
+  "generated_at_utc": "2026-09-20T14:52:55.388647+00:00",
+  "docker_ps": "astra-demo\tUp 20 hours (healthy)\t2026-09-19 19:04:48 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
@@ -12,7 +12,7 @@
       "peak": "74944.44869563001",
       "halted": "false",
       "last_closed": "\"2026-09-20 14:00:00+00:00\"",
-      "heartbeat": "\"2026-09-20 14:22:17.276276+00:00\""
+      "heartbeat": "\"2026-09-20 14:52:45.063898+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -70,7 +70,7 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 11.67017976851852,
+    "period_days": 11.691252280092593,
     "time_weighted_return_pct": -0.1032051170429212,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
