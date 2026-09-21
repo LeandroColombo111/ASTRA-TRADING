@@ -169,14 +169,51 @@ class Service:
         self.s.save('intent',intent) # fsync/commit BEFORE network write.
         self.s.event('order_intent',{**body,'_reference_price':reference_price})
         self.x.place(body)
+        rejected=False
         for _ in range(poll_attempts):
-            if self.x.order(body['clOrdId'])['state']!='live':
+            order=self.x.order(body['clOrdId'])
+            if order['state']!='live':
+                # OKX cancels a post-only order that would take liquidity (cancelSource 31): a rejection, not a resting order.
+                rejected=order['state']=='canceled' and str(order.get('cancelSource'))=='31' and float(order.get('accFillSz') or 0)==0
                 break
             time.sleep(poll_interval)
         else:
             self.x.cancel_order(body['clOrdId'])
             self.s.event('maker_entry_unfilled',{'client_id':body['clOrdId']})
         self.reconcile_intent()
+        return 'rejected' if rejected else None
+
+    FALLBACK_MAX_MOVE=.003 # after a rejection, never chase further than 0.3% from the signal price
+
+    def _fresh_quote(self,side):
+        t=self.x.ticker()
+        if pd.Timestamp.now(tz='UTC')-pd.to_datetime(int(t['ts']),unit='ms',utc=True)>pd.Timedelta(seconds=30):
+            raise ExchangeError('Stale OKX quote')
+        return float(t['askPx'] if side==1 else t['bidPx']),float(t['bidPx'] if side==1 else t['askPx'])
+
+    def enter_with_fallback(self,side,closed,atr,equity,signal_price,quote):
+        """Entry ladder: post-only at the touch; if OKX rejects it (would take liquidity), retry post-only once at a fresh
+        quote; if rejected again, enter at market. Every retry re-checks the quote and stops if price is more than
+        FALLBACK_MAX_MOVE from the signal price. Only rejections trigger the ladder: an order that rests and stays
+        unfilled is cancelled as before and never chased. Each attempt has its own clOrdId and goes through the same
+        intent/reconcile path, so an uncertain POST still blocks (nothing is blindly resubmitted)."""
+        price,maker=quote
+        ladder=(('','post_only'),('r1','post_only'),('m','market'))
+        for n,(tag,kind) in enumerate(ladder):
+            if n:
+                price,maker=self._fresh_quote(side)
+                if abs(price/signal_price-1)>self.FALLBACK_MAX_MOVE:
+                    self.s.event('entry_skipped_after_reject',{'time':str(closed),'signal_price':signal_price,'price':price,'attempt':n+1})
+                    return
+            cid='ast'+sha256((str(closed)+tag).encode()).hexdigest()[:24] # tag '' keeps the first attempt's id unchanged
+            plan=entry_plan(self.meta,side,price,atr,self.p,self.r,equity,cid,maker_price=maker if kind=='post_only' else None)
+            if kind=='market':
+                self.s.event('entry_fallback_market',{'time':str(closed),'signal_price':signal_price,'price':price})
+                self.submit(plan,'entry',closed,reference_price=price)
+                return
+            if self.submit_maker_entry(plan,closed,reference_price=price)!='rejected':
+                return
+            self.s.event('maker_entry_rejected',{'client_id':cid,'attempt':n+1})
 
     def close_position(self,pos,reason,when,reference_price=None):
         cid='ast'+sha256((str(when)+reason+pos['posId']).encode()).hexdigest()[:24]
@@ -263,15 +300,14 @@ class Service:
                 if abs(price/float(bars.close.iloc[-1])-1)>.005:
                     self.s.event('skipped_gap',{'time':str(closed)})
                 else:
-                    cid='ast'+sha256(str(closed).encode()).hexdigest()[:24]
                     # Post-only (maker) entry: rest at the current best bid
                     # (long) / best ask (short) instead of crossing the
                     # spread like a market order would. `price` above (the
                     # opposite side of book) still sets sizing/stop/target,
-                    # so risk per trade is identical either way.
+                    # so risk per trade is identical either way. A rejected
+                    # post-only order is retried, then falls back to market.
                     maker_price=float(ticker['bidPx'] if side==1 else ticker['askPx'])
-                    plan=entry_plan(self.meta,side,price,float(cur.atr),self.p,self.r,equity,cid,maker_price=maker_price)
-                    self.submit_maker_entry(plan,closed,reference_price=price)
+                    self.enter_with_fallback(side,closed,float(cur.atr),equity,price,(price,maker_price))
         self.s.save('last_closed',str(closed));self.s.save('heartbeat',str(now))
 
 
