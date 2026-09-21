@@ -1,27 +1,37 @@
 {
-  "generated_at_utc": "2026-09-21T08:37:36.104425+00:00",
+  "generated_at_utc": "2026-09-21T09:07:56.423417+00:00",
   "docker_ps": "astra-demo\tUp 38 hours (healthy)\t2026-09-19 19:04:48 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
       "inception_ms": "1788905850836",
       "inception_equity": "74944.44869563001",
-      "intent": "null",
       "position": "null",
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
+      "intent": "null",
       "peak": "74944.44869563001",
       "halted": "false",
-      "last_closed": "\"2026-09-21 08:00:00+00:00\"",
-      "heartbeat": "\"2026-09-21 08:37:24.306650+00:00\""
+      "last_closed": "\"2026-09-21 09:00:00+00:00\"",
+      "heartbeat": "\"2026-09-21 09:07:46.899605+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
       "flat_confirmed": 1,
-      "order_intent": 2,
-      "order_reconciled": 2
+      "order_intent": 3,
+      "order_reconciled": 3
     },
-    "events_total": 6,
+    "events_total": 8,
     "recent_events": [
+      [
+        "2026-09-21 09:00:03.416462+00:00",
+        "order_reconciled",
+        "{\"client_id\": \"ast3a8061ee94d60920cfd08a00\", \"state\": \"canceled\", \"filled_contracts\": \"0\", \"avg_price\": \"\", \"fee\": \"0\", \"fee_currency\": \"USDT\"}"
+      ],
+      [
+        "2026-09-21 09:00:02.800228+00:00",
+        "order_intent",
+        "{\"instId\": \"BTC-USDT-SWAP\", \"tdMode\": \"isolated\", \"posSide\": \"net\", \"clOrdId\": \"ast3a8061ee94d60920cfd08a00\", \"side\": \"buy\", \"ordType\": \"post_only\", \"sz\": \"72\", \"attachAlgoOrds\": [{\"attachAlgoClOrdId\": \"ast3a8061ee94d60920cfd08a00s\", \"slTriggerPx\": \"81802.40\", \"slOrdPx\": \"-1\", \"slTriggerPxType\": \"last\", \"tpTriggerPx\": \"89680.92\", \"tpOrdPx\": \"-1\", \"tpTriggerPxType\": \"last\"}], \"px\": \"83742.2\", \"_reference_price\": 83746.9}"
+      ],
       [
         "2026-09-15 20:30:44.573938+00:00",
         "flat_confirmed",
@@ -70,7 +80,7 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 12.430612268518518,
+    "period_days": 12.45168076388889,
     "time_weighted_return_pct": -0.1032051170429212,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
