@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-09-23T18:44:30.707655+00:00",
-  "docker_ps": "astra-demo\tUp Less than a second (health: starting)\t2026-09-23 18:44:24 +0000 UTC",
-  "health": "RuntimeError: Stale or missing heartbeat\nEXIT:1",
+  "generated_at_utc": "2026-09-23T19:14:28.895077+00:00",
+  "docker_ps": "astra-demo\tExited (1) 5 seconds ago\t2026-09-23 19:14:09 +0000 UTC",
+  "health": "",
   "state": {},
   "okx": {},
   "performance": {},
-  "logs_tail": "2026-09-23 18:44:28,812 INFO Serving strategy v4_hourly from configs/selected.json\nExchangeError: Configure isolated leverage at 1x or 2x before running"
+  "logs_tail": "2026-09-23 19:14:20,594 INFO Serving strategy v4_hourly from configs/selected.json\nExchangeError: Configure isolated leverage at 1x or 2x before running"
 }
