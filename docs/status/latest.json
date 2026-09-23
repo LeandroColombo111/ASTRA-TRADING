@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-09-23T15:43:39.374762+00:00",
-  "docker_ps": "astra-demo\tExited (1) 43 seconds ago\t2026-09-23 15:42:51 +0000 UTC",
+  "generated_at_utc": "2026-09-23T16:13:46.119269+00:00",
+  "docker_ps": "astra-demo\tExited (1) About a minute ago\t2026-09-23 16:12:36 +0000 UTC",
   "health": "",
   "state": {},
   "okx": {},
   "performance": {},
-  "logs_tail": "2026-09-23 15:42:54,547 INFO Serving strategy v4_hourly from configs/selected.json\nExchangeError: Configure isolated leverage at 1x or 2x before running"
+  "logs_tail": "2026-09-23 16:12:39,186 INFO Serving strategy v4_hourly from configs/selected.json\nExchangeError: Configure isolated leverage at 1x or 2x before running"
 }
