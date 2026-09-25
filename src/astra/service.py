@@ -10,7 +10,7 @@ import sqlite3
 import threading
 import time
 import pandas as pd
-from .accounting import deposit_adjusted_equity, modified_dietz_return
+from .accounting import deposit_adjusted_equity, modified_dietz_return, TRANSFER_BILL_TYPE
 from .data import validate
 from .engine import Risk
 from .directional_strategy import Params, features
@@ -244,7 +244,9 @@ class Service:
             inception_ms=int(now.timestamp()*1000)
             self.s.save('inception_ms',inception_ms)
             self.s.save('inception_equity',equity)
-        bills=self.x.bills(inception_ms)
+        # Only transfer bills matter for the deposit adjustment, so only those are requested (server-side filter): the full ledger
+        # (every fill and funding row, paginated) made this call time out (OKX code 50004) about once an hour.
+        bills=self.x.bills(inception_ms,bill_type=TRANSFER_BILL_TYPE)
         adjusted=deposit_adjusted_equity(equity,bills)
         peak=max(self.s.get('peak',adjusted),adjusted);self.s.save('peak',peak)
         halted=self.s.get('halted',False) or adjusted<=peak*(1-self.r.max_drawdown)

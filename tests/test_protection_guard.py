@@ -56,7 +56,7 @@ class FakeOKX:
     def equity(self):
         return 75000.0
 
-    def bills(self, since_ms):
+    def bills(self, since_ms, bill_type=None):
         return []
 
     def place(self, body):

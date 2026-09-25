@@ -40,7 +40,7 @@ class TickOKX(FakeOKX):
 
     def positions(self): return self._read('positions', [])
     def equity(self): return self._read('equity', 10000.)
-    def bills(self, since_ms): return self._read('bills', [])
+    def bills(self, since_ms, bill_type=None): return self._read('bills', [])
     def pending(self): return self._read('pending', [])
     def algos(self): return self._read('algos', [])
 
