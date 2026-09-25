@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-25T23:29:38.398638+00:00",
+  "generated_at_utc": "2026-09-25T23:59:50.259899+00:00",
   "docker_ps": "astra-demo\tUp 5 hours (healthy)\t2026-09-25 18:49:02 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
@@ -12,7 +12,7 @@
       "peak": "74944.44869563001",
       "halted": "false",
       "last_closed": "\"2026-09-25 23:00:00+00:00\"",
-      "heartbeat": "\"2026-09-25 23:29:30.622827+00:00\""
+      "heartbeat": "\"2026-09-25 23:59:41.609562+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -80,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 17.050083055555554,
+    "period_days": 17.07105398148148,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-25 22:13:47,046 ERROR Service cycle failed (ExchangeError: OKX code 50004 on /api/v5/account/bills); entries blocked for this cycle\n2026-09-25 22:33:33,385 ERROR Service cycle failed (ExchangeError: OKX code 50004 on /api/v5/account/bills); entries blocked for this cycle\n2026-09-25 22:53:38,393 ERROR Service cycle failed (ExchangeError: OKX code 50004 on /api/v5/account/bills); entries blocked for this cycle"
+  "logs_tail": "2026-09-25 22:33:33,385 ERROR Service cycle failed (ExchangeError: OKX code 50004 on /api/v5/account/bills); entries blocked for this cycle\n2026-09-25 22:53:38,393 ERROR Service cycle failed (ExchangeError: OKX code 50004 on /api/v5/account/bills); entries blocked for this cycle"
 }
