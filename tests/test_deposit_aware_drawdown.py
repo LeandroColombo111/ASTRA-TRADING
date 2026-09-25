@@ -50,7 +50,7 @@ class FakeOKX:
         self._equity_calls += 1
         return e
 
-    def bills(self, since_ms):
+    def bills(self, since_ms, bill_type=None):
         b = self.bills_by_call[self._bills_calls] if self._bills_calls < len(self.bills_by_call) else []
         self._bills_calls += 1
         return b
