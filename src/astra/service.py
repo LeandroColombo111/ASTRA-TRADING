@@ -46,7 +46,7 @@ def backtest_for(name):
         from .v4_macro import backtest as macro_backtest
         return macro_backtest
     raise ValueError('Unknown strategy in config: ' + str(name))
-from .okx import OKX, INSTRUMENT, ExchangeError, entry_plan, rounded
+from .okx import OKX, INSTRUMENT, ExchangeError, AmbiguousOrder, entry_plan, rounded
 
 log=logging.getLogger('astra')
 
@@ -221,11 +221,11 @@ class Service:
         self.s.event('exit_reason',{'reason':reason})
         # Keep exchange protection in place until position is confirmed flat.
 
-    def tick(self):
+    def tick(self,now=None):
         if self.mode=='demo':
             self.reconcile_intent()
         bars,f=self.market()
-        now=pd.Timestamp.now(tz='UTC');closed=bars.index[-1]+pd.Timedelta(hours=1)
+        now=pd.Timestamp.now(tz='UTC') if now is None else now;closed=bars.index[-1]+pd.Timedelta(hours=1)
         last=self.s.get('last_closed')
         new=last is not None and pd.Timestamp(last)<closed
         recent=pd.Timedelta(0)<=now-closed<=pd.Timedelta(minutes=2)
@@ -235,8 +235,6 @@ class Service:
                 self.s.event('signal',{'time':str(closed),'side':int(cur.signal),'atr':float(cur.atr),'anchor':int(cur.anchor)})
                 log.info('Completed candle %s: signal=%s anchor=%s',closed,int(cur.signal),int(cur.anchor))
             self.s.save('last_closed',str(closed));self.s.save('heartbeat',str(now));return
-        # Consume the candle before any external write; a crash cannot re-enter it.
-        self.s.save('last_closed',str(closed))
         positions=self.x.positions()
         if any(x['instId']!=INSTRUMENT or x.get('posSide')!='net' or x.get('mgnMode')!='isolated' for x in positions) or len(positions)>1:
             raise ExchangeError('Unexpected position; dedicated account reconciliation required')
@@ -256,6 +254,13 @@ class Service:
         algos=self.x.algos()
         if any(not x.get('clOrdId','').startswith('ast') for x in pending):
             raise ExchangeError('External open order found; do not share account with another bot')
+        # The quote is a READ too: fetch and validate it before consuming the candle, so a transient failure retries the same
+        # candle on the next tick (inside the 2-minute entry window) instead of silently dropping its signal.
+        ticker=self.x.ticker() if new else None
+        if ticker is not None and not positions and recent and int(cur.signal) and now-pd.to_datetime(int(ticker['ts']),unit='ms',utc=True)>pd.Timedelta(seconds=30):
+            raise ExchangeError('Stale OKX quote')
+        # Consume the candle after every read succeeded and BEFORE the first exchange write: a crash from here on cannot re-enter it.
+        self.s.save('last_closed',str(closed))
         if positions:
             if not owned:
                 raise ExchangeError('Unowned position found: reconcile manually before running')
@@ -269,7 +274,7 @@ class Service:
             if halted or (new and (int(cur.anchor)!=side or age>=self.p.max_hours)):
                 self.close_position(pos,'drawdown' if halted else 'anchor_or_timeout',closed)
             elif new:
-                ticker=self.x.ticker();price=float(ticker['last'])
+                price=float(ticker['last'])
                 if not owned.get('initial_distance') or not owned.get('entry'):
                     raise ExchangeError('Legacy position lacks effective risk basis; reconcile before trailing')
                 owned['peak_favorable_r']=max(owned.get('peak_favorable_r',0.),side*(float(bars.close.iloc[-1])-owned['entry'])/owned['initial_distance'])
@@ -293,9 +298,6 @@ class Service:
             elif algos or pending:
                 raise ExchangeError('Unreconciled pending orders block entries')
             elif new and recent and not halted and int(cur.signal):
-                ticker=self.x.ticker()
-                if now-pd.to_datetime(int(ticker['ts']),unit='ms',utc=True)>pd.Timedelta(seconds=30):
-                    raise ExchangeError('Stale OKX quote')
                 side=int(cur.signal);price=float(ticker['askPx'] if side==1 else ticker['bidPx'])
                 if abs(price/float(bars.close.iloc[-1])-1)>.005:
                     self.s.event('skipped_gap',{'time':str(closed)})
@@ -309,6 +311,12 @@ class Service:
                     maker_price=float(ticker['bidPx'] if side==1 else ticker['askPx'])
                     self.enter_with_fallback(side,closed,float(cur.atr),equity,price,(price,maker_price))
         self.s.save('last_closed',str(closed));self.s.save('heartbeat',str(now))
+
+
+def error_detail(exc):
+    """Message to log with a failed cycle. Only our own error types (built by okx.py without request/response bodies, headers or
+    credentials) and sqlite errors are safe to print; anything else logs the type alone."""
+    return ': '+str(exc)[:200] if isinstance(exc,(ExchangeError,AmbiguousOrder,sqlite3.Error)) else ''
 
 
 def run(selected,state,mode='observe',once=False):
@@ -326,7 +334,7 @@ def run(selected,state,mode='observe',once=False):
                 svc.tick();failures=0
             except Exception as exc:
                 failures+=1
-                log.error('Service cycle failed (%s); entries blocked for this cycle',type(exc).__name__)
+                log.error('Service cycle failed (%s%s); entries blocked for this cycle',type(exc).__name__,error_detail(exc))
                 if once or failures>=3:raise
             if once:break
             stop.wait(10)
