@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-25T21:59:08.031466+00:00",
-  "docker_ps": "astra-demo\tUp 3 hours (healthy)\t2026-09-25 18:49:02 +0000 UTC",
+  "generated_at_utc": "2026-09-25T22:29:03.561614+00:00",
+  "docker_ps": "astra-demo\tUp 4 hours (healthy)\t2026-09-25 18:49:02 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
@@ -11,8 +11,8 @@
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
       "peak": "74944.44869563001",
       "halted": "false",
-      "last_closed": "\"2026-09-25 21:00:00+00:00\"",
-      "heartbeat": "\"2026-09-25 21:58:48.778867+00:00\""
+      "last_closed": "\"2026-09-25 22:00:00+00:00\"",
+      "heartbeat": "\"2026-09-25 22:28:53.218251+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -80,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 16.987225659722224,
+    "period_days": 17.00801355324074,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-25 21:21:36,397 ERROR Service cycle failed (ExchangeError: OKX transport failure on /api/v5/trade/orders-pending; reconcile before another order); entries blocked for this cycle"
+  "logs_tail": "2026-09-25 21:21:36,397 ERROR Service cycle failed (ExchangeError: OKX transport failure on /api/v5/trade/orders-pending; reconcile before another order); entries blocked for this cycle\n2026-09-25 22:13:47,046 ERROR Service cycle failed (ExchangeError: OKX code 50004 on /api/v5/account/bills); entries blocked for this cycle"
 }
