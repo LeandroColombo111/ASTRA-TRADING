@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-25T11:12:57.506970+00:00",
-  "docker_ps": "astra-demo\tUp 37 hours (healthy)\t2026-09-23 21:47:15 +0000 UTC",
+  "generated_at_utc": "2026-09-25T11:42:58.998960+00:00",
+  "docker_ps": "astra-demo\tUp 38 hours (healthy)\t2026-09-23 21:47:15 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
@@ -9,10 +9,10 @@
       "position": "null",
       "intent": "null",
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
-      "peak": "74944.44869563001",
-      "halted": "false",
+      "heartbeat": "\"2026-09-25 11:42:40.686594+00:00\"",
       "last_closed": "\"2026-09-25 11:00:00+00:00\"",
-      "heartbeat": "\"2026-09-25 11:12:32.460812+00:00\""
+      "peak": "74944.44869563001",
+      "halted": "false"
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -80,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 16.538495219907407,
+    "period_days": 16.559347824074074,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-25 10:33:58,062 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:34:45,051 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:38:53,472 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:53:33,384 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:54:05,042 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle"
+  "logs_tail": "2026-09-25 10:33:58,062 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:34:45,051 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:38:53,472 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:53:33,384 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 10:54:05,042 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle\n2026-09-25 11:33:18,839 ERROR Service cycle failed (ExchangeError); entries blocked for this cycle"
 }
