@@ -1,6 +1,6 @@
 {
-  "generated_at_utc": "2026-09-25T18:32:51.934960+00:00",
-  "docker_ps": "astra-demo\tUp 10 seconds (health: starting)\t2026-09-25 18:26:32 +0000 UTC",
+  "generated_at_utc": "2026-09-25T18:56:48.471162+00:00",
+  "docker_ps": "astra-demo\tUp 7 minutes (healthy)\t2026-09-25 18:49:02 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
     "kv": {
@@ -12,7 +12,7 @@
       "peak": "74944.44869563001",
       "halted": "false",
       "last_closed": "\"2026-09-25 18:00:00+00:00\"",
-      "heartbeat": "\"2026-09-25 18:28:25.018682+00:00\""
+      "heartbeat": "\"2026-09-25 18:56:28.905351+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -64,7 +64,12 @@
       ]
     ]
   },
-  "okx": {},
+  "okx": {
+    "equity": 73840.17097097251,
+    "positions": [],
+    "pending": [],
+    "algos": []
+  },
   "performance": {
     "equity": 73840.17097097251,
     "adjusted_equity": 73840.17097097251,
@@ -75,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 16.843982291666666,
+    "period_days": 16.860614456018517,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-25 18:27:35,476 INFO Serving strategy v4_hourly from configs/selected.json"
+  "logs_tail": "2026-09-25 18:49:49,982 INFO Serving strategy v4_hourly from configs/selected.json"
 }
