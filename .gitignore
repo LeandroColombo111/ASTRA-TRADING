@@ -9,3 +9,5 @@ __pycache__/
 data/
 state/
 .DS_Store
+advisor/snapshots/
+advisor/journal.csv
