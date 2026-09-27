@@ -24,7 +24,12 @@ Herramientas (correr desde la raíz del repo):
 
 Qué trae `analyze`: precio actual, estado del mercado, tendencia/EMA 20-50-100-200/RSI14/ATR14 en 1d-4h-1h, posición en el rango de 60 velas, soportes/resistencias (fractales agrupados), perfil de volumen 4h (POC/VAH/VAL), máximo/mínimo del día previo y de 52 semanas, noticias del activo y macro de las últimas 4h (con `fallback_24h: true` si no hubo ninguna en 4h), y el macro (SPY, QQQ, VIX, DXY, US10Y, BTC).
 
-`mechanical_setup` es solo un **punto de partida** calculado por reglas fijas. Vos lo revisás, lo ajustás a la estructura y lo validás de nuevo con `rr`.
+`mechanical_setups` es una lista de candidatos **en ambas direcciones**, calculados por reglas fijas con entrada a precio de mercado. Cada uno trae su `context`:
+- `a_favor_de_tendencia`: la tendencia 1d manda y el 4h no la contradice.
+- `rango_extremo`: el precio está en un extremo del rango de 60 velas de 4h.
+- `contra_tendencia`: el precio está en el extremo opuesto del rango (por ejemplo, un short contra una resistencia en tendencia alcista). Siempre va con riesgo **Alto**.
+
+Son solo un **punto de partida**. Vos los revisás, los ajustás a la estructura y los validás de nuevo con `rr`.
 
 ## Árbol de decisión
 
@@ -32,7 +37,7 @@ Si no hay ticker (`$ARGUMENTS` vacío), saltá directo al Paso 4 y presentá las
 
 **Paso 1: contexto y volatilidad.** Corré `analyze $ARGUMENTS`. Cruzá el precio con las noticias del activo y las macro. Clasificá el entorno: *alta volatilidad* (noticias en desarrollo, `atr_percentile_100` > 80, VIX subiendo fuerte) o *compresión*. Identificá la tendencia principal (1d manda, 4h confirma) y los niveles clave. Si el mercado de acciones está cerrado, aclaralo: la entrada aplica a la próxima apertura y puede haber gap.
 
-**Paso 2: SL y TP.**
+**Paso 2: SL y TP.** Evaluá **las dos direcciones** (long y short), no solo la de la tendencia. Si a precio de mercado ninguna da R/R >= 1:2, probá una **entrada límite en el nivel** (por ejemplo, un short en la resistencia con el SL justo arriba). Eso achica el riesgo; presentala como orden pendiente, con su condición de invalidación.
 - **SL:** nunca un porcentaje fijo. Ubicalo en un nivel de invalidación estructural (debajo del último mínimo local o soporte para un long, arriba del máximo o resistencia para un short, o fuera del VAL/VAH/POC), con un colchón de alrededor de 0.5 ATR(4h) para evitar barridos. Si el SL queda a menos de 1 ATR(4h), está demasiado expuesto.
 - **TP1:** el **primer** obstáculo real (resistencia o soporte opuesto, POC, VAH/VAL, máximo del día previo). Nunca te saltees un nivel cercano para inflar el R/R.
 - **TP2:** la siguiente zona de liquidez u opuesta, para dejar correr.

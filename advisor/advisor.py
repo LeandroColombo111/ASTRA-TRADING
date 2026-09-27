@@ -286,17 +286,8 @@ def rr_check(side: str, entry: float, sl: float, tp1: float, tp2: float | None =
     return out
 
 
-def mechanical_setup(frames: dict, lv: dict, price: float, tfs: dict) -> dict | None:
-    """Setup candidato puramente mecánico, para rankear la watchlist. Claude lo revisa."""
+def build_setup(side: str, lv: dict, price: float, tfs: dict) -> dict | None:
     a = tfs["4h"]["atr14"]
-    t_d, t_4 = tfs["1d"]["trend"], tfs["4h"]["trend"]
-    pos = tfs["4h"]["range_60"]["position_pct"]
-    if t_d == "alcista" and t_4 != "bajista" or (t_d == "rango" and pos < 20):
-        side = "long"
-    elif t_d == "bajista" and t_4 != "alcista" or (t_d == "rango" and pos > 80):
-        side = "short"
-    else:
-        return None
     sign = 1 if side == "long" else -1
     stops = lv["supports"] if side == "long" else lv["resistances"]
     targets = lv["resistances"] if side == "long" else lv["supports"]
@@ -304,14 +295,41 @@ def mechanical_setup(frames: dict, lv: dict, price: float, tfs: dict) -> dict | 
     if stop_lvl is None:
         return None
     sl = stop_lvl - sign * 0.5 * a
-    # TP1 = primer obstáculo real (no se saltea resistencias cercanas: eso inflaría el R/R).
+    # TP1 = primer obstáculo real (no se saltea niveles cercanos: eso inflaría el R/R).
     tps = [t for t in targets if abs(t - price) >= 0.25 * a]
     tp1 = tps[0] - sign * 0.1 * a if tps else price + sign * 3 * tfs["1d"]["atr14"]
     tp2 = tps[1] - sign * 0.1 * a if len(tps) > 1 else tp1 + sign * 2 * tfs["1d"]["atr14"]
     chk = rr_check(side, price, sl, tp1, tp2, a)
     return {"side": side, "entry": round(price, 6), "sl": round(sl, 6), "tp1": round(tp1, 6),
-            "tp2": round(tp2, 6), "no_resistance_above": not tps, **{k: chk.get(k) for k in
+            "tp2": round(tp2, 6), "no_level_beyond": not tps, **{k: chk.get(k) for k in
             ("rr_tp1", "rr_tp2", "rr_blended", "approved", "risk_pct", "sl_distance_atr4h", "warnings")}}
+
+
+def mechanical_setups(lv: dict, price: float, tfs: dict) -> list[dict]:
+    """Candidatos mecánicos en ambas direcciones, para rankear la watchlist. Claude los revisa.
+
+    - a favor de tendencia: la tendencia 1d manda y el 4h no la contradice.
+    - rango: solo en los extremos del rango de 60 velas de 4h.
+    - contra-tendencia: solo en el extremo opuesto del rango (ej. short contra resistencia
+      en tendencia alcista). Siempre riesgo Alto.
+    """
+    t_d, t_4 = tfs["1d"]["trend"], tfs["4h"]["trend"]
+    pos = tfs["4h"]["range_60"]["position_pct"]
+    ctx = {}
+    for side, trend_dir, other, edge in (("long", "alcista", "bajista", pos < 20), ("short", "bajista", "alcista", pos > 80)):
+        if t_d == trend_dir and t_4 != other:
+            ctx[side] = ("a_favor_de_tendencia", "Medio")
+        elif t_d == "rango" and edge:
+            ctx[side] = ("rango_extremo", "Medio")
+        elif t_d == other and edge:
+            ctx[side] = ("contra_tendencia", "Alto")
+    out = []
+    for side, (context, risk) in ctx.items():
+        s = build_setup(side, lv, price, tfs)
+        if s:
+            out.append({"context": context, "risk_level": risk, **s})
+    out.sort(key=lambda s: (s["approved"], s["context"] != "contra_tendencia", s["rr_blended"]), reverse=True)
+    return out
 
 
 # ---------------------------------------------------------------- noticias y macro
@@ -389,7 +407,7 @@ def analyze_one(ticker: str, kind: str, with_news: bool = True, hours: int = 4) 
     out = {
         "ticker": ticker.upper(), "kind": kind, "symbol": f["symbol"], "source": f["source"],
         "price": price, "market_state": f["market_state"], "timeframes": tfs, "levels": lv,
-        "mechanical_setup": mechanical_setup(f, lv, price, tfs),
+        "mechanical_setups": mechanical_setups(lv, price, tfs),
     }
     if with_news:
         out["news"] = news(news_query(ticker, kind), hours)
@@ -419,7 +437,7 @@ def cmd_scan(a) -> dict:
         t, k = x
         try:
             r = analyze_one(t, k, with_news=False)
-            s = r["mechanical_setup"]
+            s = next(iter(r["mechanical_setups"]), None)
             return {"ticker": t, "kind": k, "price": r["price"], "trend_1d": r["timeframes"]["1d"]["trend"],
                     "trend_4h": r["timeframes"]["4h"]["trend"], "rsi_4h": r["timeframes"]["4h"]["rsi14"],
                     "atr_pct_4h": r["timeframes"]["4h"]["atr_pct"],
