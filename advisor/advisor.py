@@ -434,7 +434,9 @@ def cmd_analyze(a) -> dict:
 
 def cmd_scan(a) -> dict:
     wl = load_watchlist()
-    assets = [(t, "crypto") for t in wl.get("crypto", [])] + [(t, "stock") for t in wl.get("stocks", [])]
+    kinds = set(a.kinds or wl.get("scan_kinds", ["crypto", "stock"]))
+    assets = ([(t, "crypto") for t in wl.get("crypto", [])] if "crypto" in kinds else []) + \
+             ([(t, "stock") for t in wl.get("stocks", [])] if "stock" in kinds else [])
     exclude = {x.upper() for x in (a.exclude or [])}
     assets = [x for x in assets if x[0].upper() not in exclude]
 
@@ -603,6 +605,7 @@ def main(argv=None) -> int:
     s.add_argument("--top", type=int, default=5)
     s.add_argument("--exclude", nargs="*")
     s.add_argument("--all", action="store_true", help="incluye todos los activos, no solo aprobados")
+    s.add_argument("--kinds", nargs="*", choices=["crypto", "stock"], help="por defecto: scan_kinds de watchlist.json")
     s.add_argument("--save", action="store_true")
 
     s = sub.add_parser("rr")
