@@ -20,5 +20,6 @@
   ],
   "max_risk_pct": 3,
   "counter_trend_risk_pct": 1,
-  "min_rr_tp1_for_upper_tiers": 1.5
+  "min_rr_tp1_for_upper_tiers": 1.5,
+  "deposits": []
 }

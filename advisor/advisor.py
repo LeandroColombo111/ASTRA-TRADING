@@ -568,6 +568,7 @@ def cmd_plan(a) -> dict:
     start = datetime.fromisoformat(acc["start_date"]).date()
     end = datetime.fromisoformat(acc["target_date"]).date()
     cur, goal = acc["current_capital"], acc["target_capital"]
+    deposits = sum(x["amount"] for x in acc.get("deposits", []))
     days_left = max((end - today).days, 1)
     months_left = days_left / 30.44
     mult = goal / cur
@@ -580,6 +581,8 @@ def cmd_plan(a) -> dict:
     trades = float(np.log(mult) / np.log(1 + per_trade)) if per_trade > 0 else None
     return {
         "start_capital": acc["start_capital"], "current_capital": cur, "target_capital": goal,
+        "deposits_total": deposits,
+        "trading_pnl": round(cur - acc["start_capital"] - deposits, 2),
         "progress_pct": round((cur - acc["start_capital"]) / (goal - acc["start_capital"]) * 100, 1),
         "days_elapsed": (today - start).days, "days_left": days_left,
         "multiple_needed": round(mult, 2), "required_monthly_growth_pct": round(monthly * 100, 1),
