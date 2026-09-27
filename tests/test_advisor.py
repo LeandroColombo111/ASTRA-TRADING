@@ -58,3 +58,22 @@ def test_position_size_capped_by_leverage_and_liquidation():
     assert r["capped_by_leverage"] and r["notional_usd"] == 600.0 and r["risk_pct_real"] < 2
     bad = position_size("long", 100, 70, capital=360, risk_pct=2, leverage=5)
     assert not bad["valid"]
+
+
+ACC = {"risk_per_trade_pct": 2, "max_risk_pct": 3, "counter_trend_risk_pct": 1,
+       "min_rr_tp1_for_upper_tiers": 1.5,
+       "risk_tiers": [{"min_rr": 3, "risk_pct": 2.5}, {"min_rr": 4, "risk_pct": 3}]}
+
+
+def test_risk_tiers_scale_with_rr_and_cap():
+    from advisor import risk_for_setup
+    assert risk_for_setup(ACC, 2.2, 1.6, "a_favor_de_tendencia")["risk_pct"] == 2
+    assert risk_for_setup(ACC, 3.4, 1.6, "a_favor_de_tendencia")["risk_pct"] == 2.5
+    assert risk_for_setup(ACC, 9.0, 3.0, "a_favor_de_tendencia")["risk_pct"] == 3
+
+
+def test_risk_tiers_do_not_scale_on_far_tp2_or_counter_trend():
+    from advisor import risk_for_setup
+    assert risk_for_setup(ACC, 4.5, 0.7, "a_favor_de_tendencia")["risk_pct"] == 2
+    assert risk_for_setup(ACC, 6.0, 3.0, "contra_tendencia")["risk_pct"] == 1
+    assert risk_for_setup(ACC, 5.0, 2.0, "rango_extremo")["risk_pct"] == 2

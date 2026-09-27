@@ -522,11 +522,42 @@ def position_size(side: str, entry: float, sl: float, capital: float, risk_pct: 
     return out
 
 
+def risk_for_setup(acc: dict, rr_blended: float | None, rr_tp1: float | None, context: str | None) -> dict:
+    """Riesgo por trade escalonado por R/R, con tope duro.
+
+    - Base: risk_per_trade_pct.
+    - Escalones superiores (risk_tiers) solo si el setup va a favor de la tendencia y el
+      R/R a TP1 por sí solo es >= min_rr_tp1_for_upper_tiers (evita inflar el tamaño con un
+      TP2 lejano y poco probable).
+    - Contra-tendencia: counter_trend_risk_pct, nunca escala.
+    - Nunca supera max_risk_pct.
+    """
+    base = acc["risk_per_trade_pct"]
+    cap = acc.get("max_risk_pct", base)
+    if context == "contra_tendencia":
+        return {"risk_pct": min(acc.get("counter_trend_risk_pct", base), cap), "tier": "contra_tendencia"}
+    if rr_blended is None:
+        return {"risk_pct": min(base, cap), "tier": "base"}
+    upper_ok = context in (None, "a_favor_de_tendencia") and (rr_tp1 or 0) >= acc.get("min_rr_tp1_for_upper_tiers", 1.5)
+    risk, tier = base, "base"
+    for t in sorted(acc.get("risk_tiers", []), key=lambda t: t["min_rr"]):
+        if rr_blended >= t["min_rr"] and (upper_ok or t["risk_pct"] <= base):
+            risk, tier = t["risk_pct"], f"R/R >= {t['min_rr']:g}"
+    out = {"risk_pct": min(risk, cap), "tier": tier}
+    if not upper_ok and rr_blended >= min((t["min_rr"] for t in acc.get("risk_tiers", []) if t["risk_pct"] > base), default=99):
+        out["note"] = "No escala: el setup no va a favor de la tendencia o el R/R a TP1 es bajo"
+    return out
+
+
 def cmd_size(a) -> dict:
     acc = load_account()
-    return position_size(a.side, a.entry, a.sl, a.capital or acc["current_capital"],
-                         a.risk_pct or acc["risk_per_trade_pct"], a.leverage or acc["max_leverage"],
-                         acc.get("max_open_positions", 1))
+    if a.risk_pct:
+        tier = {"risk_pct": a.risk_pct, "tier": "manual"}
+    else:
+        tier = risk_for_setup(acc, a.rr, a.rr_tp1, a.context)
+    out = position_size(a.side, a.entry, a.sl, a.capital or acc["current_capital"], tier["risk_pct"],
+                        a.leverage or acc["max_leverage"], acc.get("max_open_positions", 1))
+    return {"risk_tier": tier, **out}
 
 
 def cmd_plan(a) -> dict:
@@ -599,6 +630,9 @@ def main(argv=None) -> int:
     s.add_argument("--capital", type=float, help="por defecto: current_capital de account.json")
     s.add_argument("--risk-pct", type=float, help="por defecto: risk_per_trade_pct de account.json")
     s.add_argument("--leverage", type=float, help="por defecto: max_leverage de account.json")
+    s.add_argument("--rr", type=float, help="R/R ponderado del setup (para el escalón de riesgo)")
+    s.add_argument("--rr-tp1", type=float, help="R/R a TP1 del setup")
+    s.add_argument("--context", choices=["a_favor_de_tendencia", "rango_extremo", "contra_tendencia"])
 
     sub.add_parser("plan")
 

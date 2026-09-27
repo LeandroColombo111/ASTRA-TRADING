@@ -7,5 +7,18 @@
   "max_leverage": 5,
   "risk_per_trade_pct": 2,
   "max_open_positions": 3,
-  "assumed_win_rate": 0.40
+  "assumed_win_rate": 0.4,
+  "risk_tiers": [
+    {
+      "min_rr": 3,
+      "risk_pct": 2.5
+    },
+    {
+      "min_rr": 4,
+      "risk_pct": 3
+    }
+  ],
+  "max_risk_pct": 3,
+  "counter_trend_risk_pct": 1,
+  "min_rr_tp1_for_upper_tiers": 1.5
 }
