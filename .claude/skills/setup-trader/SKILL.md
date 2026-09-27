@@ -19,7 +19,7 @@ Herramientas (correr desde la raíz del repo):
 .venv/bin/python advisor/advisor.py analyze <TICKER>      # snapshot completo del activo + macro + noticias
 .venv/bin/python advisor/advisor.py scan --exclude <TICKER>  # setups candidatos de la watchlist, ordenados por R/R
 .venv/bin/python advisor/advisor.py rr --side long|short --entry X --sl Y --tp1 Z --tp2 W --atr <ATR4h>
-.venv/bin/python advisor/advisor.py size --side long|short --entry X --sl Y   # tamaño según advisor/account.json
+.venv/bin/python advisor/advisor.py size --side long|short --entry X --sl Y --rr <ponderado> --rr-tp1 <R/R TP1> --context <context>
 .venv/bin/python advisor/advisor.py plan                                      # progreso hacia el objetivo de capital
 .venv/bin/python advisor/advisor.py log <TICKER> --side ... --entry ... --sl ... --tp1 ... --tp2 ... --verdict aprobado|rechazado|alternativa
 ```
@@ -53,7 +53,7 @@ Si no hay ticker (`$ARGUMENTS` vacío), saltá directo al Paso 4 y presentá las
 
 Después del rechazo, corré `scan --exclude <TICKER>`. Tomá los mejores candidatos, corré `analyze` en cada uno para confirmar la estructura y las noticias, validá con `rr` y proponé **2** alternativas con R/R >= 1:2. Si ninguna pasa, decilo. Nunca fuerces alternativas.
 
-**Paso 5: tamaño de posición.** Para cada setup aprobado, corré `size` y reportá cantidad, nocional, margen, riesgo en USD, apalancamiento efectivo y precio de liquidación aproximado. El tamaño sale del **riesgo por trade** (`risk_per_trade_pct` de `advisor/account.json`), no del apalancamiento: el apalancamiento máximo solo pone un techo al nocional. Nunca subas el riesgo por trade para "alcanzar el objetivo" más rápido. Si `size` devuelve `valid: false`, el trade se descarta.
+**Paso 5: tamaño de posición.** Para cada setup aprobado, corré `size` pasando `--rr`, `--rr-tp1` y `--context`. El riesgo por trade se escala por R/R según los escalones de `account.json`: base 2%, 2.5% con R/R >= 3 y 3% con R/R >= 4 (tope duro). Solo escala si el setup va a favor de la tendencia y el R/R a TP1 es >= 1.5. Los contra-tendencia van siempre al 1%. Reportá el escalón aplicado y también cantidad, nocional, margen, riesgo en USD, apalancamiento efectivo y precio de liquidación aproximado. El tamaño sale del **riesgo por trade** (`risk_per_trade_pct` de `advisor/account.json`), no del apalancamiento: el apalancamiento máximo solo pone un techo al nocional. Nunca subas el riesgo por trade por encima de lo que dé `size` ni presentes un trade como "seguro": ningún setup lo es. Si `size` devuelve `valid: false`, el trade se descarta.
 
 **Paso 6: registro.** Registrá cada setup presentado con `log`: el aprobado, o el rechazado más sus alternativas.
 
