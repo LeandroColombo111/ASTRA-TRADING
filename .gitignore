@@ -11,3 +11,4 @@ state/
 .DS_Store
 advisor/snapshots/
 advisor/journal.csv
+advisor/account.json

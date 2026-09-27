@@ -1,0 +1,11 @@
+{
+  "start_capital": 360,
+  "current_capital": 360,
+  "start_date": "2026-09-27",
+  "target_capital": 5000,
+  "target_date": "2027-03-27",
+  "max_leverage": 5,
+  "risk_per_trade_pct": 2,
+  "max_open_positions": 3,
+  "assumed_win_rate": 0.40
+}
