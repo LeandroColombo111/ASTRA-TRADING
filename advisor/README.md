@@ -24,6 +24,7 @@ El skill está en [`.claude/skills/setup-trader/SKILL.md`](../.claude/skills/set
 ```
 
 - `watchlist.json`: el universo que se escanea. Editalo libremente; `names` mejora la búsqueda de noticias.
+- `account.json`: capital actual, objetivo, apalancamiento máximo y riesgo por trade. Se crea copiando `account.example.json` y está excluido de git. **Actualizá `current_capital` a medida que opères.** Los comandos `size` y `plan` lo usan.
 - `journal.csv`: registro de setups. Completá `outcome`, `exit_price` y `closed_at` a mano para medir el sistema. Está excluido de git.
 - `snapshots/`: JSON guardados con `--save`. También excluido de git.
 

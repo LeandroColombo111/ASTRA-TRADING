@@ -7,6 +7,8 @@ Subcomandos:
   scan             Resumen de la watchlist con setups mecánicos candidatos.
   rr               Valida un setup (lados, R/R, distancia del SL vs ATR).
   log              Registra un setup en advisor/journal.csv.
+  size             Tamaño de posición según capital, riesgo por trade y apalancamiento.
+  plan             Progreso hacia el objetivo de capital (advisor/account.json).
 
 Uso: .venv/bin/python advisor/advisor.py analyze SOL
 """
@@ -32,6 +34,9 @@ ROOT = Path(__file__).resolve().parent
 WATCHLIST = ROOT / "watchlist.json"
 JOURNAL = ROOT / "journal.csv"
 SNAPSHOTS = ROOT / "snapshots"
+ACCOUNT = ROOT / "account.json"
+TAKER_FEE = 0.0005  # por lado, futuros perpetuos
+MMR = 0.005  # margen de mantenimiento aproximado
 
 MIN_RR = 2.0
 UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36"}
@@ -473,6 +478,86 @@ def cmd_log(a) -> dict:
     return {"logged": row, "file": str(JOURNAL)}
 
 
+def load_account() -> dict:
+    if not ACCOUNT.exists():
+        raise SystemExit(f"Falta {ACCOUNT}: copiá advisor/account.example.json y completalo")
+    return json.loads(ACCOUNT.read_text())
+
+
+def position_size(side: str, entry: float, sl: float, capital: float, risk_pct: float,
+                  leverage: float, max_positions: int = 1) -> dict:
+    """Tamaño por riesgo: se arriesga risk_pct del capital hasta el SL.
+
+    El apalancamiento solo pone un techo al nocional (capital * leverage / max_positions);
+    no cambia cuánto se pierde si toca el SL.
+    """
+    sign = 1 if side == "long" else -1
+    dist = (entry - sl) * sign
+    if dist <= 0:
+        return {"valid": False, "errors": ["SL del lado equivocado de la entrada"]}
+    risk_usd = capital * risk_pct / 100
+    qty = risk_usd / dist
+    cap = capital * leverage / max_positions
+    capped = qty * entry > cap
+    if capped:
+        qty = cap / entry
+    notional = qty * entry
+    fees = notional * TAKER_FEE * 2
+    liq = entry * (1 - sign * (1 / leverage - MMR))
+    out = {
+        "valid": True, "qty": round(qty, 6), "notional_usd": round(notional, 2),
+        "margin_usd": round(notional / leverage, 2), "leverage_set": leverage,
+        "effective_leverage": round(notional / capital, 2),
+        "risk_usd": round(qty * dist, 2), "risk_pct_real": round(qty * dist / capital * 100, 2),
+        "fees_roundtrip_usd": round(fees, 2), "liq_price_isolated_approx": round(liq, 6),
+        "capped_by_leverage": capped, "warnings": [],
+    }
+    if capped:
+        out["warnings"].append(f"El nocional quedó limitado por {leverage:g}x/{max_positions} posiciones: el riesgo real es menor al objetivo")
+    if (sl - liq) * sign <= 0:
+        out["valid"] = False
+        out["warnings"].append("El SL está más allá del precio de liquidación: el trade no es válido")
+    if fees > 0.15 * out["risk_usd"]:
+        out["warnings"].append("Las comisiones superan el 15% del riesgo: el SL está muy cerca para este tamaño")
+    return out
+
+
+def cmd_size(a) -> dict:
+    acc = load_account()
+    return position_size(a.side, a.entry, a.sl, a.capital or acc["current_capital"],
+                         a.risk_pct or acc["risk_per_trade_pct"], a.leverage or acc["max_leverage"],
+                         acc.get("max_open_positions", 1))
+
+
+def cmd_plan(a) -> dict:
+    acc = load_account()
+    today = datetime.now(timezone.utc).date()
+    start = datetime.fromisoformat(acc["start_date"]).date()
+    end = datetime.fromisoformat(acc["target_date"]).date()
+    cur, goal = acc["current_capital"], acc["target_capital"]
+    days_left = max((end - today).days, 1)
+    months_left = days_left / 30.44
+    mult = goal / cur
+    monthly = mult ** (1 / months_left) - 1
+    r = acc["risk_per_trade_pct"] / 100
+    # Expectativa por trade con R/R 2 ponderado según tasa de acierto histórica asumida.
+    wr = acc.get("assumed_win_rate", 0.40)
+    exp_r = wr * MIN_RR - (1 - wr)
+    per_trade = exp_r * r
+    trades = float(np.log(mult) / np.log(1 + per_trade)) if per_trade > 0 else None
+    return {
+        "start_capital": acc["start_capital"], "current_capital": cur, "target_capital": goal,
+        "progress_pct": round((cur - acc["start_capital"]) / (goal - acc["start_capital"]) * 100, 1),
+        "days_elapsed": (today - start).days, "days_left": days_left,
+        "multiple_needed": round(mult, 2), "required_monthly_growth_pct": round(monthly * 100, 1),
+        "risk_per_trade_usd": round(cur * r, 2), "assumed_win_rate": wr,
+        "expectancy_per_trade_pct": round(per_trade * 100, 2),
+        "trades_needed": round(trades) if trades else None,
+        "trades_per_week_needed": round(trades / (days_left / 7), 1) if trades else None,
+        "max_leverage": acc["max_leverage"], "max_open_positions": acc.get("max_open_positions", 1),
+    }
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -507,8 +592,19 @@ def main(argv=None) -> int:
     s.add_argument("--verdict", required=True, choices=["aprobado", "rechazado", "alternativa"])
     s.add_argument("--note")
 
+    s = sub.add_parser("size")
+    s.add_argument("--side", required=True, choices=["long", "short"])
+    s.add_argument("--entry", type=float, required=True)
+    s.add_argument("--sl", type=float, required=True)
+    s.add_argument("--capital", type=float, help="por defecto: current_capital de account.json")
+    s.add_argument("--risk-pct", type=float, help="por defecto: risk_per_trade_pct de account.json")
+    s.add_argument("--leverage", type=float, help="por defecto: max_leverage de account.json")
+
+    sub.add_parser("plan")
+
     a = p.parse_args(argv)
-    out = {"analyze": cmd_analyze, "scan": cmd_scan, "rr": cmd_rr, "log": cmd_log}[a.cmd](a)
+    out = {"analyze": cmd_analyze, "scan": cmd_scan, "rr": cmd_rr, "log": cmd_log,
+           "size": cmd_size, "plan": cmd_plan}[a.cmd](a)
     out = {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), **out}
     text = json.dumps(out, indent=2, ensure_ascii=False, default=str)
     if getattr(a, "save", False):

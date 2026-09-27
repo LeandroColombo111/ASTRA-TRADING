@@ -19,6 +19,8 @@ Herramientas (correr desde la raíz del repo):
 .venv/bin/python advisor/advisor.py analyze <TICKER>      # snapshot completo del activo + macro + noticias
 .venv/bin/python advisor/advisor.py scan --exclude <TICKER>  # setups candidatos de la watchlist, ordenados por R/R
 .venv/bin/python advisor/advisor.py rr --side long|short --entry X --sl Y --tp1 Z --tp2 W --atr <ATR4h>
+.venv/bin/python advisor/advisor.py size --side long|short --entry X --sl Y   # tamaño según advisor/account.json
+.venv/bin/python advisor/advisor.py plan                                      # progreso hacia el objetivo de capital
 .venv/bin/python advisor/advisor.py log <TICKER> --side ... --entry ... --sl ... --tp1 ... --tp2 ... --verdict aprobado|rechazado|alternativa
 ```
 
@@ -51,7 +53,9 @@ Si no hay ticker (`$ARGUMENTS` vacío), saltá directo al Paso 4 y presentá las
 
 Después del rechazo, corré `scan --exclude <TICKER>`. Tomá los mejores candidatos, corré `analyze` en cada uno para confirmar la estructura y las noticias, validá con `rr` y proponé **2** alternativas con R/R >= 1:2. Si ninguna pasa, decilo. Nunca fuerces alternativas.
 
-**Paso 5: registro.** Registrá cada setup presentado con `log`: el aprobado, o el rechazado más sus alternativas.
+**Paso 5: tamaño de posición.** Para cada setup aprobado, corré `size` y reportá cantidad, nocional, margen, riesgo en USD, apalancamiento efectivo y precio de liquidación aproximado. El tamaño sale del **riesgo por trade** (`risk_per_trade_pct` de `advisor/account.json`), no del apalancamiento: el apalancamiento máximo solo pone un techo al nocional. Nunca subas el riesgo por trade para "alcanzar el objetivo" más rápido. Si `size` devuelve `valid: false`, el trade se descarta.
+
+**Paso 6: registro.** Registrá cada setup presentado con `log`: el aprobado, o el rechazado más sus alternativas.
 
 ## Formato de salida obligatorio
 
@@ -69,6 +73,7 @@ Después del rechazo, corré `scan --exclude <TICKER>`. Tomá los mejores candid
 *   **Take Profit (TP):** TP1: [Precio] / TP2: [Precio]
 *   **Ratio R/R:** [1:X ponderado] (TP1 1:a / TP2 1:b)
 *   **Nivel de Riesgo:** [Bajo / Medio / Alto]
+*   **Tamaño:** [qty] ([nocional] USD, margen [X] USD a [lev]x) | Riesgo: [USD] ([%] del capital) | Liq. aprox: [precio]
 
 *[SI EL TRADE ES RECHAZADO]*
 ⚠️ **Trade Descartado:** El activo [Ticker] presenta un R/R de [X], el stop loss queda demasiado expuesto debido a [Razón técnica/Noticia].

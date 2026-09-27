@@ -43,3 +43,18 @@ def test_swings_detects_peak_and_trough():
     df = pd.DataFrame({"high": h, "low": l})
     highs, lows = swings(df, k=3)
     assert 9 in highs and 0 in lows
+
+
+def test_position_size_risk_based():
+    from advisor import position_size
+    r = position_size("long", 100, 98, capital=360, risk_pct=2, leverage=5)
+    assert r["risk_usd"] == 7.2 and r["qty"] == 3.6 and r["margin_usd"] == 72.0
+    assert not r["capped_by_leverage"]
+
+
+def test_position_size_capped_by_leverage_and_liquidation():
+    from advisor import position_size
+    r = position_size("short", 100, 100.2, capital=360, risk_pct=2, leverage=5, max_positions=3)
+    assert r["capped_by_leverage"] and r["notional_usd"] == 600.0 and r["risk_pct_real"] < 2
+    bad = position_size("long", 100, 70, capital=360, risk_pct=2, leverage=5)
+    assert not bad["valid"]
