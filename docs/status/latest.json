@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-28T12:29:39.942688+00:00",
+  "generated_at_utc": "2026-09-28T12:59:55.948011+00:00",
   "docker_ps": "astra-demo\tUp 2 days (healthy)\t2026-09-25 18:49:02 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
@@ -12,7 +12,7 @@
       "peak": "74944.44869563001",
       "halted": "false",
       "last_closed": "\"2026-09-28 12:00:00+00:00\"",
-      "heartbeat": "\"2026-09-28 12:29:23.533820+00:00\""
+      "heartbeat": "\"2026-09-28 12:59:41.503584+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -80,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 19.591767002314814,
+    "period_days": 19.6127859375,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-28 11:10:15,967 ERROR Service cycle failed (ExchangeError: OKX transport failure on /api/v5/market/history-candles; reconcile before another order); entries blocked for this cycle"
+  "logs_tail": ""
 }
