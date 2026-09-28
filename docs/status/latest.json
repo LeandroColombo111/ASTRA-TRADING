@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-28T20:02:59.427025+00:00",
+  "generated_at_utc": "2026-09-28T20:32:57.483140+00:00",
   "docker_ps": "astra-demo\tUp 3 days (healthy)\t2026-09-25 18:49:02 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
@@ -9,10 +9,10 @@
       "position": "null",
       "intent": "null",
       "fingerprint": "\"4019d18d48f1213d2c484680306f3db13e41bde54f34b54fafd16153359fc20f\"",
-      "peak": "74944.44869563001",
-      "halted": "false",
       "last_closed": "\"2026-09-28 20:00:00+00:00\"",
-      "heartbeat": "\"2026-09-28 20:02:45.653752+00:00\""
+      "heartbeat": "\"2026-09-28 20:32:38.808722+00:00\"",
+      "peak": "74944.44869563001",
+      "halted": "false"
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -80,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 19.906573657407407,
+    "period_days": 19.927387083333333,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-28 18:38:03,376 ERROR Service cycle failed (ExchangeError: OKX HTTP 503 on /api/v5/trade/orders-algo-pending); entries blocked for this cycle"
+  "logs_tail": ""
 }
