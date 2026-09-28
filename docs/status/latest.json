@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-28T10:28:36.798141+00:00",
+  "generated_at_utc": "2026-09-28T10:58:43.137573+00:00",
   "docker_ps": "astra-demo\tUp 2 days (healthy)\t2026-09-25 18:49:02 +0000 UTC",
   "health": "healthy\nEXIT:0",
   "state": {
@@ -12,7 +12,7 @@
       "peak": "74944.44869563001",
       "halted": "false",
       "last_closed": "\"2026-09-28 10:00:00+00:00\"",
-      "heartbeat": "\"2026-09-28 10:28:26.197589+00:00\""
+      "heartbeat": "\"2026-09-28 10:58:35.450056+00:00\""
     },
     "events_by_kind": {
       "exit_reason": 1,
@@ -80,9 +80,9 @@
     "halted": false,
     "net_transfers": 0,
     "inception_equity": 74944.44869563001,
-    "period_days": 19.50770300925926,
+    "period_days": 19.528609386574075,
     "time_weighted_return_pct": -1.4734616691121099,
     "note": "time_weighted_return_pct is a Modified Dietz approximation, not a true daily-linked TWR; paper PnL only, not a validation of the strategy."
   },
-  "logs_tail": "2026-09-28 09:17:06,147 ERROR Service cycle failed (ExchangeError: OKX HTTP 503 on /api/v5/account/positions); entries blocked for this cycle\n2026-09-28 09:17:16,524 ERROR Service cycle failed (ExchangeError: OKX HTTP 503 on /api/v5/account/positions); entries blocked for this cycle\n2026-09-28 09:56:40,586 ERROR Service cycle failed (ExchangeError: OKX HTTP 503 on /api/v5/account/bills); entries blocked for this cycle"
+  "logs_tail": "2026-09-28 09:56:40,586 ERROR Service cycle failed (ExchangeError: OKX HTTP 503 on /api/v5/account/bills); entries blocked for this cycle"
 }
