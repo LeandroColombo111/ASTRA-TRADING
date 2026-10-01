@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the ASTRA smart-money forward test once a day (Binance publishes the previous day's archives after UTC midnight)
+
+[Timer]
+OnCalendar=*-*-* 04:30:00 UTC
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

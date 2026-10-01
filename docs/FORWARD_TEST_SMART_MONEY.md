@@ -21,31 +21,37 @@ Pre-registro, escrito antes de que exista ningun dato de este tramo. Corre en pa
 
 ## Como se mide (distinto del bot real, y por que)
 
-Esta prueba **no usa la cuenta demo de OKX ni la VM**. Es un reemplazo (replay) del motor de backtest ya validado
-(`ExecutionSimulator`, los mismos 143 tests que protegen el resto del proyecto), alimentado con precios y datos de
-posicionamiento reales y actualizados de Binance (BTC-USDT, el mismo origen usado en toda esta rama de
-investigacion). En cada corrida:
-1. Se arma la serie de precios horaria completa (archivo historico + las velas que falten hasta la hora actual,
-   bajadas en vivo de la API publica de Binance Futures).
-2. Se arma la serie de posicionamiento diario (archivo historico + el dato de hoy, bajado en vivo de los endpoints
-   publicos `topLongShortPositionRatio` y `globalLongShortAccountRatio` de Binance).
-3. Se corre el simulador desde bastante antes del inicio de la medicion (para que los indicadores ya esten
-   convergidos) pero **solo se cuenta como resultado lo que pasa desde el 2026-10-01 23:00 UTC en adelante**.
-4. El resultado (equity, posicion abierta si la hay, trades) se guarda en `reports/forward_smart_money/state.json`
-   y se commitea.
+Esta prueba **no usa la cuenta demo de OKX ni modifica el bot**. Es un replay del motor de backtest ya validado
+(`ExecutionSimulator`, los mismos tests que protegen el resto del proyecto) sobre datos reales de Binance USD-M
+(BTCUSDT, el mismo origen de toda esta rama de investigacion). **Corre en la VM, una vez por dia (04:30 UTC), y no
+commitea nada**: el resultado se reescribe en `/opt/astra/forward_smart_money/state.json` (fuera del repo).
 
-Diferencia a favor de esta prueba frente al bot real: no depende de que OKX este arriba, de apalancamiento de cuenta
-ni de rechazos de ordenes -- mide la estrategia, no la ejecucion. Diferencia en contra: no es dinero (ni siquiera
-demo) ejecutandose en un exchange real, es una cuenta virtual recalculada cada hora. Las dos pruebas se complementan,
-no se reemplazan.
+- **Por que archivos y no la API en vivo:** `fapi.binance.com` devuelve HTTP 451 desde IPs de EE.UU. (la VM esta en
+  Iowa) y el entorno de las rutinas en la nube lo bloquea; `data.binance.vision` (archivos publicos con checksum) responde
+  desde ambos. Los archivos de un dia D aparecen despues de que D termina, y el filtro ya usaba el dato de D recien desde
+  D+1, asi que el retraso de ~1 dia coincide con la regla del backtest. La prueba se actualiza una vez por dia.
+- **Como corre:** `ops/smart_money_forward_run.sh` lanza un contenedor descartable con la imagen del bot (ya trae
+  pandas y el resto): no instala nada en el host, no reconstruye la imagen, no toca el servicio `astra-demo`. Tope de 280 MB
+  de memoria y 0.5 CPU: si algo sale mal muere ese contenedor, no el bot. Logica en `src/astra/forward_smart_money.py`.
+- **Que hace cada corrida:** baja (y cachea, verificando checksum) las velas horarias y el posicionamiento diario que falten,
+  arma la serie completa y **vuelve a correr el simulador desde el inicio de la medicion**; solo cuenta lo que pasa desde
+  2026-10-01 23:00 UTC. No guarda estado que se pueda corromper: si una corrida falla o se saltea un dia, la siguiente
+  se pone al dia sola. Si falta un dia en el medio de la serie de precios, falla fuerte y deja el archivo anterior intacto
+  (nunca se rellena un hueco).
+- **Free tier de GCP:** misma e2-micro, sin VM/disco/IP nuevos; solo trafico entrante (gratis) y unos pocos MB de cache.
+- **Ver el resultado:** `cat /opt/astra/forward_smart_money/state.json` en la VM (equity, retorno, Sharpe, drawdown, lista
+  completa de trades, curva diaria) y `log.csv` con una linea por corrida.
+
+Diferencia a favor frente al bot real: no depende de que OKX este arriba, ni de apalancamiento de cuenta ni de rechazos de
+ordenes -- mide la estrategia, no la ejecucion. En contra: no es una cuenta ejecutandose en un exchange, es una cuenta
+virtual recalculada. Las dos pruebas se complementan, no se reemplazan.
 
 ## Aproximaciones conocidas (dichas antes, no descubiertas despues)
 
-- Las velas mas recientes (las que todavia no estan en el archivo historico descargado) no tienen funding real
-  todavia disponible de la API publica usada aqui; se usa funding=0 para esas pocas velas. Efecto esperado:
-  minimo (el funding ya se vio que es un costo chico comparado con el resto).
-- Deslizamiento y comisiones: mismo modelo que el resto de `backtest2` (`impact_k=1.0`, sin calibrar con fills
-  reales), igual que el bot principal.
+- **Funding:** se usa el real de los archivos mensuales de Binance para los meses ya completos y publicados; el mes en curso
+  usa funding=0 (todavia no hay archivo) y se corrige solo cuando el mes se completa. Efecto esperado: minimo.
+- **Precio:** el del archivo de Binance (el mismo que el backtest), no el de OKX.
+- Deslizamiento y comisiones: mismo modelo que el resto de `backtest2` (`impact_k=1.0`, sin calibrar con fills reales).
 
 ## Hitos y reglas de decision
 
