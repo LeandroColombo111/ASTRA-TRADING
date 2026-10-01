@@ -21,7 +21,8 @@ sudo -u leandrocolombo git -C "$REPO" fetch origin main -q \
   || echo "git sync failed; running with the code already on disk" >&2
 
 # Tope de memoria y CPU: si algo sale mal, muere este contenedor, nunca el bot ni la VM.
-exec docker run --rm --name astra-smart-money \
+# Sin --name a proposito: un contenedor viejo con el mismo nombre bloquearia todas las corridas siguientes en silencio.
+exec docker run --rm \
   --user 10001:10001 --read-only --tmpfs /tmp \
   --cap-drop ALL --security-opt no-new-privileges:true \
   --memory 280m --memory-swap 560m --cpus 0.5 --pids-limit 64 \
