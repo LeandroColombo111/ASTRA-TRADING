@@ -7,6 +7,7 @@ identical. The 'atr' column is only a stop-distance unit: these strategies use
 short-horizon volatility.
 """
 from dataclasses import dataclass
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
@@ -193,6 +194,121 @@ def volume_signal(bars, p):
         ema = obv.ewm(span=p.obv_days * 24, adjust=False, min_periods=p.obv_days * 24).mean()
         acc = (obv - ema).to_numpy()
         ok = ok & np.isfinite(acc) & (((sig == 1) & (acc > 0)) | ((sig == -1) & (acc < 0)))
+    out = base.copy()
+    out['signal'] = np.where(ok, sig, 0)
+    return out
+
+
+@dataclass(frozen=True)
+class VwapDeviationParams(HourlyParams):
+    """Gate v4_hourly ENTRIES by deviation from a rolling VWAP (volume-weighted average price, typical price x volume).
+    mode='breakout_confirm': only take the breakout when price is already away from VWAP by at least dev_min (trend
+    already has volume-weighted conviction). mode='reversion_block': block entries extended more than dev_max from
+    VWAP (chasing a move already far from the volume-weighted average)."""
+    vwap_hours: int = 168
+    dev_min: float = 0.0
+    dev_max: float = 1e9
+    mode: str = 'breakout_confirm'
+
+
+def vwap_deviation(bars, hours):
+    typical = (bars.high + bars.low + bars.close) / 3.
+    pv = (typical * bars.volume).rolling(hours).sum()
+    v = bars.volume.rolling(hours).sum()
+    vwap = pv / v
+    return (bars.close - vwap) / vwap
+
+
+def vwap_signal(bars, p):
+    base = v4_features(bars, p)
+    dev = vwap_deviation(bars, p.vwap_hours).to_numpy()
+    sig = base['signal'].to_numpy()
+    if p.mode == 'breakout_confirm':
+        ok = np.isfinite(dev) & (((sig == 1) & (dev >= p.dev_min)) | ((sig == -1) & (dev <= -p.dev_min)))
+    else:
+        ok = np.isfinite(dev) & (np.abs(dev) <= p.dev_max)
+    out = base.copy()
+    out['signal'] = np.where(ok, sig, 0)
+    return out
+
+
+def load_binance_metrics(symbol):
+    """Daily positioning metrics from Binance (proxy for OKX; NOT OKX data). Never fills the known 2021-12-31 to
+    2022-12-13 gap (see data/<SYMBOL>-metrics-manifest.json): callers must dropna() per column they use."""
+    path = Path(__file__).resolve().parents[3] / 'data' / f'{symbol}USDT-metrics-daily.csv'
+    df = pd.read_csv(path, index_col='time', parse_dates=True)
+    return df
+
+
+def _causal_daily(series, bars_index, max_stale_days=2):
+    """Align a metric known only at the end of day D to hourly bars: only visible from D+1 00:00 onward (never looks
+    ahead into the day that produced it), same reindex+ffill discipline as macro_trend's daily EMA cross. Capped at
+    max_stale_days: an unbounded ffill would silently bridge the known 316-day Binance outage with an up-to-a-year-
+    stale value, which is filling a gap in disguise. Past the cap the value reads as unavailable (NaN), same as if
+    there were no data that day -- entries relying on it are blocked, never guessed."""
+    shifted = series.copy()
+    shifted.index = shifted.index + pd.Timedelta(days=1)
+    return shifted.reindex(bars_index + BAR, method='ffill', limit=max_stale_days * 24)
+
+
+@dataclass(frozen=True)
+class OpenInterestParams(HourlyParams):
+    """Gate v4_hourly ENTRIES on open interest direction: only take a trade (long or short) when OI rose over the
+    last oi_days, i.e. new money is entering alongside the move (vs a breakout driven by position unwinding /
+    short-covering, which futures lore treats as weaker and more reversal-prone). Reasoned direction, not swept."""
+    oi_days: int = 3
+    symbol: str = 'BTC'
+
+
+def oi_confirm_signal(bars, p):
+    base = v4_features(bars, p)
+    m = load_binance_metrics(p.symbol)
+    oi_chg = m['sum_open_interest'].pct_change(p.oi_days)
+    aligned = _causal_daily(oi_chg, bars.index).to_numpy()
+    ok = np.isfinite(aligned) & (aligned > 0)
+    out = base.copy()
+    out['signal'] = np.where(ok, base['signal'].to_numpy(), 0)
+    return out
+
+
+@dataclass(frozen=True)
+class SmartMoneyParams(HourlyParams):
+    """'Smart money' divergence: gate entries on top-trader long/short positioning vs the all-account (mostly
+    retail) ratio. Only take a LONG when top traders are relatively MORE long than the crowd (top_ratio > retail
+    ratio x divergence_min); only take a SHORT when top traders are relatively more short. When top traders agree
+    with the crowd or lean the other way, the signal is blocked. Fixed divergence_min, not swept."""
+    divergence_min: float = 1.0  # top/retail ratio must exceed this to confirm a long (and its reciprocal to confirm a short)
+    symbol: str = 'BTC'
+
+
+def smart_money_signal(bars, p):
+    base = v4_features(bars, p)
+    m = load_binance_metrics(p.symbol)
+    rel = (m['sum_toptrader_long_short_ratio'] / m['count_long_short_ratio']).dropna()
+    aligned = _causal_daily(rel, bars.index).to_numpy()
+    sig = base['signal'].to_numpy()
+    ok = np.isfinite(aligned) & (((sig == 1) & (aligned >= p.divergence_min)) | ((sig == -1) & (aligned <= 1 / p.divergence_min)))
+    out = base.copy()
+    out['signal'] = np.where(ok, sig, 0)
+    return out
+
+
+@dataclass(frozen=True)
+class TakerFlowParams(HourlyParams):
+    """Gate v4_hourly ENTRIES by aggressor (taker) volume imbalance: only take a long when takers were net buyers
+    over the last flow_days, only take a short when takers were net sellers (real order-flow confirmation, the
+    closest proxy to true aggressor data this project has access to)."""
+    flow_days: int = 3
+    symbol: str = 'BTC'
+
+
+def taker_flow_signal(bars, p):
+    base = v4_features(bars, p)
+    m = load_binance_metrics(p.symbol)
+    ratio = m['sum_taker_long_short_vol_ratio'].rolling(p.flow_days).mean().dropna()
+    aligned = _causal_daily(ratio, bars.index).to_numpy()
+    sig = base['signal'].to_numpy()
+    ok = np.isfinite(aligned) & (((sig == 1) & (aligned >= 1.0)) | ((sig == -1) & (aligned < 1.0)))
     out = base.copy()
     out['signal'] = np.where(ok, sig, 0)
     return out
