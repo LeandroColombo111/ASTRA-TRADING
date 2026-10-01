@@ -1,9 +1,9 @@
 {
-  "generated_at_utc": "2026-10-01T22:36:37.566770+00:00",
+  "generated_at_utc": "2026-10-01T23:08:36.600070+00:00",
   "pre_registration_start": "2026-10-01 23:00:00+00:00",
   "divergence_min": 1.1,
-  "last_bar": "2026-10-01 21:00:00+00:00",
-  "forward_days": -0.04,
+  "last_bar": "2026-10-01 22:00:00+00:00",
+  "forward_days": 0.0,
   "equity_now": 10000.0,
   "return_pct": 0.0,
   "sharpe": 0.0,

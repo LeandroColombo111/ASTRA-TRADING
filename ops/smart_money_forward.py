@@ -1,8 +1,9 @@
 """Segunda prueba en vivo (docs/FORWARD_TEST_SMART_MONEY.md): replay del motor de backtest ya validado, alimentado
 con precio y posicionamiento REALES y actualizados de Binance (publico, sin credenciales). No usa la cuenta OKX ni
-la VM del bot. Stateless y reproducible: cada corrida reconstruye todo desde el archivo historico + lo que falte
-hasta ahora, nunca depende de un estado previo que se pueda corromper. Escribe reports/forward_smart_money/state.json
-y agrega una linea a reports/forward_smart_money/log.csv. Uso: python3 ops/smart_money_forward.py"""
+la VM del bot, y no depende de ningun archivo local (data/ esta gitignored y no existe en el entorno limpio donde
+corre la rutina en la nube): todo se baja en vivo de la API de Binance en cada corrida. Stateless y reproducible:
+no depende de ningun estado previo que se pueda corromper. Escribe reports/forward_smart_money/state.json y agrega
+una linea a reports/forward_smart_money/log.csv. Uso: python3 ops/smart_money_forward.py"""
 from pathlib import Path
 from datetime import datetime, timezone
 import json
@@ -24,61 +25,48 @@ CFG = json.loads(Path('configs/selected.json').read_text())
 RISK = Risk(**CFG['risk'])
 PARAMS = SmartMoneyParams(**CFG['params'], divergence_min=DIVERGENCE_MIN, symbol='BTC')
 sim = build_sim(RISK)
+FETCH_FROM = PRE_REG_START - WARMUP
 
 
-def fetch_live_klines(start_ms):
-    rows, url = [], 'https://fapi.binance.com/fapi/v1/klines'
+def fetch_klines():
+    rows, start_ms = [], int(FETCH_FROM.timestamp() * 1000)
+    url = 'https://fapi.binance.com/fapi/v1/klines'
     while True:
-        r = requests.get(url, params={'symbol': 'BTCUSDT', 'interval': '1h', 'startTime': start_ms, 'limit': 1000}, timeout=30)
+        r = requests.get(url, params={'symbol': 'BTCUSDT', 'interval': '1h', 'startTime': start_ms, 'limit': 1500}, timeout=30)
         r.raise_for_status()
         page = r.json()
-        rows.extend(page)
-        if len(page) < 1000:
+        if not page:
             break
+        rows.extend(page)
         start_ms = page[-1][0] + 1
-    return rows
+        if len(page) < 1500:
+            break
+    bars = pd.DataFrame([{'time': pd.Timestamp(r[0], unit='ms', tz='UTC'), 'open': float(r[1]), 'high': float(r[2]),
+                          'low': float(r[3]), 'close': float(r[4]), 'volume': float(r[5]), 'funding': 0.}
+                        for r in rows if pd.Timestamp(r[0], unit='ms', tz='UTC') + HOUR <= pd.Timestamp.now(tz='UTC')])
+    bars = bars.set_index('time').sort_index()
+    bars = bars[~bars.index.duplicated()]
+    assert (bars.index.to_series().diff().dropna() == HOUR).all(), 'gap in the live BTC kline series'
+    return bars
 
 
-def load_price():
-    parts = []
-    for f in ('data/BTCUSDT-2020-1h.csv', 'data/BTCUSDT-1h.csv'):
-        b = pd.read_csv(f, index_col='time', parse_dates=True)
-        b.index = pd.to_datetime(b.index, utc=True)
-        parts.append(b)
-    hist = pd.concat(parts)
-    hist = hist[~hist.index.duplicated()].sort_index()
-    next_hour = hist.index[-1] + HOUR
-    live_rows = fetch_live_klines(int(next_hour.timestamp() * 1000))
-    if live_rows:
-        live = pd.DataFrame([{'time': pd.Timestamp(r[0], unit='ms', tz='UTC'), 'open': float(r[1]), 'high': float(r[2]),
-                              'low': float(r[3]), 'close': float(r[4]), 'volume': float(r[5]), 'funding': 0.}
-                             for r in live_rows if pd.Timestamp(r[0], unit='ms', tz='UTC') + HOUR <= pd.Timestamp.now(tz='UTC')])
-        live = live.set_index('time')
-        hist = pd.concat([hist, live])
-        hist = hist[~hist.index.duplicated()].sort_index()
-    assert (hist.index.to_series().diff().dropna() == HOUR).all(), 'gap in the joined BTC price series'
-    return hist
-
-
-def load_metrics():
-    hist = pd.read_csv('data/BTCUSDT-metrics-daily.csv', index_col='time', parse_dates=True)
+def fetch_metrics():
+    """Binance's live endpoints only retain ~30 days regardless of limit (verified); that's enough since
+    smart_money_signal only ever reads the most recent 1-2 days through its causal, staleness-capped align."""
     top = requests.get('https://fapi.binance.com/futures/data/topLongShortPositionRatio',
-                       params={'symbol': 'BTCUSDT', 'period': '1d', 'limit': 30}, timeout=30).json()
+                       params={'symbol': 'BTCUSDT', 'period': '1d', 'limit': 500}, timeout=30).json()
     acct = requests.get('https://fapi.binance.com/futures/data/globalLongShortAccountRatio',
-                        params={'symbol': 'BTCUSDT', 'period': '1d', 'limit': 30}, timeout=30).json()
+                        params={'symbol': 'BTCUSDT', 'period': '1d', 'limit': 500}, timeout=30).json()
     top_s = pd.Series({pd.Timestamp(r['timestamp'], unit='ms', tz='UTC').normalize(): float(r['longShortRatio']) for r in top})
     acct_s = pd.Series({pd.Timestamp(r['timestamp'], unit='ms', tz='UTC').normalize(): float(r['longShortRatio']) for r in acct})
-    live = pd.DataFrame({'sum_toptrader_long_short_ratio': top_s, 'count_long_short_ratio': acct_s})
-    live = live[~live.index.isin(hist.index)]
-    full = pd.concat([hist, live]).sort_index()
-    return full[~full.index.duplicated()]
+    return pd.DataFrame({'sum_toptrader_long_short_ratio': top_s, 'count_long_short_ratio': acct_s})
 
 
 def main():
-    bars = load_price()
-    metrics = load_metrics()
-    # smart_money_signal reads metrics via exposure_strategies.load_binance_metrics(symbol), which only knows the
-    # static archive file; for this run it's pointed at the live-extended frame built above instead.
+    bars = fetch_klines()
+    metrics = fetch_metrics()
+    # smart_money_signal reads metrics via exposure_strategies.load_binance_metrics(symbol), which normally points at
+    # the local archive file; for this run it's pointed at the live-fetched frame built above instead.
     import astra.backtest2.exposure_strategies as es
     es.load_binance_metrics = lambda symbol: metrics
     sig = smart_money_signal(bars, PARAMS)
