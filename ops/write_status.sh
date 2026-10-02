@@ -63,5 +63,5 @@ if isinstance(st, dict) and isinstance(ok, dict) and st and ok.get("equity") is 
         w = csv.writer(f)
         if new:
             w.writerow(["t", "equity", "events_total", "order_intents", "exit_reasons", "in_position"])
-        w.writerow([d["generated_at_utc"], ok["equity"], st.get("events_total"), k.get("order_intent", 0), k.get("exit_reason", 0), 1 if st["kv"].get("position") else 0])
+        w.writerow([d["generated_at_utc"], ok["equity"], st.get("events_total"), k.get("order_intent", 0), k.get("exit_reason", 0), 0 if str(st["kv"].get("position")).strip().lower() in ("", "null", "none") else 1])
 PYEOF
