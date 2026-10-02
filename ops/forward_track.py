@@ -14,6 +14,10 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
 from astra.forward_test import psr, days_needed, daily_moments
 
+# Equity moves that did not come from the bot (orders without an 'ast' clOrdId, found in the OKX bills). Each entry is
+# (first snapshot that shows the effect, amount in USDT to add back so the curve measures the strategy only).
+EXTERNAL_ADJUSTMENTS = [(pd.Timestamp('2026-09-23 22:16:58+00:00'), 1026.931219)]
+
 ap = argparse.ArgumentParser()
 ap.add_argument('--start', default='2026-09-18T17:05:00Z')
 ap.add_argument('--history', nargs='+', default=['history.csv'])
@@ -24,7 +28,9 @@ start = pd.Timestamp(a.start)
 
 frames = [pd.read_csv(path, parse_dates=['t']) for path in a.history if Path(path).exists()]
 df = pd.concat(frames).drop_duplicates('t').sort_values('t') if frames else pd.DataFrame(columns=['t', 'equity', 'order_intents', 'exit_reasons'])
-df = df[df.t >= start]
+df = df[df.t >= start].copy()
+for since, amount in EXTERNAL_ADJUSTMENTS:
+    df.loc[df.t >= since, 'equity'] += amount
 days = (df.t.max() - start) / pd.Timedelta(days=1) if len(df) else 0.
 # order_intent / exit_reason counts are cumulative in the bot's event log, so measure them relative to the first snapshot at or after the start
 entries = int(df.order_intents.iloc[-1] - df.order_intents.iloc[0]) if len(df) else 0
@@ -35,16 +41,17 @@ ret = daily.pct_change().dropna().to_numpy()
 lines = ['# Prueba en vivo (papel) con configuracion congelada\n',
          f'Desde {a.start}. Generado {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC. Fuente: {", ".join(a.history)}.\n',
          f'- Dias transcurridos: {days:.1f}', f'- Snapshots leidos: {len(df)}',
-         f'- Ordenes de entrada registradas: {entries}; salidas: {exits}',
+         f'- Ordenes de entrada (incluye canceladas sin ejecutar): {entries}; salidas: {exits}',
          f"- Equity demo: {df.equity.iloc[0]:,.0f} -> {df.equity.iloc[-1]:,.0f}" if len(df) else '- Sin snapshots todavia']
 m = daily_moments(ret)
-if m is None or entries == 0:
-    lines.append('- Sharpe / PSR: sin datos suficientes (todavia no hubo operaciones que medir).')
+if m is None or exits == 0:
+    lines.append('- Sharpe / PSR: sin datos suficientes (todavia no hubo operaciones cerradas que medir).')
 else:
     sr, sk, ku, n = m
     p = psr(ret)
     lines += [f'- Sharpe anual observado: {sr * np.sqrt(365):.2f} ({n} dias)', f'- PSR (probabilidad de Sharpe real > 0, sin descuento por trials): {p:.2f}',
               f'- Dias de historial necesarios para PSR >= 0.95 si el Sharpe real fuera el observado: {days_needed(sr, sk, ku):,.0f}']
+lines.append(f'- Ajustes por operaciones ajenas al bot: {len(EXTERNAL_ADJUSTMENTS)} (suma {sum(a for _, a in EXTERNAL_ADJUSTMENTS):,.2f} USDT)')
 lines.append('\nHitos fijados en docs/FORWARD_TEST.md: 10 trades (chequeo de ejecucion), 30 trades (calibracion de impact_k y primera revision), 60 trades (evaluacion).')
 text = '\n'.join(lines) + '\n'
 print(text)
