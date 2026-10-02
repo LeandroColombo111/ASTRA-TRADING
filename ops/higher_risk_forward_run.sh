@@ -1,5 +1,5 @@
 #!/bin/bash
-# Prueba en vivo del filtro de mayor riesgo (docs/FORWARD_TEST_HIGHER_RISK.md). Lo lanza systemd en la VM, una vez por dia.
+# Prueba en vivo de mayor riesgo (docs/FORWARD_TEST_HIGHER_RISK.md). Lo lanza systemd en la VM, una vez por dia.
 # Corre el calculo en un contenedor DESCARTABLE de la imagen del bot (ya trae pandas/numpy/requests): no instala nada
 # en el host, no reconstruye la imagen, no toca el servicio astra-demo ni la cuenta OKX. El resultado se REESCRIBE en
 # $OUT/state.json (fuera del repo: no se commitea nada). Free tier: misma e2-micro, trafico solo entrante, unos MB de disco.
