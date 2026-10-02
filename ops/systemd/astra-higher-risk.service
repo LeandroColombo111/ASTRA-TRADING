@@ -1,0 +1,10 @@
+[Unit]
+Description=ASTRA higher-risk forward test (daily replay, result rewritten in place, no commits)
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/astra/ASTRA-TRADING/ops/higher_risk_forward_run.sh
+TimeoutStartSec=15min
+Nice=15
